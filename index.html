@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karlovac Developers</title>
+  <meta name="description" content="A developer community in Karlovac, Croatia sharing knowledge about programming, cloud, AI, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner container">
+      <a href="#" class="logo">KD<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#events" data-i18n="nav.events">Events</a></li>
+        <li><a href="#topics" data-i18n="nav.topics">Topics</a></li>
+        <li><a href="#join" class="btn btn-sm" data-i18n="nav.join">Join us</a></li>
+        <li>
+          <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">HR</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-glow glow-1"></div>
+      <div class="hero-glow glow-2"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="badge" data-i18n="hero.badge">Karlovac, Croatia &middot; Est. 2017</div>
+      <h1 class="hero-title" data-i18n-html="hero.title">
+        Where <span class="gradient-text">developers</span><br />
+        meet &amp; grow
+      </h1>
+      <p class="hero-sub" data-i18n="hero.sub">
+        A community of 200+ developers in Karlovac sharing knowledge
+        about programming, cloud, AI, and everything in between.
+      </p>
+      <div class="hero-actions">
+        <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="hero.cta.primary">
+          Join on Meetup
+        </a>
+        <a href="#events" class="btn btn-ghost" data-i18n="hero.cta.ghost">See past events</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">200<span class="stat-plus">+</span></span>
+          <span class="stat-label" data-i18n="stat.members">Members</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">2017</span>
+          <span class="stat-label" data-i18n="stat.founded">Founded</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">5.0<span class="stat-star">★</span></span>
+          <span class="stat-label" data-i18n="stat.rating">Rating</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-grid">
+        <div class="about-text">
+          <p class="section-eyebrow" data-i18n="about.eyebrow">About us</p>
+          <h2 class="section-title" data-i18n="about.title">Building a local tech community, one meetup at a time</h2>
+          <p class="section-body" data-i18n="about.body1">
+            Karlovac Developers is a grassroots community of software engineers, designers,
+            and tech enthusiasts based in Karlovac. Since 2017, we've been gathering regularly
+            to share talks, workshops, and ideas — from AI to open source mapping, from
+            .NET to cloud infrastructure.
+          </p>
+          <p class="section-body" data-i18n="about.body2">
+            We believe that great ideas grow best in good company. Whether you're a seasoned
+            engineer or just starting out, you'll find a welcoming crowd here.
+          </p>
+          <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="about.cta">
+            Find us on Meetup →
+          </a>
+        </div>
+        <div class="about-cards">
+          <div class="info-card">
+            <div class="info-card-icon">📍</div>
+            <div>
+              <div class="info-card-label" data-i18n="card.location.label">Location</div>
+              <div class="info-card-value" data-i18n="card.location.value">Karlovac, Croatia</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">💬</div>
+            <div>
+              <div class="info-card-label" data-i18n="card.chat.label">Community chat</div>
+              <div class="info-card-value" data-i18n="card.chat.value">WhatsApp group</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">🎤</div>
+            <div>
+              <div class="info-card-label" data-i18n="card.speak.label">Want to speak?</div>
+              <div class="info-card-value" data-i18n="card.speak.value">Submit your topic</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">🌟</div>
+            <div>
+              <div class="info-card-label" data-i18n="card.rating.label">Rating</div>
+              <div class="info-card-value" data-i18n="card.rating.value">5.0 / 5 (101 reviews)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING EVENT -->
+  <section class="section-upcoming">
+    <div class="container">
+      <div class="upcoming-card">
+        <div class="upcoming-label" data-i18n="upcoming.label">Next event</div>
+        <div class="upcoming-inner">
+          <div class="upcoming-date-block">
+            <span class="upcoming-month" data-i18n="upcoming.month">May</span>
+            <span class="upcoming-day">16</span>
+            <span class="upcoming-year">2026</span>
+          </div>
+          <div class="upcoming-details">
+            <h3 class="upcoming-title">Sajam znanja na Korani</h3>
+            <p class="upcoming-desc" data-i18n="upcoming.desc">
+              A full-day outdoor gathering on the banks of the Korana river — featuring
+              knowledge sharing, bonfire, and swimming. Open to all local tech professionals
+              and enthusiasts.
+            </p>
+            <div class="upcoming-meta">
+              <span class="meta-tag">📍 Koransko šetalište 6, Karlovac</span>
+              <span class="meta-tag" data-i18n="upcoming.meta.time">🌞 Full day</span>
+            </div>
+          </div>
+          <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="btn btn-primary upcoming-cta" data-i18n="upcoming.cta">
+            RSVP
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAST EVENTS -->
+  <section class="section" id="events">
+    <div class="container">
+      <p class="section-eyebrow center" data-i18n="events.eyebrow">Past events</p>
+      <h2 class="section-title center" data-i18n="events.title">What we've been up to</h2>
+      <div class="events-grid">
+
+        <article class="event-card">
+          <div class="event-card-top">
+            <span class="event-tag" data-i18n="event1.tag">Networking</span>
+            <time class="event-date">Feb 28, 2026</time>
+          </div>
+          <h3 class="event-title">CroMesh Meetup #2</h3>
+          <p class="event-desc" data-i18n="event1.desc">Community networking evening at Radio Klub Karlovac, connecting local tech and maker enthusiasts.</p>
+          <div class="event-footer">
+            <span class="event-attendees" data-i18n="event1.attendees">5 attendees</span>
+            <span class="event-venue">Radio Klub Karlovac</span>
+          </div>
+        </article>
+
+        <article class="event-card">
+          <div class="event-card-top">
+            <span class="event-tag">TechTalks</span>
+            <time class="event-date">Feb 19, 2026</time>
+          </div>
+          <h3 class="event-title">#9 TechTalks</h3>
+          <p class="event-desc" data-i18n="event2.desc">The ninth edition of our regular TechTalks series — casual technical presentations over coffee at Choco Caffe Bar.</p>
+          <div class="event-footer">
+            <span class="event-attendees" data-i18n="event2.attendees">4 attendees</span>
+            <span class="event-venue">Choco Caffe Bar</span>
+          </div>
+        </article>
+
+        <article class="event-card featured">
+          <div class="event-card-top">
+            <span class="event-tag">AI</span>
+            <time class="event-date">Jan 27, 2026</time>
+          </div>
+          <h3 class="event-title" data-i18n="event3.title">AI Agents in Practice</h3>
+          <p class="event-desc" data-i18n="event3.desc">A deep dive into real-world AI agent applications, featuring a live demo of a medical AI assistant. One of our best-attended recent sessions.</p>
+          <div class="event-footer">
+            <span class="event-attendees" data-i18n="event3.attendees">13 attendees</span>
+            <span class="event-venue">Karlovac</span>
+          </div>
+        </article>
+
+        <article class="event-card featured">
+          <div class="event-card-top">
+            <span class="event-tag">Open Source</span>
+            <time class="event-date">Nov 25, 2025</time>
+          </div>
+          <h3 class="event-title">OpenStreetMap Croatia</h3>
+          <p class="event-desc" data-i18n="event4.desc">A hands-on workshop combined with a walking tour of Karlovac — exploring the power of open-source collaborative mapping.</p>
+          <div class="event-footer">
+            <span class="event-attendees" data-i18n="event4.attendees">13 attendees</span>
+            <span class="event-venue">Karlovac</span>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="events-more">
+        <a href="https://www.meetup.com/karlovac-developers-meetup/events/past/" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="events.more">
+          View all past events →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPICS -->
+  <section class="section section-dark" id="topics">
+    <div class="container">
+      <p class="section-eyebrow center" data-i18n="topics.eyebrow">What we talk about</p>
+      <h2 class="section-title center" data-i18n="topics.title">Topics &amp; Technologies</h2>
+      <div class="topics-grid">
+        <div class="topic-chip" data-i18n="topic.ai">AI &amp; Machine Learning</div>
+        <div class="topic-chip" data-i18n="topic.web">Web Development</div>
+        <div class="topic-chip">Cloud (AWS, GCP)</div>
+        <div class="topic-chip">JavaScript</div>
+        <div class="topic-chip">.NET</div>
+        <div class="topic-chip">Open Source</div>
+        <div class="topic-chip" data-i18n="topic.mobile">Mobile Development</div>
+        <div class="topic-chip" data-i18n="topic.se">Software Engineering</div>
+        <div class="topic-chip">DevOps</div>
+        <div class="topic-chip" data-i18n="topic.networking">Networking &amp; Mesh</div>
+        <div class="topic-chip" data-i18n="topic.db">Databases</div>
+        <div class="topic-chip" data-i18n="topic.programming">Programming</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN CTA -->
+  <section class="section section-cta" id="join">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-glow"></div>
+        <div class="cta-content">
+          <h2 class="cta-title" data-i18n="cta.title">Ready to join the community?</h2>
+          <p class="cta-sub" data-i18n="cta.sub">
+            Whether you want to attend talks, give a presentation, or just hang out
+            with fellow developers — we'd love to have you.
+          </p>
+          <div class="cta-actions">
+            <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="btn btn-primary btn-lg" data-i18n="cta.primary">
+              Join on Meetup
+            </a>
+            <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="btn btn-ghost btn-lg" data-i18n="cta.ghost">
+              Submit a talk idea
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#" class="logo">KD<span class="logo-dot">.</span></a>
+      <p class="footer-text" data-i18n="footer.text">Karlovac Developers &mdash; Karlovac, Croatia</p>
+      <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="footer-link">
+        meetup.com/karlovac-developers-meetup
+      </a>
+    </div>
+  </footer>
+
+  <script src="translations.js"></script>
+</body>
+</html>
