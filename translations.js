@@ -1,150 +1,172 @@
 const translations = {
   en: {
-    'nav.about':            'About',
-    'nav.events':           'Events',
-    'nav.topics':           'Topics',
-    'nav.join':             'Join us',
+    /* ── Home: hero ───────────────────────────── */
+    'hero.tagline':      "Karlovac's developer meetup group",
+    'hero.cta.join':     '🎉 Join the Meetup',
+    'hero.cta.next':     '📅 Next Event',
 
-    'hero.badge':           'Karlovac, Croatia · Est. 2017',
-    'hero.title':           'Where <span class="gradient-text">developers</span><br />meet &amp; grow',
-    'hero.sub':             'A community of 200+ developers in Karlovac sharing knowledge about programming, cloud, AI, and everything in between.',
-    'hero.cta.primary':     'Join on Meetup',
-    'hero.cta.ghost':       'See past events',
+    /* ── Home: intro ──────────────────────────── */
+    'intro.title':       "What's Karlovac Developers?",
+    'intro.p1':          'Karlovac Developers is a casual, community-run meetup group for developers and tech enthusiasts in Karlovac.',
+    'intro.p2':          "Whether you're a seasoned engineer, a curious beginner, or just here to hang out and for the good vibes — you're welcome here. We meet up, share ideas, hack on stuff, and learn together.",
 
-    'stat.members':         'Members',
-    'stat.founded':         'Founded',
-    'stat.rating':          'Rating',
+    /* ── Home: cards ──────────────────────────── */
+    'join.title':        'Join Us',
+    'join.p1':           "We meet regularly to chat, share knowledge, and enjoy each other's company. Drop by our next Meetup to see what it's all about!",
+    'join.p2':           "You don't need to give a talk — just come hang out, grab a coffee, and meet fellow developers.",
+    'join.p3':           'Got something to share? Awesome — <a href="give-a-talk/" class="inline-link">sign up to speak</a>',
 
-    'about.eyebrow':        'About us',
-    'about.title':          'Building a local tech community, one meetup at a time',
-    'about.body1':          'Karlovac Developers is a grassroots community of software engineers, designers, and tech enthusiasts based in Karlovac. Since 2017, we\'ve been gathering regularly to share talks, workshops, and ideas — from AI to open source mapping, from .NET to cloud infrastructure.',
-    'about.body2':          'We believe that great ideas grow best in good company. Whether you\'re a seasoned engineer or just starting out, you\'ll find a welcoming crowd here.',
-    'about.cta':            'Find us on Meetup →',
+    'host.title':        'Host a Meetup',
+    'host.p1':           'Want to host a Karlovac Developers meetup at your space?',
+    'host.p2':           "We're always looking for friendly venues, and hosting is a great way to support the local dev community.",
+    'host.p3':           "If you've got a space and want to get involved, sign up to host here.",
+    'host.cta':          'Sign up to host →',
 
-    'card.location.label':  'Location',
-    'card.location.value':  'Karlovac, Croatia',
-    'card.chat.label':      'Community chat',
-    'card.chat.value':      'WhatsApp group',
-    'card.speak.label':     'Want to speak?',
-    'card.speak.value':     'Submit your topic',
-    'card.rating.label':    'Rating',
-    'card.rating.value':    '5.0 / 5 (101 reviews)',
+    'next.title':        'Our next Meetup',
+    'next.date':         'May 16, 2026',
+    'next.excerpt':      'A full-day outdoor gathering on the banks of the Korana river — knowledge sharing, a bonfire, and swimming. Open to all local tech professionals and enthusiasts...',
 
-    'upcoming.label':       'Next event',
-    'upcoming.month':       'May',
-    'upcoming.desc':        'A full-day outdoor gathering on the banks of the Korana river — featuring knowledge sharing, bonfire, and swimming. Open to all local tech professionals and enthusiasts.',
-    'upcoming.meta.time':   '🌞 Full day',
-    'upcoming.cta':         'RSVP',
+    'past.title':        'Past Meetups',
+    'past.date':         'February 28, 2026',
+    'past.all':          'Show all past Meetups →',
 
-    'events.eyebrow':       'Past events',
-    'events.title':         'What we\'ve been up to',
-    'events.more':          'View all past events →',
+    'read.more':         'Read more →',
 
-    'event1.tag':           'Networking',
-    'event1.desc':          'Community networking evening at Radio Klub Karlovac, connecting local tech and maker enthusiasts.',
-    'event1.attendees':     '5 attendees',
+    /* ── Footer ───────────────────────────────── */
+    'footer.line1':      'Karlovac Developers ❤️ Karlovac',
+    'footer.line2':      'Built by developers, for developers.',
 
-    'event2.desc':          'The ninth edition of our regular TechTalks series — casual technical presentations over coffee at Choco Caffe Bar.',
-    'event2.attendees':     '4 attendees',
+    /* ── Page: give a talk ────────────────────── */
+    'page.back':         '← Back to home',
 
-    'event3.title':         'AI Agents in Practice',
-    'event3.desc':          'A deep dive into real-world AI agent applications, featuring a live demo of a medical AI assistant. One of our best-attended recent sessions.',
-    'event3.attendees':     '13 attendees',
+    'talk.title':        'Give a talk',
+    'talk.sub':          "Got something to share? We'd love to hear it — no matter how big or small.",
+    'talk.why.title':    'Why speak?',
+    'talk.why.p':        'Our meetups run on people sharing what they know. You do not need to be an expert or a polished presenter — you just need something you find interesting. Chances are somebody in the room has been wondering about exactly that.',
+    'talk.what.title':   'What can I talk about?',
+    'talk.what.li1':     'A tool or library you use every day',
+    'talk.what.li2':     'A side project you built, however small',
+    'talk.what.li3':     'A lesson learned the hard way in production',
+    'talk.what.li4':     'AI, web, cloud, mobile, .NET, DevOps, open source, embedded, networking — all fair game',
+    'talk.what.li5':     'A live demo of something you think is cool',
+    'talk.format.title': 'Formats',
+    'talk.format.li1':   'Lightning talk — 5 to 10 minutes, slides optional',
+    'talk.format.li2':   'Full talk — 20 to 30 minutes plus questions',
+    'talk.format.li3':   'Workshop — 45 to 90 minutes, hands-on',
+    'talk.format.li4':   'Show and tell — informal, just open your laptop',
+    'talk.first.title':  'First time presenting?',
+    'talk.first.p':      "Perfect — we are a friendly, low-pressure crowd, and plenty of our speakers started right here. Tell us what you have in mind and we will help you shape it, review your slides, or run a rehearsal beforehand.",
+    'talk.cta.p':        'Ready when you are. Send us a message with your topic and roughly how long you need, and we will find a slot at one of the upcoming meetups.',
+    'talk.cta.btn':      'Pitch your talk on Meetup →',
 
-    'event4.desc':          'A hands-on workshop combined with a walking tour of Karlovac — exploring the power of open-source collaborative mapping.',
-    'event4.attendees':     '13 attendees',
-
-    'topics.eyebrow':       'What we talk about',
-    'topics.title':         'Topics &amp; Technologies',
-
-    'topic.ai':             'AI &amp; Machine Learning',
-    'topic.web':            'Web Development',
-    'topic.mobile':         'Mobile Development',
-    'topic.se':             'Software Engineering',
-    'topic.networking':     'Networking &amp; Mesh',
-    'topic.db':             'Databases',
-    'topic.programming':    'Programming',
-
-    'cta.title':            'Ready to join the community?',
-    'cta.sub':              'Whether you want to attend talks, give a presentation, or just hang out with fellow developers — we\'d love to have you.',
-    'cta.primary':          'Join on Meetup',
-    'cta.ghost':            'Submit a talk idea',
-
-    'footer.text':          'Karlovac Developers — Karlovac, Croatia',
+    /* ── Page: host a meetup ──────────────────── */
+    'hostpage.title':      'Host a meetup',
+    'hostpage.sub':        'Have a space? Help the local dev community grow.',
+    'hostpage.why.title':  'Why host?',
+    'hostpage.why.p':      'Hosting is the simplest way to support the local tech scene, and it puts your team in front of the people building things in Karlovac. It costs you an evening and a room.',
+    'hostpage.need.title': 'What we need from you',
+    'hostpage.need.li1':   'Room for roughly 15 to 30 people, with somewhere to sit',
+    'hostpage.need.li2':   'A screen or projector',
+    'hostpage.need.li3':   'Wi-Fi for the speakers',
+    'hostpage.need.li4':   'A weekday evening, usually from 18:00',
+    'hostpage.need.li5':   'Ideally somewhere nearby to grab a drink afterwards',
+    'hostpage.give.title': 'What we bring',
+    'hostpage.give.li1':   'The speakers and the programme for the evening',
+    'hostpage.give.li2':   'Promotion through Meetup and our community chat',
+    'hostpage.give.li3':   'The crowd — our meetups usually draw a dozen or more people',
+    'hostpage.give.li4':   'A room left exactly as we found it',
+    'hostpage.how.title':  'How it works',
+    'hostpage.how.li1':    'Get in touch and tell us about your space',
+    'hostpage.how.li2':    'We agree on a date that suits you',
+    'hostpage.how.li3':    'We announce the meetup and line up the talks',
+    'hostpage.how.li4':    'You open the door, we handle the rest',
+    'hostpage.cta.p':      'Got a space in mind? Message us with the location, roughly how many people fit, and which dates work for you.',
+    'hostpage.cta.btn':    'Offer your space on Meetup →',
   },
 
   hr: {
-    'nav.about':            'O nama',
-    'nav.events':           'Događaji',
-    'nav.topics':           'Teme',
-    'nav.join':             'Pridruži se',
+    /* ── Naslovnica: hero ─────────────────────── */
+    'hero.tagline':      'Karlovački meetup za programere',
+    'hero.cta.join':     '🎉 Pridruži se Meetupu',
+    'hero.cta.next':     '📅 Sljedeći događaj',
 
-    'hero.badge':           'Karlovac, Hrvatska · Osn. 2017.',
-    'hero.title':           'Gdje se <span class="gradient-text">programeri</span><br />susreću i rastu',
-    'hero.sub':             'Zajednica 200+ programera u Karlovcu koja dijeli znanje o programiranju, oblaku, AI-ju i svemu između.',
-    'hero.cta.primary':     'Pridruži se na Meetupu',
-    'hero.cta.ghost':       'Pogledaj prošle događaje',
+    /* ── Naslovnica: uvod ─────────────────────── */
+    'intro.title':       'Što je Karlovac Developers?',
+    'intro.p1':          'Karlovac Developers je opušten meetup koji vodi zajednica programera i tech entuzijasta u Karlovcu.',
+    'intro.p2':          'Bilo da si iskusan inženjer, radoznali početnik ili si tu samo zbog dobre atmosfere — dobrodošao si. Družimo se, dijelimo ideje, radimo na projektima i učimo zajedno.',
 
-    'stat.members':         'Članova',
-    'stat.founded':         'Osnovano',
-    'stat.rating':          'Ocjena',
+    /* ── Naslovnica: kartice ──────────────────── */
+    'join.title':        'Pridruži nam se',
+    'join.p1':           'Redovito se okupljamo kako bismo popričali, podijelili znanje i uživali u društvu. Svrati na sljedeći Meetup i vidi o čemu se radi!',
+    'join.p2':           'Ne moraš držati predavanje — samo dođi, uzmi kavu i upoznaj druge programere.',
+    'join.p3':           'Imaš nešto za podijeliti? Odlično — <a href="give-a-talk/" class="inline-link">prijavi se za predavanje</a>',
 
-    'about.eyebrow':        'O nama',
-    'about.title':          'Gradimo lokalnu tech zajednicu, jedan meetup po jedan',
-    'about.body1':          'Karlovac Developers je zajednica software inženjera, dizajnera i tech entuzijasta iz Karlovca. Od 2017. redovito se okupljamo kako bismo dijelili predavanja, radionice i ideje — od AI-ja do open source kartografije, od .NET-a do cloud infrastrukture.',
-    'about.body2':          'Vjerujemo da izvrsne ideje najbrže rastu u dobrom društvu. Bilo da si iskusni inženjer ili tek počinješ, ovdje ćeš naći dobrodošlu ekipu.',
-    'about.cta':            'Pronađi nas na Meetupu →',
+    'host.title':        'Ugosti meetup',
+    'host.p1':           'Želiš ugostiti Karlovac Developers meetup u svom prostoru?',
+    'host.p2':           'Uvijek tražimo prostore s dobrom ekipom, a ugošćivanje je odličan način da podržiš lokalnu dev zajednicu.',
+    'host.p3':           'Ako imaš prostor i želiš se uključiti, prijavi ga ovdje.',
+    'host.cta':          'Prijavi prostor →',
 
-    'card.location.label':  'Lokacija',
-    'card.location.value':  'Karlovac, Hrvatska',
-    'card.chat.label':      'Chat zajednice',
-    'card.chat.value':      'WhatsApp grupa',
-    'card.speak.label':     'Želiš predavati?',
-    'card.speak.value':     'Predloži temu',
-    'card.rating.label':    'Ocjena',
-    'card.rating.value':    '5,0 / 5 (101 recenzija)',
+    'next.title':        'Naš sljedeći Meetup',
+    'next.date':         '16. svibnja 2026.',
+    'next.excerpt':      'Cjelodnevno okupljanje na obali Korane — dijeljenje znanja, logorska vatra i kupanje. Otvoreno za sve lokalne tech stručnjake i entuzijaste...',
 
-    'upcoming.label':       'Sljedeći događaj',
-    'upcoming.month':       'Svi.',
-    'upcoming.desc':        'Cjelodnevno okupljanje na obalama rijeke Korane — dijeljenje znanja, logorska vatra i kupanje. Otvoreno za sve lokalne tech stručnjake i entuzijaste.',
-    'upcoming.meta.time':   '🌞 Cijeli dan',
-    'upcoming.cta':         'Prijavi se',
+    'past.title':        'Prošli Meetupovi',
+    'past.date':         '28. veljače 2026.',
+    'past.all':          'Pogledaj sve prošle Meetupove →',
 
-    'events.eyebrow':       'Prošli događaji',
-    'events.title':         'Što smo radili',
-    'events.more':          'Pogledaj sve prošle događaje →',
+    'read.more':         'Pročitaj više →',
 
-    'event1.tag':           'Umrežavanje',
-    'event1.desc':          'Večer umrežavanja zajednice u Radio Klubu Karlovac, s ciljem povezivanja lokalnih tech i maker entuzijasta.',
-    'event1.attendees':     '5 sudionika',
+    /* ── Podnožje ─────────────────────────────── */
+    'footer.line1':      'Karlovac Developers ❤️ Karlovac',
+    'footer.line2':      'Radili programeri, za programere.',
 
-    'event2.desc':          'Deveto izdanje naše redovne serije TechTalks — opuštena tehnička predavanja uz kavu u Choco Caffe Baru.',
-    'event2.attendees':     '4 sudionika',
+    /* ── Stranica: predavanje ─────────────────── */
+    'page.back':         '← Natrag na naslovnicu',
 
-    'event3.title':         'AI Agenti u praksi',
-    'event3.desc':          'Detaljna analiza primjene AI agenata u stvarnom svijetu, s live demonstracijom medicinskog AI asistenta. Jedna od naših najposjećenijih nedavnih sesija.',
-    'event3.attendees':     '13 sudionika',
+    'talk.title':        'Drži predavanje',
+    'talk.sub':          'Imaš nešto za podijeliti? Rado bismo čuli — bez obzira koliko velika ili mala tema bila.',
+    'talk.why.title':    'Zašto predavati?',
+    'talk.why.p':        'Naši meetupovi žive od ljudi koji dijele ono što znaju. Ne moraš biti stručnjak ni uglađen govornik — dovoljno je da imaš temu koja te zanima. Velika je šansa da se netko u publici pitao upravo isto.',
+    'talk.what.title':   'O čemu mogu pričati?',
+    'talk.what.li1':     'Alat ili biblioteka koju koristiš svaki dan',
+    'talk.what.li2':     'Projekt iz slobodnog vremena, koliko god malen bio',
+    'talk.what.li3':     'Lekcija naučena na teži način u produkciji',
+    'talk.what.li4':     'AI, web, cloud, mobilni razvoj, .NET, DevOps, open source, embedded, umrežavanje — sve prolazi',
+    'talk.what.li5':     'Demo uživo nečega što ti je zanimljivo',
+    'talk.format.title': 'Formati',
+    'talk.format.li1':   'Lightning talk — 5 do 10 minuta, slajdovi nisu obavezni',
+    'talk.format.li2':   'Puno predavanje — 20 do 30 minuta plus pitanja',
+    'talk.format.li3':   'Radionica — 45 do 90 minuta, praktično',
+    'talk.format.li4':   'Show and tell — neformalno, samo otvori laptop',
+    'talk.first.title':  'Prvi put pred publikom?',
+    'talk.first.p':      'Savršeno — ekipa je opuštena i bez pritiska, a dobar dio naših govornika počeo je upravo ovdje. Javi nam što imaš na umu pa ćemo ti pomoći oblikovati temu, pregledati slajdove ili odraditi probu unaprijed.',
+    'talk.cta.p':        'Spremni smo kad i ti. Pošalji nam poruku s temom i okvirnim trajanjem pa ćemo naći termin na nekom od sljedećih meetupova.',
+    'talk.cta.btn':      'Predloži temu na Meetupu →',
 
-    'event4.desc':          'Praktična radionica u kombinaciji s pješačkom turom Karlovcem — istraživanje snage open-source kolaborativnog kartiranja.',
-    'event4.attendees':     '13 sudionika',
-
-    'topics.eyebrow':       'O čemu pričamo',
-    'topics.title':         'Teme i tehnologije',
-
-    'topic.ai':             'AI i strojno učenje',
-    'topic.web':            'Web razvoj',
-    'topic.mobile':         'Mobilni razvoj',
-    'topic.se':             'Softversko inženjerstvo',
-    'topic.networking':     'Umrežavanje i mesh',
-    'topic.db':             'Baze podataka',
-    'topic.programming':    'Programiranje',
-
-    'cta.title':            'Spreman se pridružiti zajednici?',
-    'cta.sub':              'Bez obzira želiš li prisustvovati predavanjima, dati prezentaciju ili se samo družiti s programerima — radujemo se tvom dolasku.',
-    'cta.primary':          'Pridruži se na Meetupu',
-    'cta.ghost':            'Predloži ideju za predavanje',
-
-    'footer.text':          'Karlovac Developers — Karlovac, Hrvatska',
+    /* ── Stranica: ugosti meetup ──────────────── */
+    'hostpage.title':      'Ugosti meetup',
+    'hostpage.sub':        'Imaš prostor? Pomozi lokalnoj dev zajednici da raste.',
+    'hostpage.why.title':  'Zašto ugostiti?',
+    'hostpage.why.p':      'Ugošćivanje je najjednostavniji način da podržiš lokalnu tech scenu, a tvoj tim stavlja pred ljude koji u Karlovcu grade stvari. Košta te jednu večer i jednu prostoriju.',
+    'hostpage.need.title': 'Što nam treba od tebe',
+    'hostpage.need.li1':   'Prostor za otprilike 15 do 30 ljudi, s mjestom za sjedenje',
+    'hostpage.need.li2':   'Ekran ili projektor',
+    'hostpage.need.li3':   'Wi-Fi za govornike',
+    'hostpage.need.li4':   'Večer radnim danom, obično od 18:00',
+    'hostpage.need.li5':   'Idealno nešto u blizini gdje se može popiti piće poslije',
+    'hostpage.give.title': 'Što mi donosimo',
+    'hostpage.give.li1':   'Govornike i program za tu večer',
+    'hostpage.give.li2':   'Promociju kroz Meetup i chat zajednice',
+    'hostpage.give.li3':   'Publiku — na našim meetupovima obično je desetak ili više ljudi',
+    'hostpage.give.li4':   'Prostor ostavljen točno onakav kakav smo ga zatekli',
+    'hostpage.how.title':  'Kako to ide',
+    'hostpage.how.li1':    'Javi nam se i opiši svoj prostor',
+    'hostpage.how.li2':    'Dogovorimo datum koji tebi odgovara',
+    'hostpage.how.li3':    'Najavimo meetup i posložimo predavanja',
+    'hostpage.how.li4':    'Ti otvoriš vrata, mi rješavamo ostalo',
+    'hostpage.cta.p':      'Imaš prostor na umu? Pošalji nam poruku s lokacijom, okvirnim brojem ljudi i datumima koji ti odgovaraju.',
+    'hostpage.cta.btn':    'Ponudi prostor na Meetupu →',
   },
 };
 
@@ -152,8 +174,15 @@ const translations = {
 
 const STORAGE_KEY = 'kd-lang';
 
+// Subpages live one directory down, so relative links inside translated
+// HTML need a prefix. <body data-root="../"> sets it.
+function rootPrefix() {
+  return document.body.getAttribute('data-root') || '';
+}
+
 function applyLang(lang) {
   const t = translations[lang];
+  const root = rootPrefix();
 
   // Text nodes
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -161,10 +190,12 @@ function applyLang(lang) {
     if (t[key] !== undefined) el.textContent = t[key];
   });
 
-  // HTML nodes (e.g. hero title with inner <span>)
+  // HTML nodes (e.g. a paragraph with an inline link)
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     const key = el.getAttribute('data-i18n-html');
-    if (t[key] !== undefined) el.innerHTML = t[key];
+    if (t[key] !== undefined) {
+      el.innerHTML = t[key].replace(/href="(?!https?:|#|\/)/g, 'href="' + root);
+    }
   });
 
   // Toggle button label shows the other language
@@ -172,17 +203,20 @@ function applyLang(lang) {
   if (btn) btn.textContent = lang === 'en' ? 'HR' : 'EN';
 
   document.documentElement.lang = lang;
-  localStorage.setItem(STORAGE_KEY, lang);
+  try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* file:// origins */ }
+}
+
+function storedLang() {
+  try { return localStorage.getItem(STORAGE_KEY) || 'en'; } catch (e) { return 'en'; }
 }
 
 function toggleLang() {
-  const current = localStorage.getItem(STORAGE_KEY) || 'en';
-  applyLang(current === 'en' ? 'hr' : 'en');
+  applyLang(storedLang() === 'en' ? 'hr' : 'en');
 }
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem(STORAGE_KEY) || 'en';
-  applyLang(saved);
-  document.getElementById('lang-toggle').addEventListener('click', toggleLang);
+  applyLang(storedLang());
+  const btn = document.getElementById('lang-toggle');
+  if (btn) btn.addEventListener('click', toggleLang);
 });
