@@ -97,6 +97,12 @@ function renderJob(job, lang) {
 function renderInto(container, jobs, lang) {
   container.textContent = '';
 
+  // A failed fetch is not the same as an empty wall — say which.
+  if (LOAD_FAILED) {
+    container.appendChild(el('p', 'jobs-empty',
+      t('jobs.unavailable', 'Postings could not be loaded right now.')));
+    return;
+  }
   if (!jobs.length) {
     container.appendChild(el('p', 'jobs-empty',
       t('jobs.empty', 'No open postings right now — be the first.')));
@@ -108,6 +114,7 @@ function renderInto(container, jobs, lang) {
 // ── Boot ────────────────────────────────────────────────────
 
 let ALL_JOBS = [];
+let LOAD_FAILED = false;
 let activeFilter = 'all';
 
 function paint() {
@@ -151,8 +158,21 @@ document.addEventListener('DOMContentLoaded', function () {
   // Re-render when the language toggle fires
   document.addEventListener('langchange', paint);
 
+  if (location.protocol === 'file:') {
+    // Browsers give file:// pages a null origin and block fetch() outright,
+    // so jobs.json can never load this way. Serve the folder instead:
+    //   python3 -m http.server 8000
+    console.warn(
+      'Job postings need the site served over http:// — jobs.json cannot be ' +
+      'fetched from a file:// page. Try: python3 -m http.server 8000'
+    );
+  }
+
   fetch(jobsRoot() + 'jobs.json', { cache: 'no-cache' })
-    .then(r => (r.ok ? r.json() : []))
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
     .then(jobs => {
       const now = new Date();
       ALL_JOBS = (Array.isArray(jobs) ? jobs : [])
@@ -160,5 +180,5 @@ document.addEventListener('DOMContentLoaded', function () {
         .sort((a, b) => (a.posted < b.posted ? 1 : -1));
       paint();
     })
-    .catch(() => { ALL_JOBS = []; paint(); });
+    .catch(() => { ALL_JOBS = []; LOAD_FAILED = true; paint(); });
 });
