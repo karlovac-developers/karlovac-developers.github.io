@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Jobs | Karlovac Developers</title>
+  <meta name="description" content="Roles going around the Karlovac Developers community, and people open to work. Every posting is vouched for by a community member." />
+  <link rel="canonical" href="https://karlovac-developers.github.io/jobs/" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236c63ff'/%3E%3Ctext x='32' y='44' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='700' fill='white' text-anchor='middle'%3EKD%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body data-root="../">
+
+  <main class="main">
+
+    <header class="page-hero">
+      <div class="hero-overlay"></div>
+      <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">HR</button>
+      <div class="page-hero-inner">
+        <a href="../" class="page-back" data-i18n="page.back">← Back to home</a>
+        <h1 class="page-title" data-i18n="jobs.title">Jobs</h1>
+        <p class="page-tagline" data-i18n="jobs.subtitle">Looking for someone — I know someone</p>
+        <p class="page-sub" data-i18n="jobs.page.sub">
+          Roles going around the community, and people open to work. Every posting is vouched for by someone who knows the work.
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="jobs-toolbar">
+        <div class="jobs-filters">
+          <button class="filter-btn is-active" data-jobs-filter="all" data-i18n="jobs.filter.all">All</button>
+          <button class="filter-btn" data-jobs-filter="hiring" data-i18n="jobs.filter.hiring">Looking for someone</button>
+          <button class="filter-btn" data-jobs-filter="available" data-i18n="jobs.filter.available">I know someone</button>
+        </div>
+        <span class="jobs-count" id="jobs-count"></span>
+      </div>
+
+      <div id="jobs-list" class="jobs-list"></div>
+
+      <div class="callout">
+        <h2 class="callout-title" data-i18n="jobs.how.title">How it works</h2>
+        <p data-i18n="jobs.how.p">
+          Anyone can submit — a company hiring, or a developer open to work. Submissions go through a
+          short form and a maintainer publishes the ones that fit. Postings drop off automatically
+          after 60 days, so nothing here is stale.
+        </p>
+        <ul class="callout-list">
+          <li data-i18n="jobs.rules.li1">Every posting names the community member vouching for it</li>
+          <li data-i18n="jobs.rules.li2">Real roles from real people — no recruiter listing farms</li>
+          <li data-i18n="jobs.rules.li3">Karlovac, Zagreb, and remote all welcome</li>
+          <li data-i18n="jobs.rules.li4">Postings expire after 60 days; resubmit if the role is still open</li>
+        </ul>
+        <a href="#" data-jobs-form target="_blank" rel="noopener" class="btn-solid" data-i18n="jobs.post">Post an opening →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p data-i18n="footer.line1">Karlovac Developers ❤️ Karlovac</p>
+    <p data-i18n="footer.line2">Built by developers, for developers.</p>
+    <p class="footer-links">
+      <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener">
+        <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.9 13.6c-.3.9-1.2 1.2-2 1.1-.6-.1-1-.5-1.2-1.1l-1-2.8-.8 2.2c-.3.8-.8 1.2-1.5 1.2-.7 0-1.2-.4-1.5-1.2l-1.4-4c-.2-.6.1-1.1.6-1.3.6-.2 1.1.1 1.3.7l.9 2.7.9-2.4c.2-.7.7-1 1.3-1s1.1.3 1.3 1l.9 2.5.9-2.8c.2-.6.7-.9 1.3-.7.5.2.8.7.6 1.3l-1.6 4.6z" />
+        </svg>
+        Meetup
+      </a>
+      •
+      <a href="https://github.com/karlovac-developers" target="_blank" rel="noopener">
+        <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
+        </svg>
+        GitHub
+      </a>
+    </p>
+  </footer>
+
+  <script src="../translations.js"></script>
+  <script src="../jobs.js"></script>
+</body>
+</html>

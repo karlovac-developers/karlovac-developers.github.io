@@ -32,6 +32,35 @@ const translations = {
 
     'read.more':         'Read more →',
 
+    /* ── Job wall ─────────────────────────────── */
+    'jobs.title':        'Jobs',
+    'jobs.subtitle':     'Looking for someone — I know someone',
+    'jobs.all':          'See all postings →',
+    'jobs.post':         'Post an opening →',
+    'jobs.empty':        'No open postings right now — be the first.',
+    'jobs.page.sub':     'Roles going around the community, and people open to work. Every posting is vouched for by someone who knows the work.',
+    'jobs.filter.all':      'All',
+    'jobs.filter.hiring':   'Looking for someone',
+    'jobs.filter.available': 'I know someone',
+    'jobs.kind.hiring':     'Looking for someone',
+    'jobs.kind.available':  'I know someone',
+    'jobs.vouched':      'Vouched by',
+    'jobs.apply':        'Apply →',
+    'jobs.contact':      'Get in touch →',
+    'jobs.count.one':    '1 open posting',
+    'jobs.count.many':   '{n} open postings',
+    'jobs.type.full-time':  'Full-time',
+    'jobs.type.part-time':  'Part-time',
+    'jobs.type.contract':   'Contract',
+    'jobs.type.internship': 'Internship',
+    'jobs.type.student':    'Student',
+    'jobs.how.title':    'How it works',
+    'jobs.how.p':        'Anyone can submit — a company hiring, or a developer open to work. Submissions go through a short form and a maintainer publishes the ones that fit. Postings drop off automatically after 60 days, so nothing here is stale.',
+    'jobs.rules.li1':    'Every posting names the community member vouching for it',
+    'jobs.rules.li2':    'Real roles from real people — no recruiter listing farms',
+    'jobs.rules.li3':    'Karlovac, Zagreb, and remote all welcome',
+    'jobs.rules.li4':    'Postings expire after 60 days; resubmit if the role is still open',
+
     /* ── Footer ───────────────────────────────── */
     'footer.line1':      'Karlovac Developers ❤️ Karlovac',
     'footer.line2':      'Built by developers, for developers.',
@@ -116,6 +145,35 @@ const translations = {
     'past.all':          'Pogledaj sve prošle Meetupove →',
 
     'read.more':         'Pročitaj više →',
+
+    /* ── Zid poslova ──────────────────────────── */
+    'jobs.title':        'Poslovi',
+    'jobs.subtitle':     'Tražim nekoga — Znam nekoga',
+    'jobs.all':          'Pogledaj sve oglase →',
+    'jobs.post':         'Objavi oglas →',
+    'jobs.empty':        'Trenutno nema otvorenih oglasa — budi prvi.',
+    'jobs.page.sub':     'Pozicije koje kruže zajednicom i ljudi otvoreni za nove prilike. Iza svakog oglasa stoji netko tko poznaje posao.',
+    'jobs.filter.all':      'Sve',
+    'jobs.filter.hiring':   'Tražim nekoga',
+    'jobs.filter.available': 'Znam nekoga',
+    'jobs.kind.hiring':     'Tražim nekoga',
+    'jobs.kind.available':  'Znam nekoga',
+    'jobs.vouched':      'Preporučuje',
+    'jobs.apply':        'Prijavi se →',
+    'jobs.contact':      'Javi se →',
+    'jobs.count.one':    '1 otvoreni oglas',
+    'jobs.count.many':   'Otvorenih oglasa: {n}',
+    'jobs.type.full-time':  'Puno radno vrijeme',
+    'jobs.type.part-time':  'Nepuno radno vrijeme',
+    'jobs.type.contract':   'Ugovor',
+    'jobs.type.internship': 'Praksa',
+    'jobs.type.student':    'Studentski',
+    'jobs.how.title':    'Kako to ide',
+    'jobs.how.p':        'Oglas može poslati svatko — tvrtka koja zapošljava ili programer otvoren za nove prilike. Prijave idu kroz kratki obrazac, a održavatelj objavljuje one koje odgovaraju. Oglasi se automatski skidaju nakon 60 dana pa ovdje nema zastarjelih.',
+    'jobs.rules.li1':    'Uz svaki oglas stoji ime člana zajednice koji ga preporučuje',
+    'jobs.rules.li2':    'Stvarne pozicije od stvarnih ljudi — bez agencijskog spama',
+    'jobs.rules.li3':    'Karlovac, Zagreb i remote — sve je dobrodošlo',
+    'jobs.rules.li4':    'Oglasi istječu nakon 60 dana; pošalji ponovno ako je pozicija još otvorena',
 
     /* ── Podnožje ─────────────────────────────── */
     'footer.line1':      'Karlovac Developers ❤️ Karlovac',
@@ -204,6 +262,9 @@ function applyLang(lang) {
 
   document.documentElement.lang = lang;
   try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* file:// origins */ }
+
+  // Content rendered by other scripts (job wall) re-translates itself here.
+  document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
 }
 
 function storedLang() {
