@@ -28,12 +28,14 @@ Subpages must carry `<body data-root="../">`. Both `translations.js` and `jobs.j
 
 ### i18n (`translations.js`)
 
-A flat `translations` object with `en` and `hr` dictionaries keyed by dotted strings. On `DOMContentLoaded` it applies the stored language (`localStorage` key `kd-lang`, default `en`) by walking:
+A flat `translations` object with `en` and `hr` dictionaries keyed by dotted strings. On `DOMContentLoaded` it applies the stored language (`localStorage` key `kd-lang`, default `hr`) by walking:
 
 - `[data-i18n]` → sets `textContent`
 - `[data-i18n-html]` → sets `innerHTML`, rewriting relative `href="…"` with the `data-root` prefix
 
-The English text is also written literally into the HTML so the page reads correctly before JS runs. **Any new user-facing string needs a key in both `en` and `hr`**, plus the English copy inline in the markup.
+The Croatian text is also written literally into the HTML so the page reads correctly before JS runs — it must match the `hr` value verbatim, or the page visibly changes on load. Same goes for `<html lang="hr">` and the `EN` label on the `#lang-toggle` button: both are the pre-JS state and `applyLang()` overwrites them afterwards. **Any new user-facing string needs a key in both `en` and `hr`**, plus the Croatian copy inline in the markup.
+
+Page `<title>` and `<meta name="description">` are *not* wired to the i18n engine — they stay Croatian regardless of the toggle.
 
 `applyLang()` ends by dispatching a `langchange` CustomEvent on `document`. Anything that renders text from JS must listen for it and re-render — `jobs.js` does this via `paint()`.
 

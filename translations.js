@@ -270,7 +270,7 @@ function applyLang(lang) {
 }
 
 function storedLang() {
-  try { return localStorage.getItem(STORAGE_KEY) || 'en'; } catch (e) { return 'en'; }
+  try { return localStorage.getItem(STORAGE_KEY) || 'hr'; } catch (e) { return 'hr'; }
 }
 
 function toggleLang() {
