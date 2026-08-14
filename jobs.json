@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "_note": "MOCK DATA — placeholder postings for previewing the job wall. Replace the whole array with [] before the site goes live. Entries without 'posted' and 'role' are ignored by the renderer, so this note never displays."
+  },
+  {
+    "posted": "2026-08-11",
+    "kind": "hiring",
+    "role": "Senior Flutter Developer",
+    "company": "Demo Tech d.o.o.",
+    "location": "Karlovac",
+    "type": "full-time",
+    "description": "Mobile team of four, building a field-service app used across the region. Looking for someone comfortable owning releases end to end.",
+    "vouchedBy": "Ivan K.",
+    "link": "https://example.com/jobs/flutter"
+  },
+  {
+    "posted": "2026-08-06",
+    "kind": "available",
+    "role": "Backend developer — Go, Postgres, some Kubernetes",
+    "location": "Remote",
+    "type": "contract",
+    "description": "Eight years in, mostly payments and internal platforms. Free from September, open to part-time or a longer contract.",
+    "vouchedBy": "Ana M.",
+    "link": "mailto:someone@example.com"
+  },
+  {
+    "posted": "2026-07-30",
+    "kind": "hiring",
+    "role": "Frontend Developer (React, TypeScript)",
+    "company": "Example Labs",
+    "location": "Zagreb — hybrid, 2 days on site",
+    "type": "full-time",
+    "description": "Design-system work on a product used by a few hundred thousand people. They are fine with a Karlovac base if you can make Tuesdays and Thursdays.",
+    "vouchedBy": "Petra L.",
+    "link": "https://example.com/careers/frontend"
+  },
+  {
+    "posted": "2026-07-18",
+    "kind": "hiring",
+    "role": "QA automation intern",
+    "company": "Uzorak d.o.o.",
+    "location": "Karlovac",
+    "type": "internship",
+    "description": "Paid, three months, with a real mentor rather than a ticket queue. A good first step for a student finishing up their studies.",
+    "vouchedBy": "Marko F.",
+    "link": "https://example.com/internship"
+  },
+  {
+    "posted": "2026-06-28",
+    "kind": "available",
+    "role": "DevOps / platform engineer",
+    "location": "Karlovac or remote",
+    "type": "part-time",
+    "description": "Terraform, GitHub Actions, and a lot of AWS. Happy to take on two or three days a week alongside current work.",
+    "vouchedBy": "Ivan K.",
+    "link": "mailto:someone-else@example.com"
+  }
+]
