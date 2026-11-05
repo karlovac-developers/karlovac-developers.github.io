@@ -2,6 +2,10 @@ import rss from '@astrojs/rss';
 import { safeCollection } from '../lib/collections';
 import { withBase, absoluteUrl } from '../lib/url';
 import { SITE, SECTIONS_MAP } from '../config';
+import { pick } from '../i18n/index.ts';
+
+/* One feed, in Croatian. Mock posts are prefixed "Primjer: ", since a feed
+   reader cannot show the mock label. */
 
 const escapeXml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -11,8 +15,8 @@ export async function GET(context) {
     .sort((a, b) => +b.data.date - +a.data.date);
   const allAuthors = await safeCollection(SECTIONS_MAP.authors);
   return rss({
-    title: SITE.title,
-    description: SITE.description,
+    title: pick('hr', SITE.title),
+    description: pick('hr', SITE.description),
     site: absoluteUrl('/', context.site),
     xmlns: { dc: 'http://purl.org/dc/elements/1.1/' },
     items: posts.map((post) => {
@@ -22,7 +26,7 @@ export async function GET(context) {
       ];
       if (!names.length && post.data.author) names.push(post.data.author);
       return {
-        title: post.data.title,
+        title: post.data.mock ? `Primjer: ${post.data.title}` : post.data.title,
         pubDate: post.data.date,
         description: post.data.description,
         link: withBase(`/blog/${post.id}/`),

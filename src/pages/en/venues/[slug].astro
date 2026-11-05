@@ -1,0 +1,6 @@
+---
+import View from '../../../views/Venue.astro';
+import { paths } from '../../../views/Venue.paths.ts';
+export const getStaticPaths = () => paths('en');
+---
+<View {...Astro.props} />

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "hero-01",
+    "file": "hero-01.jpg",
+    "alt": {
+      "hr": "Predavačica pokazuje grafikon na ekranu skupini ljudi koji sjede za stolovima i slušaju.",
+      "en": "A presenter shows a chart on a screen to a group of people seated at desks, listening."
+    },
+    "source": "https://unsplash.com/photos/m76kVfIRS5U",
+    "licence": "Unsplash License",
+    "mock": true
+  },
+  {
+    "id": "hero-02",
+    "file": "hero-02.jpg",
+    "alt": {
+      "hr": "Troje ljudi u radionici gleda u laptop okruženi robotskom opremom.",
+      "en": "Three people in a workshop look at a laptop, surrounded by robotics equipment."
+    },
+    "source": "https://unsplash.com/photos/bIltCMXIwRE",
+    "licence": "Unsplash License",
+    "mock": true
+  },
+  {
+    "id": "hero-03",
+    "file": "hero-03.jpg",
+    "alt": {
+      "hr": "Četvero kolega za stolom raspravlja ispred monitora, s pločom punom skica u pozadini.",
+      "en": "Four colleagues at a desk discuss something on a monitor, with a sketch-covered board behind them."
+    },
+    "source": "https://unsplash.com/photos/UikYLDQj9_I",
+    "licence": "Unsplash License",
+    "mock": true
+  }
+]

@@ -1,5 +1,5 @@
 ---
-import { STRINGS } from '../config';
+
 /** Checklist: use inside MDX:
  *  <Checklist id="rb-venue" items={[ 'Shortlist venues', 'Confirm access' ]} />
  *  `id` must be unique across the site, it namespaces the saved progress
@@ -9,12 +9,14 @@ interface Props {
   items: string[];
 }
 const { id, items } = Astro.props;
+import { t, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
 ---
 
 <div class="g-checklist" data-key={id}>
   <div class="g-checklist__head">
-    <span>{STRINGS.checklist}</span>
-    <span class="g-checklist__count">0/{items.length} {STRINGS.checklistDone}</span>
+    <span>{t(locale, 'checklist')}</span>
+    <span class="g-checklist__count">0/{items.length} {t(locale, 'checklistDone')}</span>
   </div>
   <ul>
     {items.map((item) => (

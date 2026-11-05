@@ -1,0 +1,28 @@
+---
+import { SECTIONS_MAP } from '../config';
+import { render } from 'astro:content';
+import { safeCollection } from '../lib/collections';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+import { t, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+
+const { entry } = Astro.props;
+const entryLang = entry.data.lang !== locale ? entry.data.lang : undefined;
+const d = entry.data;
+const { Content } = await render(entry);
+---
+
+<BaseLayout langRule={{ entryLang: entry.data.lang }} title={d.title} description={d.description}>
+  <PageHero lang={entryLang} mock={entry.data.mock} eyebrow={d.role ?? t(locale, 'eyebrowOrganizer')} backHref={`/${SECTIONS_MAP.team}/`} backLabel={t(locale, 'allOrganizers')} title={d.title} />
+  <section class="g-bg-white g-section">
+    <div class="g-container">
+      <div class="g-article">
+        <AuthorBox entry={entry} base="/organizers/" />
+        <div lang={entryLang}><Content /></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

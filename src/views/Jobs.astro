@@ -1,0 +1,60 @@
+---
+/** Job wall. Postings come from src/data/jobs.json (the `jobs` collection);
+ *  lib/jobs.ts decides which show. The kind filter is
+ *  public/scripts/jobs-filter.js; without JavaScript every posting shows. */
+import { safeCollection } from '../lib/collections';
+import { visibleJobs } from '../lib/jobs.ts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Callout from '../components/Callout.astro';
+import JobCard from '../components/JobCard.astro';
+import MockBadge from '../components/MockBadge.astro';
+import { SECTIONS, JOBS_FORM_URL } from '../config';
+import { t, pick, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+const jobs = visibleJobs(await safeCollection('jobs'), new Date());
+const formIsMock = JOBS_FORM_URL.includes('REPLACE-ME');
+const countText = (n: number) => (n === 1 ? t(locale, 'jobs.count.one') : t(locale, 'jobs.count.many', { n }));
+const sec = SECTIONS.jobs;
+---
+
+<BaseLayout title={pick(locale, sec.title)} description={pick(locale, sec.lead)}>
+  <PageHero eyebrow={t(locale, 'jobs.subtitle')} title={pick(locale, sec.title)} lead={pick(locale, sec.lead)} />
+  <section class="g-bg-white g-section">
+    <div class="g-container">
+      <Callout title={t(locale, 'jobs.how.title')}>
+        <p>{t(locale, 'jobs.how.p')}</p>
+        <ul>
+          <li>{t(locale, 'jobs.rules.li1')}</li>
+          <li>{t(locale, 'jobs.rules.li2')}</li>
+          <li>{t(locale, 'jobs.rules.li3')}</li>
+          <li>{t(locale, 'jobs.rules.li4')}</li>
+        </ul>
+        <p>
+          {formIsMock
+            ? <span class="g-btn g-btn--primary kd-btn-mock" aria-disabled="true">{t(locale, 'jobs.post')} <MockBadge /></span>
+            : <a class="g-btn g-btn--primary" href={JOBS_FORM_URL} rel="noopener" target="_blank">{t(locale, 'jobs.post')}</a>}
+        </p>
+      </Callout>
+
+      <div class="kd-jobs-filter g-row" data-jobs-filter-bar hidden>
+        <button type="button" class="g-filter is-active" data-jobs-filter="all" aria-pressed="true">{t(locale, 'jobs.filter.all')}</button>
+        <button type="button" class="g-filter" data-jobs-filter="hiring" aria-pressed="false">{t(locale, 'jobs.filter.hiring')}</button>
+        <button type="button" class="g-filter" data-jobs-filter="available" aria-pressed="false">{t(locale, 'jobs.filter.available')}</button>
+      </div>
+      <p
+        class="kd-jobs-count"
+        data-jobs-count
+        data-count-one={t(locale, 'jobs.count.one')}
+        data-count-many={t(locale, 'jobs.count.many')}
+        aria-live="polite"
+      >{countText(jobs.length)}</p>
+
+      {jobs.length > 0
+        ? <div class="kd-jobs" data-jobs-list>{jobs.map((j) => <JobCard job={j} />)}</div>
+        : <p>{t(locale, 'jobs.empty')}</p>}
+    </div>
+  </section>
+  <script src="/scripts/jobs-filter.js" is:inline defer></script>
+</BaseLayout>

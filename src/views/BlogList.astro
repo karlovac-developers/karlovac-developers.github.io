@@ -1,0 +1,44 @@
+---
+import { safeCollection } from '../lib/collections';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import PostCard from '../components/PostCard.astro';
+import Pagination from '../components/Pagination.astro';
+import { SECTIONS, PAGINATION } from '../config';
+import { t, pick, pageHref, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+/* One route serves /blog/ and /blog/page/N/, matching the Hugo theme's
+   paginator URLs. /blog/<slug> still goes to [slug].astro: named params
+   take priority over rest params. */
+
+const { current, total, posts, tags } = Astro.props;
+---
+
+<BaseLayout title={pick(locale, SECTIONS.blog.title)} description={pick(locale, SECTIONS.blog.lead)}>
+  <PageHero
+    eyebrow={pick(locale, SECTIONS.blog.eyebrow)}
+    title={pick(locale, SECTIONS.blog.title)}
+    lead={pick(locale, SECTIONS.blog.lead)}
+  />
+  <section class="g-bg-white g-section">
+    <div class="g-container">
+      <div class="g-row" style="justify-content:space-between;align-items:center;margin-bottom:var(--space-5)">
+        <div class="g-row" data-filterbar>
+          {tags.length > 0 && (
+            <>
+              <span style="font-size:var(--text-sm);color:var(--text-muted)">{t(locale, 'filterLabel')}</span>
+              <button class="g-filter is-active" data-filter="*">{t(locale, 'filterAll')}</button>
+              {tags.map((tag) => <button class="g-filter" data-filter={tag}>#{tag}</button>)}
+            </>
+          )}
+        </div>
+        <a class="g-btn g-btn--ghost g-btn--sm" href={pageHref(locale, '/rss.xml')} title={t(locale, 'subscribeRssTitle')}><i class="fa-solid fa-rss" aria-hidden="true"></i> {t(locale, 'subscribeRss')}</a>
+      </div>
+      <div class="g-grid-3">
+        {posts.map((p) => <PostCard post={p} />)}
+      </div>
+      <Pagination current={current} total={total} base="/blog/" />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+import { safeCollection } from '../lib/collections';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import OrganizerCard from '../components/OrganizerCard.astro';
+import Pagination from '../components/Pagination.astro';
+import { SECTIONS, PAGINATION } from '../config';
+import { pick, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+/* One route serves /organizers/ and /organizers/page/N/, matching the Hugo
+   theme's paginator URLs. */
+
+const { current, total, organizers } = Astro.props;
+---
+
+<BaseLayout title={pick(locale, SECTIONS.organizers.title)} description={pick(locale, SECTIONS.organizers.lead)}>
+  <PageHero
+    eyebrow={pick(locale, SECTIONS.organizers.eyebrow)}
+    title={pick(locale, SECTIONS.organizers.title)}
+    lead={pick(locale, SECTIONS.organizers.lead)}
+  />
+  <section class="g-bg-white g-section">
+    <div class="g-container">
+      <div class="g-grid-3">
+        {organizers.map((o) => <OrganizerCard organizer={o} />)}
+      </div>
+      <Pagination current={current} total={total} base="/organizers/" />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+/** One job wall posting. The posting's own text carries its `lang`; the
+ *  badges, labels and link stay in the page's language. */
+import type { CollectionEntry } from 'astro:content';
+import MockBadge from './MockBadge.astro';
+import { t, formatDate, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+interface Props { job: CollectionEntry<'jobs'> }
+const { job } = Astro.props;
+const d = job.data;
+const lang = d.lang !== locale ? d.lang : undefined;
+const external = d.link.startsWith('https://');
+---
+
+<article class="g-card kd-job" data-jobs-kind={d.kind}>
+  <div class="g-card__body">
+    <div class="g-row kd-job__badges">
+      <span class={`g-badge g-badge--soft kd-job__kind kd-job__kind--${d.kind}`}>{t(locale, `jobs.kind.${d.kind}`)}</span>
+      <span class="g-badge g-badge--soft">{t(locale, `jobs.type.${d.type}`)}</span>
+      {d.mock && <MockBadge />}
+    </div>
+    <h3 class="g-card__title" lang={lang}>{d.role}</h3>
+    <div class="g-meta-line">
+      {d.company && <span lang={lang}><i class="fa-solid fa-building" aria-hidden="true"></i> {d.company}</span>}
+      <span lang={lang}><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {d.location}</span>
+      <span><i class="fa-solid fa-calendar-day" aria-hidden="true"></i> <time datetime={d.posted.toISOString().slice(0, 10)}>{formatDate(d.posted, locale, { day: 'numeric', month: 'short', year: 'numeric' })}</time></span>
+    </div>
+    <p class="g-card__text" lang={lang}>{d.description}</p>
+    <p class="kd-job__vouched">{t(locale, 'jobs.vouched')}: {d.vouchedBy}</p>
+    <a class="g-btn g-btn--sm g-btn--outline" href={d.link} {...(external ? { rel: 'noopener', target: '_blank' } : {})}>
+      {t(locale, d.kind === 'available' ? 'jobs.contact' : 'jobs.apply')}
+    </a>
+  </div>
+</article>

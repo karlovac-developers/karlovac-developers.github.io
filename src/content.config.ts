@@ -1,11 +1,18 @@
 import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { glob, file } from 'astro/loaders';
 
-/** Front-matter schemas: kept 1:1 compatible with the Hugo theme (see PARITY.md). */
+/** Front-matter schemas (adapted from the Popular theme, see THEME.md).
+ *  Submitted collections gain `lang` (the language the entry is written in)
+ *  and `mock` (placeholder content, labelled on the page and listed by
+ *  `npm run mocks`). Pages and docs are split into hr/ and en/ folders. */
+const lang = z.enum(['hr', 'en']).default('hr');
+const mock = z.boolean().default(false);
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
+    lang,
+    mock,
     title: z.string(),
     date: z.coerce.date(),
     draft: z.boolean().default(false), // drafts are excluded from builds, matching Hugo
@@ -40,6 +47,8 @@ const blog = defineCollection({
 const events = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/events' }),
   schema: z.object({
+    lang,
+    mock,
     title: z.string(),
     date: z.coerce.date(), // the event's start time; upcoming vs past is decided by this
     draft: z.boolean().default(false), // drafts are excluded from builds, matching Hugo
@@ -80,6 +89,8 @@ const events = defineCollection({
 const organizers = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/organizers' }),
   schema: z.object({
+    lang,
+    mock,
     title: z.string(),
     weight: z.number().default(100),
     role: z.string().optional(),
@@ -95,6 +106,8 @@ const organizers = defineCollection({
 const authors = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/authors' }),
   schema: z.object({
+    lang,
+    mock,
     title: z.string(), // the author's name
     role: z.string().optional(),
     photo: z.string().optional(),
@@ -108,6 +121,8 @@ const authors = defineCollection({
 const speakers = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/speakers' }),
   schema: z.object({
+    lang,
+    mock,
     title: z.string(), // the speaker's name
     role: z.string().optional(),
     photo: z.string().optional(),
@@ -121,6 +136,8 @@ const speakers = defineCollection({
 const venues = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/venues' }),
   schema: z.object({
+    lang,
+    mock,
     title: z.string(), // the venue's name
     address: z.string().optional(),
     photo: z.string().optional(),
@@ -138,6 +155,7 @@ const venues = defineCollection({
 const docs = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/docs' }),
   schema: z.object({
+    mock,
     title: z.string(),
     eyebrow: z.string().optional(),
     lead: z.string().optional(),
@@ -149,6 +167,7 @@ const docs = defineCollection({
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/pages' }),
   schema: z.object({
+    mock,
     title: z.string(),
     eyebrow: z.string().optional(),
     lead: z.string().optional(),
@@ -157,4 +176,36 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { blog, events, organizers, authors, speakers, venues, docs, pages };
+/** Job wall postings: one JSON array, validated at build time. */
+const jobs = defineCollection({
+  loader: file('src/data/jobs.json'),
+  schema: z.object({
+    id: z.string(),
+    posted: z.coerce.date(),
+    kind: z.enum(['hiring', 'available']),
+    role: z.string(),
+    company: z.string().optional(), // omitted for kind: 'available'
+    location: z.string(),
+    type: z.enum(['full-time', 'part-time', 'contract', 'internship', 'student']),
+    description: z.string(),
+    vouchedBy: z.string(),
+    link: z.string().regex(/^(https:\/\/|mailto:)/, 'link must start with https:// or mailto:'),
+    lang,
+    mock,
+  }),
+});
+
+/** Home hero photos. `file` names an image in src/assets/hero/. */
+const heroPhotos = defineCollection({
+  loader: file('src/data/hero-photos.json'),
+  schema: z.object({
+    id: z.string(),
+    file: z.string(),
+    alt: z.object({ hr: z.string().min(1), en: z.string().min(1) }),
+    source: z.string().url(),
+    licence: z.string(),
+    mock,
+  }),
+});
+
+export const collections = { blog, events, organizers, authors, speakers, venues, docs, pages, jobs, heroPhotos };

@@ -1,17 +1,17 @@
 ---
-/** §7: "Your name here?" invite card appended to the speakers list when
- *  SITE.speakers.invite is true. Links to the /speak/ CFP page. Off by
- *  default, so sites that do not solicit talks show nothing. */
-import { SITE, STRINGS } from '../config';
-import { withBase } from '../lib/url';
-const invite = (SITE as Record<string, any>).speakers?.invite === true;
+/** "Your name here?" invite card appended to the speakers list when the
+ *  speakers feature is on. Links to the give-a-talk page. */
+import { FEATURES } from '../config';
+import { t, pageHref, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+const invite = FEATURES.speakers;
 ---
 {invite && (
   <div class="g-persona g-persona--primary">
     <span class="g-medallion g-medallion--lg" aria-hidden="true"><i class="fa-solid fa-microphone-lines"></i></span>
     <div>
-      <div class="g-persona__name"><a href={withBase('/speak/')} style="color:inherit">{STRINGS.speakerInviteTitle} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
-      <p class="g-persona__bio">{STRINGS.speakerInviteBody}</p>
+      <div class="g-persona__name"><a href={pageHref(locale, '/give-a-talk/')} style="color:inherit">{t(locale, 'speakerInviteTitle')} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+      <p class="g-persona__bio">{t(locale, 'speakerInviteBody')}</p>
     </div>
   </div>
 )}

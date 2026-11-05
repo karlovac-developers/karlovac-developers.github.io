@@ -1,0 +1,227 @@
+---
+import { safeCollection } from '../lib/collections';
+import { formatStat, countSectionsIn } from '../lib/stats';
+import { isUpcoming } from '../lib/dates.ts';
+import { visibleJobs } from '../lib/jobs.ts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import OrganizerCard from '../components/OrganizerCard.astro';
+import EventsEmpty from '../components/EventsEmpty.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
+import JobCard from '../components/JobCard.astro';
+import MockBadge from '../components/MockBadge.astro';
+import { HOME, SITE, SECTIONS_MAP, SOCIAL, FEATURES, JOBS_PREVIEW_COUNT } from '../config';
+import { buildOrgLd, jsonld } from '../lib/jsonld';
+import { absoluteUrl } from '../lib/url';
+import { t, pick, pageHref, formatDate, getLocale, type Pair } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+const now = new Date();
+const events = (await safeCollection('events')).filter((e) => !e.data.draft);
+const upcoming = events.filter((e) => isUpcoming(e.data.date, now)).sort((a, b) => +a.data.date - +b.data.date);
+const next = FEATURES.events ? upcoming[0] : undefined;
+
+const posts = FEATURES.blog
+  ? (await safeCollection('blog')).filter((p) => !p.data.draft).sort((a, b) => +b.data.date - +a.data.date).slice(0, 3)
+  : [];
+/* Stat values: @pastEventCount and @count:<section>[:rounded] resolve to
+   live numbers (see lib/stats). */
+const pastCount = events.filter((e) => !isUpcoming(e.data.date, now)).length;
+const counts: Record<string, number> = {};
+const statText = (v: string | Pair) => (typeof v === 'string' ? v : pick(locale, v));
+for (const name of countSectionsIn(HOME.stats.map((s) => ({ value: statText(s.value) })))) {
+  counts[name] = (await safeCollection(name)).filter((e) => !(e.data as any)?.draft).length;
+}
+const statValue = (v: string | Pair) => formatStat(statText(v), { pastCount, counts });
+const nextVenue = next?.data.venueRef ? (await safeCollection('venues')).find((v) => v.id === next.data.venueRef)?.data.title : undefined;
+const organizers = FEATURES.organizers
+  ? (await safeCollection(SECTIONS_MAP.team)).sort((a, b) => a.data.weight - b.data.weight)
+  : [];
+const jobs = FEATURES.jobs ? visibleJobs(await safeCollection('jobs'), now).slice(0, JOBS_PREVIEW_COUNT) : [];
+
+const h = HOME;
+const orgLd = jsonld(buildOrgLd({
+  name: pick(locale, SITE.title),
+  url: absoluteUrl(pageHref(locale, '/'), Astro.site ?? Astro.url),
+  logo: SITE.logo ? absoluteUrl(SITE.logo, Astro.site ?? Astro.url) : undefined,
+  description: pick(locale, SITE.description),
+  sameAs: SOCIAL.filter((s) => /^https?:/.test(s.url)).map((s) => s.url),
+}));
+const external = (url: string) => /^https?:/.test(url);
+const extAttrs = (url: string) => (external(url) ? { rel: 'noopener', target: '_blank' } : {});
+---
+
+<BaseLayout>
+  <script type="application/ld+json" slot="head" set:html={orgLd} />
+  <section class="g-hero">
+    <div class="g-container g-hero__grid">
+      <div class="g-hero__content">
+        {h.hero.eyebrow && <span class="g-eyebrow">{pick(locale, h.hero.eyebrow)}</span>}
+        <h1>{pick(locale, h.hero.title)}</h1>
+        <p class="g-hero__lead">{pick(locale, h.hero.lead)}</p>
+        <div class="g-row">
+          {h.hero.ctas.map((c) => (
+            <a class={`g-btn g-btn--lg g-btn--${c.variant ?? 'primary'}`} href={pageHref(locale, c.url)} {...extAttrs(c.url)}>
+              {c.icon && <i class={c.icon} aria-hidden="true"></i>}{pick(locale, c.label)}
+            </a>
+          ))}
+        </div>
+      </div>
+      {FEATURES.heroCarousel && <div class="g-hero__media"><HeroCarousel /></div>}
+    </div>
+  </section>
+
+  {FEATURES.stats && h.stats.length > 0 && (
+    <section class="g-bg-ink">
+      <div class="g-container g-stats">
+        {h.stats.map((s) => (
+          <div class="g-stat">
+            <div class="g-stat__n">{statValue(s.value)}</div>
+            <div class="g-stat__l">{pick(locale, s.label)} {s.mock && <MockBadge />}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {h.features.length > 0 && (
+    <section class="g-bg-white g-section">
+      <div class="g-container">
+        <div class="g-section-head">
+          {h.featuresHead.eyebrow && <span class="g-eyebrow">{pick(locale, h.featuresHead.eyebrow)}</span>}
+          <h2>{pick(locale, h.featuresHead.title)}</h2>
+          {h.featuresHead.lead && <p class="g-lead">{pick(locale, h.featuresHead.lead)}</p>}
+        </div>
+        <div class="g-grid-3" style="margin-top:var(--space-5)">
+          {h.features.map((f) => (
+            <div class="g-card"><div class="g-card__body">
+              <span class="g-medallion"><i class={f.icon} aria-hidden="true"></i></span>
+              <h3 class="g-card__title">{pick(locale, f.title)}</h3>
+              <p class="g-card__text">{pick(locale, f.body)}</p>
+            </div></div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {next && (
+    <section class="g-bg-wash-soft">
+      <div class="g-container g-feature">
+        {next.data.image && <div class="g-feature__media"><img src={next.data.image} alt={next.data.title} /></div>}
+        <div class="g-feature__body">
+          <span class="g-badge g-badge--soft"><i class="fa-solid fa-calendar" aria-hidden="true"></i> {t(locale, 'nextMeetup')}</span>
+          {next.data.mock && <MockBadge />}
+          <h2 style="margin:0" lang={next.data.lang !== locale ? next.data.lang : undefined}>{next.data.title}</h2>
+          <div class="g-meta-line">
+            <span><i class="fa-solid fa-calendar-day" aria-hidden="true"></i> {formatDate(next.data.date, locale, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}{next.data.time && ` · ${next.data.time}`}</span>
+            <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {nextVenue ?? next.data.venue ?? t(locale, 'venueTba')}</span>
+          </div>
+          {next.data.description && <p style="margin:0;color:var(--text-muted);max-width:34rem" lang={next.data.lang !== locale ? next.data.lang : undefined}>{next.data.description}</p>}
+          <div class="g-row">
+            {!next.data.planning && next.data.rsvp && <a class="g-btn g-btn--primary" href={next.data.rsvp} {...extAttrs(next.data.rsvp)}><i class="fa-solid fa-calendar" aria-hidden="true"></i> {t(locale, 'rsvpExternal')}</a>}
+            <a class="g-btn g-btn--outline" href={pageHref(locale, '/events/')}>{t(locale, 'allEvents')}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {FEATURES.events && !next && (
+    <section class="g-bg-wash-soft g-section">
+      <div class="g-container"><EventsEmpty /></div>
+    </section>
+  )}
+
+  {jobs.length > 0 && (
+    <section class="g-bg-white g-section">
+      <div class="g-container">
+        <div class="g-row" style="justify-content:space-between;align-items:flex-end">
+          <div class="g-section-head">
+            <span class="g-eyebrow">{t(locale, 'jobs.subtitle')}</span>
+            <h2>{t(locale, 'home.jobs.title')}</h2>
+          </div>
+          <a class="g-btn g-btn--ghost" href={pageHref(locale, '/jobs/')}>{t(locale, 'home.jobs.all')}</a>
+        </div>
+        <div class="kd-jobs" style="margin-top:var(--space-4)">
+          {jobs.map((j) => <JobCard job={j} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {posts.length > 0 && (
+    <section class="g-bg-white g-section">
+      <div class="g-container">
+        <div class="g-row" style="justify-content:space-between;align-items:flex-end">
+          <div class="g-section-head">
+            <span class="g-eyebrow">{t(locale, 'fromTheBlog')}</span>
+            <h2>{t(locale, 'latestFromCommunity')}</h2>
+          </div>
+          <a class="g-btn g-btn--ghost" href={pageHref(locale, '/blog/')}>{t(locale, 'readTheBlog')} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="g-grid-3" style="margin-top:var(--space-4)">
+          {posts.map((p) => <PostCard post={p} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {organizers.length > 0 && (
+    <section class="g-bg-tertiary g-section">
+      <div class="g-container">
+        <div class="g-section-head g-section-head--center">
+          <span class="g-eyebrow">{t(locale, 'home.team.eyebrow')}</span>
+          <h2>{t(locale, 'home.team.title')}</h2>
+          <p class="g-lead">{t(locale, 'home.team.lead')}</p>
+        </div>
+        <div class="g-grid-3" style="margin-top:var(--space-5)">
+          {organizers.slice(0, 3).map((o) => <OrganizerCard organizer={o} />)}
+        </div>
+        <div class="g-row" style="justify-content:center;margin-top:var(--space-4)">
+          <a class="g-btn g-btn--outline" href={pageHref(locale, `/${SECTIONS_MAP.team}/`)}>{t(locale, 'home.team.all')}</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {FEATURES.testimonials && h.testimonials.length > 0 && (
+    <section class="g-bg-white g-section">
+      <div class="g-container">
+        <div class="g-section-head g-section-head--center">
+          {h.testimonialsHead.eyebrow && <span class="g-eyebrow">{pick(locale, h.testimonialsHead.eyebrow)}</span>}
+          <h2>{pick(locale, h.testimonialsHead.title)}</h2>
+          {h.testimonialsHead.lead && <p class="g-lead">{pick(locale, h.testimonialsHead.lead)}</p>}
+        </div>
+        <div class="g-grid-3" style="margin-top:var(--space-5)">
+          {h.testimonials.map((q) => (
+            <figure class="g-quote">
+              <blockquote>{pick(locale, q.quote)}</blockquote>
+              <figcaption>
+                {q.photo && <img src={q.photo} alt={q.name} />}
+                <div>
+                  <span class="g-quote__name">{q.name}</span>
+                  <span class="g-quote__role">{pick(locale, q.role)}</span>
+                  {q.mock && <MockBadge />}
+                </div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="g-bg-wash g-section">
+    <div class="g-container" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem">
+      <span class="g-eyebrow">{h.getInvolved.eyebrow ? pick(locale, h.getInvolved.eyebrow) : t(locale, 'home.involved.eyebrow')}</span>
+      <h2 style="margin:0;max-width:40rem">{pick(locale, h.getInvolved.title)}</h2>
+      <p style="margin:0;color:var(--ink-700);max-width:38rem">{pick(locale, h.getInvolved.lead)}</p>
+      <div class="g-row" style="justify-content:center">
+        {h.getInvolved.ctas.map((c) => (
+          <a class={`g-btn g-btn--${c.variant ?? 'primary'}`} href={pageHref(locale, c.url)}>{pick(locale, c.label)}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

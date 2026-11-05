@@ -1,0 +1,6 @@
+---
+import View from '../../../views/Event.astro';
+import { paths } from '../../../views/Event.paths.ts';
+export const getStaticPaths = () => paths('en');
+---
+<View {...Astro.props} />

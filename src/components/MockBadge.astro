@@ -1,0 +1,7 @@
+---
+/** Visible label on mock content, in the page's language. */
+import { t, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+---
+
+<span class="g-badge g-badge--soft kd-mock">{t(locale, 'mock.label')}</span>
