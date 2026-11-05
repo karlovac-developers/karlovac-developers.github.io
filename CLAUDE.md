@@ -31,6 +31,10 @@ Page logic lives in `src/views/<Name>.astro`. Dynamic routes keep their `getStat
 *   Submitted collections (events, blog, authors, speakers, venues, organizers, jobs) are written once, with a `lang` field, and render under both locales. Put `lang` on the entry's own text only, never on badges or labels. Single-entry views pass `langRule={{ entryLang }}` to `BaseLayout`, which points the canonical at the copy in the entry's language. An entry body shown in the other language is wrapped in `data-entry-lang`, so `check-links.mjs` lets its links point at its own language.
 *   Events are upcoming until the end of their day in Zagreb: use `isUpcoming()` from `src/lib/dates.ts`, never `date >= now`.
 
+### Events from Meetup
+
+The `events` loader (`src/lib/meetup-loader.ts`) is the `glob` loader plus the upcoming events in Meetup's iCalendar feed (`MEETUP_ICAL_URL`), parsed by `src/lib/meetup.ts`. A file wins: a feed event is skipped when a file has the same `meetupUrl` or the same id (`<date>-<title slug>`). The feed has no venue; such events link to Meetup for it. A failed fetch only logs a warning. Set `MEETUP_SYNC=off` to build offline. Do not scrape Meetup's pages at build time: only the public feed is read.
+
 ### Feature flags
 
 `FEATURES` in `src/config.ts` hides navigation, footer, home and component links to a feature. Routes are not flagged: a route exists only while its entry files exist. To turn a feature off, set the flag and delete its entry files (README has the list). All collections stay registered in `src/content.config.ts`.
@@ -45,7 +49,7 @@ Every mock carries `mock: true` and shows `<MockBadge />`; mock pages and docs s
 
 ### Node-loaded files
 
-`src/config.ts`, `src/i18n/*.ts`, `src/lib/dates.ts` and `src/lib/jobs.ts` are loaded by Node for tests and `list-mocks`. They import only other `.ts` files, with explicit `.ts` extensions, use `as` (not `<T>`) for type assertions, and never import `astro:*`.
+`src/config.ts`, `src/i18n/*.ts`, `src/lib/dates.ts`, `src/lib/jobs.ts` and `src/lib/meetup.ts` are loaded by Node for tests and `list-mocks`. They import only other `.ts` files, with explicit `.ts` extensions, use `as` (not `<T>`) for type assertions, and never import `astro:*`.
 
 ### The previous site
 

@@ -43,9 +43,31 @@ All paths are the same in both languages: Croatian at `/events/`, English at
     add a `{ hr, en }` pair in `src/config.ts`. A key missing on either side fails
     `npm run check`.
 
-**Events from Meetup.** Events are announced on Meetup. The organizer who creates
-an event there also adds it to `src/content/events/` the same day, so the home
-page's "next event" stays true.
+**Events from Meetup.** Events are announced on Meetup. Every build reads Meetup's
+public calendar feed (`MEETUP_ICAL_URL` in `src/config.ts`) and adds each upcoming
+event that has no file in `src/content/events/`, with its title, date, time and
+description, and an RSVP button to Meetup. The daily build picks up a new event by
+the next morning; run the deploy workflow by hand to publish it sooner.
+
+The feed has no venue, so a synced event links to Meetup for the location. To add
+a venue, speakers or talks, write the event's file: name it
+`<date>-<title slug>.md` (the synced event's URL shows the name) and set
+`meetupUrl` to the Meetup event page. A file with the same `meetupUrl` replaces the
+synced event. The feed lists upcoming events only, so once an event is over it
+disappears from the site unless it has a file: write one for every event worth
+keeping in the archive.
+
+If Meetup cannot be reached, the build logs a warning and goes on without the
+synced events. `MEETUP_SYNC=off npm run build` skips the fetch.
+
+The past events up to 2026-10-10 and their venues were imported once from Meetup's
+event pages. Meetup listed 49 past events then; the 39 older ones have no file and
+are counted in the home page's "events hosted" stat through
+`MEETUP_PAST_EVENTS_NOT_ON_SITE`.
+
+**Home photos.** `src/data/hero-photos.json` lists the carousel photos, which are
+in `src/assets/hero/`. Each needs alt text in both languages and a `source` link,
+which the caption links to.
 
 ## Mock content
 

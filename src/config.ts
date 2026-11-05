@@ -36,6 +36,12 @@ export type Feature = keyof typeof FEATURES;
 
 export const MEETUP_URL = 'https://www.meetup.com/karlovac-developers-meetup/';
 export const MEETUP_UPCOMING_URL = 'https://www.meetup.com/karlovac-developers-meetup/events/?type=upcoming';
+/* Public iCalendar feed of upcoming events, read at build time (src/lib/meetup-loader.ts). */
+export const MEETUP_ICAL_URL = 'https://www.meetup.com/karlovac-developers-meetup/events/ical/';
+/* Past events on Meetup that have no file in src/content/events/ (49 past
+   events on Meetup on 2026-11-05, 10 of them imported). Added to the
+   "events hosted" stat. */
+export const MEETUP_PAST_EVENTS_NOT_ON_SITE = 39;
 
 /* ── Job wall ── */
 export const JOBS_EXPIRY_DAYS = 60;
@@ -240,12 +246,14 @@ export const HOME: {
       { label: { hr: '📅 Sljedeći događaj', en: '📅 Next Event' }, url: MEETUP_UPCOMING_URL, variant: 'outline' },
     ],
   },
-  /* @pastEventCount resolves at build time to the number of past events. */
+  /* @pastEventCount resolves at build time to the number of real past
+     events, plus MEETUP_PAST_EVENTS_NOT_ON_SITE. Members: 221 on Meetup on
+     2026-11-05. */
   stats: [
-    { value: '@pastEventCount', label: { hr: 'događanja', en: 'events hosted' }, mock: true },
-    { value: '2026', label: { hr: 'osnovano', en: 'founded' }, mock: true },
-    { value: { hr: 'Svi', en: 'All' }, label: { hr: 'dobrodošli', en: 'welcome' }, mock: true },
-    { value: { hr: 'Besplatno', en: 'Free' }, label: { hr: 'ulaz', en: 'to attend' }, mock: true },
+    { value: '@pastEventCount', label: { hr: 'održanih susreta', en: 'events hosted' } },
+    { value: '2017', label: { hr: 'osnovano', en: 'founded' } },
+    { value: '200+', label: { hr: 'članova na Meetupu', en: 'members on Meetup' } },
+    { value: { hr: 'Besplatno', en: 'Free' }, label: { hr: 'ulaz', en: 'to attend' } },
   ],
   featuresHead: { title: { hr: 'Što radimo', en: 'What we do' } },
   features: [

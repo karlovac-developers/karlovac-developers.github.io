@@ -21,7 +21,9 @@ const venueAddress = venuePage?.data.address ?? (venuePage ? undefined : d.addre
 /* Venue-wanted only matters for events still to come: a past event with no
    recorded venue shows neither badge nor "to be announced". */
 const upcoming = isUpcoming(d.date, new Date());
-const tbd = upcoming && (d.venueWanted || !venueName);
+/* Events synced from Meetup's calendar carry no venue; it is on the Meetup page. */
+const venueOnMeetup = !venueName && !d.venueWanted && !!d.meetupUrl;
+const tbd = upcoming && (d.venueWanted || (!venueName && !venueOnMeetup));
 const lang = d.lang !== locale ? d.lang : undefined;
 /* Planning: the event is on the calendar but its details are not settled.
    Wins over the venue-wanted badge, which is inferred, and hides the RSVP
@@ -58,7 +60,9 @@ const day = formatDate(d.date, locale, { month: 'short', day: 'numeric' });
     {(venueName || upcoming) && (
       <div class="g-event__meta">
         <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-        {venueName ? <span lang={lang}>{venueName}{venueAddress && ` · ${venueAddress}`}</span> : t(locale, 'venueTba')}
+        {venueName
+          ? <span lang={lang}>{venueName}{venueAddress && ` · ${venueAddress}`}</span>
+          : venueOnMeetup ? <a href={d.meetupUrl} rel="noopener" target="_blank">{t(locale, 'venueOnMeetup')}</a> : t(locale, 'venueTba')}
       </div>
     )}
     {speakerLine && (

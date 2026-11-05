@@ -1,35 +1,35 @@
 [
   {
-    "id": "hero-01",
-    "file": "hero-01.jpg",
+    "id": "meetup-group",
+    "file": "meetup-group.jpg",
     "alt": {
-      "hr": "Predavačica pokazuje grafikon na ekranu skupini ljudi koji sjede za stolovima i slušaju.",
-      "en": "A presenter shows a chart on a screen to a group of people seated at desks, listening."
+      "hr": "Predavač stoji uz ekran s prezentacijom, a dvadesetak ljudi na stolicama u svijetloj dvorani s lučnim prozorima sluša predavanje.",
+      "en": "A speaker stands next to a presentation screen while about twenty people on chairs in a bright room with arched windows listen."
     },
-    "source": "https://unsplash.com/photos/m76kVfIRS5U",
-    "licence": "Unsplash License",
-    "mock": true
+    "source": "https://www.meetup.com/karlovac-developers-meetup/",
+    "licence": "Karlovac Developers, from the group's Meetup page",
+    "mock": false
   },
   {
-    "id": "hero-02",
-    "file": "hero-02.jpg",
+    "id": "meetup-korana",
+    "file": "meetup-korana.jpg",
     "alt": {
-      "hr": "Troje ljudi u radionici gleda u laptop okruženi robotskom opremom.",
-      "en": "Three people in a workshop look at a laptop, surrounded by robotics equipment."
+      "hr": "Travnjak pod visokim drvećem uz Koranu, s klupama, stolovima i drvenom kućicom, mjesto roštilja na Korani.",
+      "en": "A lawn under tall trees by the Korana river, with benches, tables and a wooden hut, where the Korana barbecue was held."
     },
-    "source": "https://unsplash.com/photos/bIltCMXIwRE",
-    "licence": "Unsplash License",
-    "mock": true
+    "source": "https://www.meetup.com/karlovac-developers-meetup/events/312830974/",
+    "licence": "Karlovac Developers, from the event's Meetup page",
+    "mock": false
   },
   {
-    "id": "hero-03",
-    "file": "hero-03.jpg",
+    "id": "meetup-openstreetmap",
+    "file": "meetup-openstreetmap.jpg",
     "alt": {
-      "hr": "Četvero kolega za stolom raspravlja ispred monitora, s pločom punom skica u pozadini.",
-      "en": "Four colleagues at a desk discuss something on a monitor, with a sketch-covered board behind them."
+      "hr": "Snimka Karlovca iz zraka s ucrtanim ulicama iz OpenStreetMapa i natpisom „OpenStreetMap, Karlovac Developers Group”.",
+      "en": "An aerial view of Karlovac with OpenStreetMap streets drawn over it and the words “OpenStreetMap, Karlovac Developers Group”."
     },
-    "source": "https://unsplash.com/photos/UikYLDQj9_I",
-    "licence": "Unsplash License",
-    "mock": true
+    "source": "https://www.meetup.com/karlovac-developers-meetup/events/312077249/",
+    "licence": "Karlovac Developers, from the event's Meetup page",
+    "mock": false
   }
 ]

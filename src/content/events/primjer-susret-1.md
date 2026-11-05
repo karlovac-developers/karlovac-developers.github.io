@@ -1,6 +1,6 @@
 ---
-title: "Siječanjski meetup"
-date: 2027-01-14
+title: "Rujanski meetup"
+date: 2025-09-18
 time: "18:00"
 description: "Primjer susreta: jedno predavanje, pitanja i druženje nakon toga."
 venueRef: dvorana-primjer

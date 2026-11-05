@@ -10,7 +10,7 @@ import EventsEmpty from '../components/EventsEmpty.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import JobCard from '../components/JobCard.astro';
 import MockBadge from '../components/MockBadge.astro';
-import { HOME, SITE, SECTIONS_MAP, SOCIAL, FEATURES, JOBS_PREVIEW_COUNT } from '../config';
+import { HOME, SITE, SECTIONS_MAP, SOCIAL, FEATURES, JOBS_PREVIEW_COUNT, MEETUP_PAST_EVENTS_NOT_ON_SITE } from '../config';
 import { buildOrgLd, jsonld } from '../lib/jsonld';
 import { absoluteUrl } from '../lib/url';
 import { t, pick, pageHref, formatDate, getLocale, type Pair } from '../i18n/index.ts';
@@ -25,8 +25,9 @@ const posts = FEATURES.blog
   ? (await safeCollection('blog')).filter((p) => !p.data.draft).sort((a, b) => +b.data.date - +a.data.date).slice(0, 3)
   : [];
 /* Stat values: @pastEventCount and @count:<section>[:rounded] resolve to
-   live numbers (see lib/stats). */
-const pastCount = events.filter((e) => !isUpcoming(e.data.date, now)).length;
+   live numbers (see lib/stats). Past events count real events only, plus
+   the older Meetup events that have no file. */
+const pastCount = MEETUP_PAST_EVENTS_NOT_ON_SITE + events.filter((e) => !e.data.mock && !isUpcoming(e.data.date, now)).length;
 const counts: Record<string, number> = {};
 const statText = (v: string | Pair) => (typeof v === 'string' ? v : pick(locale, v));
 for (const name of countSectionsIn(HOME.stats.map((s) => ({ value: statText(s.value) })))) {
@@ -115,7 +116,9 @@ const extAttrs = (url: string) => (external(url) ? { rel: 'noopener', target: '_
           <h2 style="margin:0" lang={next.data.lang !== locale ? next.data.lang : undefined}>{next.data.title}</h2>
           <div class="g-meta-line">
             <span><i class="fa-solid fa-calendar-day" aria-hidden="true"></i> {formatDate(next.data.date, locale, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}{next.data.time && ` · ${next.data.time}`}</span>
-            <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {nextVenue ?? next.data.venue ?? t(locale, 'venueTba')}</span>
+            <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {nextVenue ?? next.data.venue ?? (next.data.meetupUrl && !next.data.venueWanted
+              ? <a href={next.data.meetupUrl} rel="noopener" target="_blank">{t(locale, 'venueOnMeetup')}</a>
+              : t(locale, 'venueTba'))}</span>
           </div>
           {next.data.description && <p style="margin:0;color:var(--text-muted);max-width:34rem" lang={next.data.lang !== locale ? next.data.lang : undefined}>{next.data.description}</p>}
           <div class="g-row">

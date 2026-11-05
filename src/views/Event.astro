@@ -80,10 +80,13 @@ const eventLd = jsonld(buildEventLd({
       <div class="g-meta-line" style="margin-bottom:var(--space-4)">
         <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {venuePage
           ? <>{FEATURES.venues ? <a href={pageHref(locale, `/venues/${venuePage.id}/`)}>{venuePage.data.title}</a> : venuePage.data.title}{venuePage.data.address && ` · ${venuePage.data.address}`}</>
-          : <>{d.venue ?? t(locale, 'venueTba')}{d.address && ` · ${d.address}`}</>}</span>
+          : d.venue ? <>{d.venue}{d.address && ` · ${d.address}`}</>
+          : d.meetupUrl && !d.venueWanted ? <a href={d.meetupUrl} rel="noopener" target="_blank">{t(locale, 'venueOnMeetup')}</a>
+          : t(locale, 'venueTba')}</span>
         {venuePage?.data.wheelchair && <span><span class="g-badge g-badge--success g-badge--soft"><i class="fa-solid fa-wheelchair" aria-hidden="true"></i> {t(locale, 'wheelchairAccessible')}</span></span>}
         {FEATURES.venues && venuePage && (venuePage.data.transit || venuePage.data.parking || venuePage.data.access) && <span><a href={pageHref(locale, `/venues/${venuePage.id}/`)}>{t(locale, 'gettingThere')}</a></span>}
         {d.speaker && <span><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i> {d.speaker}</span>}
+        {d.meetupUrl && <span><a href={d.meetupUrl} rel="noopener" target="_blank"><i class="fa-brands fa-meetup" aria-hidden="true"></i> {t(locale, 'viewOnMeetup')}</a></span>}
         {!hasTalksArray && d.recording && <span><a href={pageHref(locale, d.recording)} rel="noopener" target="_blank"><i class="fa-solid fa-circle-play" aria-hidden="true"></i> {t(locale, 'watchRecording')}</a></span>}
         {!hasTalksArray && d.slides && <span><a href={pageHref(locale, d.slides)} rel="noopener" target="_blank"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> {t(locale, 'viewSlides')}</a></span>}
       </div>

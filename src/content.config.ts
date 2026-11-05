@@ -1,5 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob, file } from 'astro/loaders';
+import { withMeetupEvents } from './lib/meetup-loader.ts';
+import { MEETUP_ICAL_URL } from './config.ts';
 
 /** Front-matter schemas (adapted from the Popular theme, see THEME.md).
  *  Submitted collections gain `lang` (the language the entry is written in)
@@ -44,8 +46,9 @@ const blog = defineCollection({
   }),
 });
 
+/* Event files plus Meetup's upcoming events (see src/lib/meetup-loader.ts). */
 const events = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/events' }),
+  loader: withMeetupEvents(glob({ pattern: '**/*.{md,mdx}', base: './src/content/events' }), MEETUP_ICAL_URL),
   schema: z.object({
     lang,
     mock,
@@ -66,7 +69,7 @@ const events = defineCollection({
     checkin: z.string().optional(), // e.g. "Bring your registration email (print or phone) and photo ID."
     venueNotes: z.string().optional(), // e.g. "Buzz 204 at the side door."; overrides the venue page's notes
     rsvp: z.string().optional(),
-    meetupUrl: z.string().optional(), // metadata convention; the theme renders no external links on event rows
+    meetupUrl: z.string().optional(), // the Meetup event page; also how a file is matched to a synced event
     cancelled: z.boolean().default(false), // EventCancelled JSON-LD + visible badge
     online: z.boolean().default(false), // OnlineEventAttendanceMode + VirtualLocation
     price: z.union([z.number(), z.string()]).optional(), // machine price for Offer

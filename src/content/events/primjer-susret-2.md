@@ -1,6 +1,6 @@
 ---
-title: "Ožujski meetup"
-date: 2027-03-11
+title: "Listopadski meetup"
+date: 2025-10-16
 time: "18:00"
 description: "Primjer susreta s dva kratka predavanja."
 venueRef: dvorana-primjer

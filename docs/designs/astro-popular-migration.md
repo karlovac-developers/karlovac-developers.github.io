@@ -1521,6 +1521,30 @@ Both open questions resolved as hoped: entry files export
 *   **The `lang.switch.aria` key holds text in the target language** in each
     dictionary ("Read in English" in `hr`), and the switcher link carries the
     matching `lang`.
+*   **Meetup content (owner's request after implementation; Meetup sync was
+    out of scope for v1).**
+    *   *Build-time sync:* the `events` loader adds the upcoming events in
+        Meetup's public iCalendar feed that have no file (see README). The
+        feed lists no venue and no past events.
+    *   *One-off import:* the ten most recent past events (2025-11-25 to
+        2026-10-10) and their four venues were imported from the data
+        embedded in Meetup's public event pages. That data is undocumented
+        and may fall under Meetup's terms of use, so it was read once, by
+        hand, and is not part of the build. The import replaced the
+        hand-written CroMesh #2 and Korana files. Korana takes Meetup's
+        details: 10:00–23:00 at Foginovo kupalište.
+    *   *Mocks:* the two mock events moved to September and October 2025, so
+        the upcoming list shows only real events, and they still demonstrate
+        talks and speakers. Mock events are left out of the "events hosted"
+        stat.
+    *   *Stats and talk form:* the stats are real (founded 2017, 200+ members,
+        free entry, and past events counted as above). The talk page links to
+        the group's Croatian "Call For Speakers" Google Form.
+    *   *Hero photos:* the Unsplash photos were replaced by three images from
+        the group's Meetup pages (the group photo, the Korana meadow and the
+        OpenStreetMap event cover), with the owner's approval.
+    *   *People:* no member data was imported. Speaker names appear only
+        where the organizers wrote them in the event descriptions.
 
 --------------------------------------------------------------------------------
 

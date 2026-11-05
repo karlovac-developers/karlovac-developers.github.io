@@ -29,7 +29,9 @@ const photos = (await getCollection('heroPhotos')).map((p) => {
     {photos.map((p, i) => (
       <figure class="kd-carousel__slide" hidden={i > 0}>
         <Image src={p.img} alt={pick(locale, p.alt)} widths={[640, 960, 1280]} sizes="(min-width: 960px) 50vw, 100vw" loading={i === 0 ? 'eager' : 'lazy'} />
-        <figcaption>{t(locale, 'mock.photo')} {p.mock && <MockBadge />}</figcaption>
+        <figcaption>{p.mock
+          ? <>{t(locale, 'mock.photo')} <MockBadge /></>
+          : <a href={p.source} rel="noopener" target="_blank">{t(locale, 'carousel.credit')}</a>}</figcaption>
       </figure>
     ))}
     {photos.length > 1 && (
