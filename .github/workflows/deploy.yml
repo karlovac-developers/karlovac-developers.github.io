@@ -2,8 +2,11 @@
 #
 # Based on the Popular theme's deploy-astro.yml.tmpl (see THEME.md).
 # Pull requests build and check only. Pushes to main and manual runs also
-# deploy. There is no scheduled build: "next event", Meetup's upcoming
-# events and job expiry change only when the site is rebuilt.
+# deploy. The daily scheduled run first checks whether anything that changes
+# without a commit (upcoming events, Meetup's calendar, job expiry) differs
+# from the live site's build-state.json, and builds and deploys only if so.
+# GitHub disables the schedule after 60 days without repository activity
+# (re-enable it under Actions -> Deploy site -> Enable workflow).
 #
 # One-time setup: repository Settings -> Pages -> Source: GitHub Actions.
 name: Deploy site
@@ -12,10 +15,31 @@ on:
   pull_request:
   push:
     branches: [main]
+  schedule:
+    - cron: '0 3 * * *'
   workflow_dispatch:
 
 jobs:
+  check:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      changed: ${{ steps.state.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      # No npm ci: the script imports only Node built-ins and src/lib files.
+      - id: state
+        run: node scripts/build-state.mjs --compare https://karlovac-developers.github.io/build-state.json
+
   build:
+    needs: check
+    # Runs when check was skipped (not a scheduled run) or found a change.
+    if: ${{ !cancelled() && (github.event_name != 'schedule' || needs.check.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,6 +53,7 @@ jobs:
       - run: npm run build
       - run: npm run check
       - run: npm run mocks
+      - run: node scripts/build-state.mjs > dist/build-state.json
       - uses: actions/configure-pages@v5
         if: github.event_name != 'pull_request'
       - uses: actions/upload-pages-artifact@v3
@@ -37,7 +62,7 @@ jobs:
           path: ./dist
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: ${{ !cancelled() && needs.build.result == 'success' && github.event_name != 'pull_request' }}
     needs: build
     runs-on: ubuntu-latest
     permissions:

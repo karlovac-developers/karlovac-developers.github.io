@@ -33,7 +33,7 @@ Page logic lives in `src/views/<Name>.astro`. Dynamic routes keep their `getStat
 
 ### Events from Meetup
 
-The `events` loader (`src/lib/meetup-loader.ts`) is the `glob` loader plus the upcoming events in Meetup's iCalendar feed (`MEETUP_ICAL_URL`), parsed by `src/lib/meetup.ts`. A file wins: a feed event is skipped when a file has the same `meetupUrl` or the same id (`<date>-<title slug>`). The feed has no venue; such events link to Meetup for it. A failed fetch only logs a warning. Set `MEETUP_SYNC=off` to build offline. Do not scrape Meetup's pages at build time: only the public feed is read.
+The `events` loader (`src/lib/meetup-loader.ts`) is the `glob` loader plus the upcoming events in Meetup's iCalendar feed (`MEETUP_ICAL_URL`), parsed by `src/lib/meetup.ts`. A file wins: a feed event is skipped when a file has the same `meetupUrl` or the same id (`<date>-<title slug>`). The feed has no venue; such events link to Meetup for it. A failed fetch only logs a warning. Set `MEETUP_SYNC=off` to build offline. The scheduled workflow run rebuilds only when `scripts/build-state.mjs` reports a change from the live `/build-state.json`; anything new that changes without a commit must be added to that state too. Do not scrape Meetup's pages at build time: only the public feed is read.
 
 ### Feature flags
 

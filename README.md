@@ -46,9 +46,9 @@ All paths are the same in both languages: Croatian at `/events/`, English at
 **Events from Meetup.** Events are announced on Meetup. Every build reads Meetup's
 public calendar feed (`MEETUP_ICAL_URL` in `src/config.ts`) and adds each upcoming
 event that has no file in `src/content/events/`, with its title, date, time and
-description, and an RSVP button to Meetup. There is no scheduled build: after
-announcing an event on Meetup, run the deploy workflow by hand (Actions → Deploy
-site → Run workflow, or `gh workflow run deploy.yml`) to publish it.
+description, and an RSVP button to Meetup. The daily check (see Deploy) publishes
+a new Meetup event by the next morning; run the deploy workflow by hand (Actions →
+Deploy site → Run workflow, or `gh workflow run deploy.yml`) to publish it sooner.
 
 The feed has no venue, so a synced event links to Meetup for the location. To add
 a venue, speakers or talks, write the event's file: name it
@@ -109,11 +109,18 @@ Then run `npm run build && npm run check`.
 `.github/workflows/deploy.yml` builds and checks every pull request. Pushes to
 `main` and manual runs also deploy to GitHub Pages.
 
-**There is no scheduled build.** What depends on the date is worked out when the
-site is built, so between builds it goes stale: an event that is over stays
-"next", a new Meetup event does not appear, and expired job postings stay up. Run
-the workflow by hand after announcing an event and the day after it, or add a
-`schedule:` trigger back to the workflow.
+**The daily check.** At 03:00 UTC a scheduled run works out what changes without
+a commit: which event files are upcoming, which job postings are still visible and
+which events Meetup's calendar lists (`scripts/build-state.mjs`). Every deploy
+publishes the same summary as `/build-state.json`. The scheduled run compares the
+two and builds and deploys only when they differ, so most days it ends after the
+check, in a few seconds. If Meetup cannot be reached, the check compares the rest
+and leaves the Meetup part as it is. `node scripts/build-state.mjs --compare
+https://karlovac-developers.github.io/build-state.json` runs the same check locally.
+
+**Scheduled runs stop after 60 days without repository activity.** GitHub disables
+them and emails the workflow's last actor. Re-enable the workflow under Actions →
+Deploy site → Enable workflow.
 
 ## The previous site at /old/
 
