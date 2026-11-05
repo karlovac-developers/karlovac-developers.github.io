@@ -1,0 +1,21 @@
+---
+/** Designed empty state for zero upcoming events (§5). Shown on the home page
+ *  and events list instead of a blank section: a message, then the chat CTA
+ *  (if SITE.community.chat is set, §4) and the calendar-subscribe buttons.
+ *  The calendar feed mirrors Hugo's OutputFormats "Calendar" endpoint. */
+import { MEETUP_UPCOMING_URL } from '../config';
+import CalendarSubscribe from './CalendarSubscribe.astro';
+import { t, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+---
+<div class="g-empty">
+  <span class="g-medallion g-medallion--lg"><i class="fa-solid fa-calendar-day" aria-hidden="true"></i></span>
+  <p class="g-lead">{t(locale, 'noUpcomingEvents')}</p>
+  <div class="g-row" style="justify-content:center">
+    <a class="g-btn g-btn--primary" href={MEETUP_UPCOMING_URL} rel="noopener" target="_blank">
+      <i class="fa-brands fa-meetup" aria-hidden="true"></i> {t(locale, 'rsvpExternal')}
+    </a>
+    <CalendarSubscribe />
+  </div>
+</div>

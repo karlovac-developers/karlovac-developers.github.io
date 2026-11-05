@@ -1,0 +1,21 @@
+---
+/** Site-wide notice banner (§5). Reads optional SITE.notice = { text, url? }.
+ *  Static, not dismissible, no JS. Rendered by BaseLayout above the header.
+ *  Text is inline-markdown rendered (parity with Hugo's notice.html). */
+import { SITE } from '../config';
+import { inlineMarkdown } from '../lib/inline-md';
+import { t, pageHref, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+const notice = (SITE as Record<string, any>).notice;
+const text: string | undefined = notice?.text;
+const html = text ? inlineMarkdown(text) : '';
+---
+{text && (
+  <div class="g-notice" role="status">
+    <div class="g-notice__inner">
+      <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+      <span><Fragment set:html={html} />{notice.url && <> <a href={pageHref(locale, notice.url)}>{t(locale, 'learnMore')}</a></>}</span>
+    </div>
+  </div>
+)}

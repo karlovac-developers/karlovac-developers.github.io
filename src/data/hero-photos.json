@@ -1,0 +1,35 @@
+[
+  {
+    "id": "meetup-group",
+    "file": "meetup-group.jpg",
+    "alt": {
+      "hr": "Predavač stoji uz ekran s prezentacijom, a dvadesetak ljudi na stolicama u svijetloj dvorani s lučnim prozorima sluša predavanje.",
+      "en": "A speaker stands next to a presentation screen while about twenty people on chairs in a bright room with arched windows listen."
+    },
+    "source": "https://www.meetup.com/karlovac-developers-meetup/",
+    "licence": "Karlovac Developers, from the group's Meetup page",
+    "mock": false
+  },
+  {
+    "id": "meetup-korana",
+    "file": "meetup-korana.jpg",
+    "alt": {
+      "hr": "Travnjak pod visokim drvećem uz Koranu, s klupama, stolovima i drvenom kućicom, mjesto roštilja na Korani.",
+      "en": "A lawn under tall trees by the Korana river, with benches, tables and a wooden hut, where the Korana barbecue was held."
+    },
+    "source": "https://www.meetup.com/karlovac-developers-meetup/events/312830974/",
+    "licence": "Karlovac Developers, from the event's Meetup page",
+    "mock": false
+  },
+  {
+    "id": "meetup-openstreetmap",
+    "file": "meetup-openstreetmap.jpg",
+    "alt": {
+      "hr": "Snimka Karlovca iz zraka s ucrtanim ulicama iz OpenStreetMapa i natpisom „OpenStreetMap, Karlovac Developers Group”.",
+      "en": "An aerial view of Karlovac with OpenStreetMap streets drawn over it and the words “OpenStreetMap, Karlovac Developers Group”."
+    },
+    "source": "https://www.meetup.com/karlovac-developers-meetup/events/312077249/",
+    "licence": "Karlovac Developers, from the event's Meetup page",
+    "mock": false
+  }
+]

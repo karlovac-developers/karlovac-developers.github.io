@@ -1,0 +1,6 @@
+---
+import View from '../../views/BlogList.astro';
+import { paths } from '../../views/BlogList.paths.ts';
+export const getStaticPaths = () => paths('hr');
+---
+<View {...Astro.props} />

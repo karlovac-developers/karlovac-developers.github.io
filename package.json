@@ -1,0 +1,26 @@
+{
+  "name": "karlovac-developers-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && node --test tests/*.test.ts tests/*.test.mjs && python3 scripts/check-image-alt.py dist src/content && python3 scripts/check-jsonld.py dist && node scripts/check-links.mjs dist",
+    "mocks": "node scripts/list-mocks.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.2",
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.0.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^5.9.3"
+  }
+}

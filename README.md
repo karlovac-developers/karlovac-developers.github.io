@@ -1,49 +1,137 @@
 # Karlovac Developers
 
-The website for [Karlovac Developers](https://karlovac-developers.github.io/) — a casual, community-run meetup group for developers and tech enthusiasts in Karlovac.
+The website of [Karlovac Developers](https://www.meetup.com/karlovac-developers-meetup/),
+a community meetup for developers and tech enthusiasts in Karlovac, at
+<https://karlovac-developers.github.io/>.
 
-- **Site:** https://karlovac-developers.github.io/
-- **Meetup:** https://www.meetup.com/karlovac-developers-meetup/
+The site is built with [Astro](https://astro.build/) from the
+[Popular](https://github.com/mariatta/astro-theme-popular) theme, and is served in
+Croatian at `/` and in English at `/en/`. See [THEME.md](THEME.md) for what was
+changed in the theme, and
+[docs/designs/astro-popular-migration.md](docs/designs/astro-popular-migration.md)
+for the design.
 
-A static site with no build step, no dependencies and no package manager — plain HTML, one stylesheet and two small scripts. GitHub Pages serves it from the repo root, so **pushing to `main` deploys**.
+## Setup
 
-## Running locally
+Node 22.23.4 or later (Astro's minimum; `.nvmrc` selects the latest 22.x) and Python 3 for two of the checks.
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev       # http://localhost:4321/
+npm run build     # static site in dist/
+npm run preview   # serve dist/
+npm run check     # types, tests, alt text, JSON-LD, links (run after build)
+npm run mocks     # list every mock and placeholder
 ```
 
-Then open http://localhost:8000. Serve it over http rather than opening `index.html` directly — on a `file://` page the browser blocks the `jobs.json` fetch and `localStorage`, so the job wall and the language toggle won't work.
+## Adding content
 
-## Layout
+All paths are the same in both languages: Croatian at `/events/`, English at
+`/en/events/`.
 
-| Path | What it is |
+*   **A page** (fixed text, translated): add `src/content/pages/hr/<slug>.mdx` and
+    `src/content/pages/en/<slug>.mdx` with the same file name. English files link to
+    `/en/…` pages; Croatian files link without the prefix.
+*   **An event, post, speaker, venue, organizer or author** (written once): add a
+    Markdown file to `src/content/<collection>/`, with `lang: hr` or `lang: en` for
+    the language it is written in. It shows on both the Croatian and English site,
+    marked with its own language.
+*   **A job posting**: add an entry to `src/data/jobs.json`. The schema is in
+    `src/content.config.ts`: `link` must start with `https://` or `mailto:`, and
+    postings disappear 60 days after `posted`.
+*   **Interface text**: add the key to both `hr` and `en` in `src/i18n/ui.ts`, or
+    add a `{ hr, en }` pair in `src/config.ts`. A key missing on either side fails
+    `npm run check`.
+
+**Events from Meetup.** Events are announced on Meetup. Every build reads Meetup's
+public calendar feed (`MEETUP_ICAL_URL` in `src/config.ts`) and adds each upcoming
+event that has no file in `src/content/events/`, with its title, date, time and
+description, and an RSVP button to Meetup. The daily build picks up a new event by
+the next morning; run the deploy workflow by hand to publish it sooner.
+
+The feed has no venue, so a synced event links to Meetup for the location. To add
+a venue, speakers or talks, write the event's file: name it
+`<date>-<title slug>.md` (the synced event's URL shows the name) and set
+`meetupUrl` to the Meetup event page. A file with the same `meetupUrl` replaces the
+synced event. The feed lists upcoming events only, so once an event is over it
+disappears from the site unless it has a file: write one for every event worth
+keeping in the archive.
+
+If Meetup cannot be reached, the build logs a warning and goes on without the
+synced events. `MEETUP_SYNC=off npm run build` skips the fetch.
+
+The past events up to 2026-10-10 and their venues were imported once from Meetup's
+event pages. Meetup listed 49 past events then; the 39 older ones have no file and
+are counted in the home page's "events hosted" stat through
+`MEETUP_PAST_EVENTS_NOT_ON_SITE`.
+
+**Home photos.** `src/data/hero-photos.json` lists the carousel photos, which are
+in `src/assets/hero/`. Each needs alt text in both languages and a `source` link,
+which the caption links to.
+
+## Mock content
+
+Where no real content exists yet, the site shows mock content. Every mock has
+`mock: true`, shows a visible "Primjer" / "Example" label, and has "Primjer: " in
+front of its title in the RSS and calendar feeds. Mock people's surname is
+"Primjer". `npm run mocks` lists every mock and placeholder (including the job form
+URL, `JOBS_FORM_URL` in `src/config.ts`). To replace a mock, put the real content
+in and remove `mock: true`.
+
+## Turning a feature off
+
+Every theme feature is on. To turn one off, set its flag to `false` in `FEATURES`
+in `src/config.ts` (this hides navigation, footer and home links to it) and delete
+its entry files from both `src/pages/` and `src/pages/en/`:
+
+| Feature | Entry files |
 | --- | --- |
-| `index.html` | Homepage — hero, intro cards, job preview |
-| `give-a-talk/`, `host-a-meetup/`, `jobs/` | Subpages, one `index.html` each |
-| `style.css` | The single stylesheet for all of the above |
-| `translations.js` | Croatian/English dictionaries and the i18n engine |
-| `jobs.js`, `jobs.json` | The job wall and its data |
-| `jobs.example.json` | Schema reference for `jobs.json` (not loaded by the site) |
-| `rostilj/` | A standalone one-off event page with its own design |
+| `blog` | `blog/[...page].astro`, `blog/[slug].astro` |
+| `tags` | `tags/[tag]/[...page].astro` |
+| `authors` | `authors/[slug].astro` |
+| `talks` | `talks/[...page].astro` |
+| `speakers` | `speakers/index.astro`, `speakers/[slug].astro` |
+| `venues` | `venues/index.astro`, `venues/[slug].astro` |
+| `organizers` | `organizers/[...page].astro`, `organizers/[slug].astro` |
+| `jobs` | `jobs/index.astro` |
+| `events` | `events/[...page].astro`, `events/[slug].astro` |
+| `rss` | `rss.xml.js` (Croatian only, no `en/` twin) |
+| `calendar` | `events/calendar.ics.ts` (no `en/` twin) |
+| `llms` | `llms.txt.ts` (no `en/` twin) |
+| `docs` | none: handbook and runbooks are pages; delete `src/content/docs/` |
+| `heroCarousel`, `stats`, `testimonials` | none: home page sections only |
 
-Pages are standalone rather than templated: the header, footer, fonts and favicon are duplicated in each file, so a change to the nav or footer means editing every page.
+Then run `npm run build && npm run check`.
 
-## Adding a job posting
+## Deploy
 
-`jobs.json` is a plain array, hand-edited and committed. Copy an entry from `jobs.example.json`, fill it in and open a PR — `_fields` in that file documents every key. Two things to get right:
+`.github/workflows/deploy.yml` builds and checks every pull request. Pushes to
+`main`, a daily run at 03:00 UTC and manual runs also deploy to GitHub Pages. The
+daily run keeps "next event" and job expiry current.
 
-- `posted` must be the real date in `YYYY-MM-DD`. Postings disappear from the site automatically 60 days later.
-- `vouchedBy` is the community member referring the posting. That's the whole point of the wall — don't leave it blank.
+**Scheduled builds stop after 60 days without repository activity.** GitHub
+disables them and emails the workflow's last actor. Re-enable the workflow under
+Actions → Deploy site → Enable workflow.
 
-Use `kind: "hiring"` for a company looking for someone and `kind: "available"` for a person open to work.
+## The previous site at /old/
 
-## Changing the text
+`public/old/` is a frozen copy of the static site that was live before this one
+(`main` at `e27727f`), served at <https://karlovac-developers.github.io/old/>.
+Its only changes are a `noindex` tag and canonical links pointing at `/old/`, so
+search engines do not treat it as a copy of the new pages. Do not edit it. To
+remove it, delete `public/old/`.
 
-Every user-facing string lives in `translations.js` under a dotted key, in both `en` and `hr`. The Croatian copy is *also* written literally into the HTML so the page reads correctly before JavaScript runs — when you edit a string, edit both, and keep them identical or the page will visibly change on load.
+The Astro dev server does not map `/old/` to `/old/index.html`; open
+`/old/index.html` there, or check the built site with
+`python3 -m http.server --directory dist`.
 
-Adding a new string means: a key in `en`, the same key in `hr`, a `data-i18n="key"` (or `data-i18n-html="key"` for markup) attribute on the element, and the Croatian text inline as the element's content.
+## Rollback
 
-## Contributing
+The static site that was live before this one is on the `live-static` branch.
 
-Issues and pull requests are welcome — for the site itself, for job postings, or for fixing our Croatian. If you want to give a talk or host a meetup, the [give a talk](https://karlovac-developers.github.io/give-a-talk/) and [host a meetup](https://karlovac-developers.github.io/host-a-meetup/) pages are the faster route.
+1.  Disable the deploy workflow: `gh workflow disable deploy.yml`.
+2.  In Settings → Pages, set the source to "Deploy from a branch", branch
+    `live-static`, folder `/`.
+
+`legacy-static` holds the old site's source files, including the pages that were
+never published. It is an archive, not a rollback target.

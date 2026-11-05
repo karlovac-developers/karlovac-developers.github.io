@@ -1,0 +1,50 @@
+---
+import { SITE, FOOTER, SOCIAL, isOn } from '../config';
+import { pick, pageHref, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+const year = new Date().getFullYear();
+const social = SOCIAL.filter((s) => isOn(s.feature));
+const columns = FOOTER.columns.map((col) => ({ ...col, links: col.links.filter((l) => isOn(l.feature)) }));
+const external = (url: string) => /^https?:/.test(url);
+---
+
+<footer class="g-footer">
+  <div class="g-container g-footer__top">
+    <div class="g-footer__brand">
+      {SITE.logo && <img src={SITE.logo} alt={pick(locale, SITE.title)} />}
+      {social.length > 0 && (
+        <div style="display:flex;gap:0.5rem;margin-top:0.25rem">
+          {social.map((s) => (
+            <a
+              class="g-social"
+              href={pageHref(locale, s.url)}
+              aria-label={s.label}
+              {...(external(s.url) ? { rel: 'me noopener', target: '_blank' } : {})}
+            >
+              <i class={s.icon} aria-hidden="true"></i>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+
+    {columns.map((col) => (
+      <div class="g-footer__col">
+        <div class="g-footer__col-title">{pick(locale, col.title)}</div>
+        <ul>
+          {col.links.map((l) => (
+            <li><a href={pageHref(locale, l.href)}>{pick(locale, l.label)}</a></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="g-footer__bottom">
+    <div class="g-container">
+      <span>© {year} {pick(locale, SITE.title)}</span>
+      <span><a href={FOOTER.credit.url} rel="noopener">{FOOTER.credit.label}</a></span>
+      <span>{pick(locale, FOOTER.tagline)}</span>
+    </div>
+  </div>
+</footer>

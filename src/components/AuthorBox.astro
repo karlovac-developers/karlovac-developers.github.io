@@ -1,0 +1,62 @@
+---
+
+/** AuthorBox: bio card for a post author.
+ *  Pass either `entry` (an authors-collection entry, linked to its profile)
+ *  or `guest` (inline guestAuthors object from a post's front matter). */
+import type { CollectionEntry } from 'astro:content';
+import MockBadge from './MockBadge.astro';
+import { FEATURES } from '../config';
+import { t, pageHref, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+interface Guest {
+  name: string; title?: string; photo?: string; bio?: string; website?: string;
+  social?: { label: string; icon: string; url: string }[];
+}
+interface Props {
+  entry?: CollectionEntry<'authors'> | CollectionEntry<'speakers'> | CollectionEntry<'organizers'>;
+  guest?: Guest;
+  /** Profile URL prefix; speakers pass '/speakers/'. */
+  base?: string;
+}
+const { entry, guest, base = '/authors/' } = Astro.props;
+const d = entry?.data;
+const bio = d ? ((d as any).bio ?? (d as any).description) : undefined;
+/* Link to the profile page only when that profile type is switched on. */
+const linked = { '/authors/': FEATURES.authors, '/speakers/': FEATURES.speakers, '/organizers/': FEATURES.organizers }[base] ?? true;
+const lang = d && (d as any).lang !== locale ? (d as any).lang : undefined;
+---
+
+<div class="g-persona g-persona--primary">
+  {d && (
+    <>
+      {d.photo && <img class="g-persona__img" src={pageHref(locale, d.photo)} alt={entry.data.title} loading="lazy" decoding="async" />}
+      <div>
+        <div class="g-persona__name">
+          {linked ? <a href={pageHref(locale, `${base}${entry.id}/`)} style="color:inherit">{d.title}</a> : d.title}
+          {(d as any).mock && <MockBadge />}
+        </div>
+        {d.role && <div class="g-persona__role" lang={lang}>{d.role}</div>}
+        {bio && <p class="g-persona__bio" lang={lang}>{bio}</p>}
+        <div class="g-persona__socials">
+          {(d as any).website && <a href={pageHref(locale, (d as any).website)} aria-label={t(locale, 'website')} rel="noopener" target="_blank"><i class="fa-solid fa-globe" aria-hidden="true"></i></a>}
+          {d.social.map((s) => <a href={pageHref(locale, s.url)} aria-label={s.label} rel="noopener" target="_blank"><i class={s.icon} aria-hidden="true"></i></a>)}
+        </div>
+      </div>
+    </>
+  )}
+  {guest && (
+    <>
+      {guest.photo && <img class="g-persona__img" src={pageHref(locale, guest.photo)} alt={guest.name} loading="lazy" decoding="async" />}
+      <div>
+        <div class="g-persona__name">{guest.name} <span class="g-badge g-badge--soft" style="vertical-align:middle">{t(locale, 'guest')}</span></div>
+        {guest.title && <div class="g-persona__role">{guest.title}</div>}
+        {guest.bio && <p class="g-persona__bio">{guest.bio}</p>}
+        <div class="g-persona__socials">
+          {guest.website && <a href={pageHref(locale, guest.website)} aria-label={t(locale, 'website')} rel="noopener" target="_blank"><i class="fa-solid fa-globe" aria-hidden="true"></i></a>}
+          {(guest.social ?? []).map((s) => <a href={pageHref(locale, s.url)} aria-label={s.label} rel="noopener" target="_blank"><i class={s.icon} aria-hidden="true"></i></a>)}
+        </div>
+      </div>
+    </>
+  )}
+</div>

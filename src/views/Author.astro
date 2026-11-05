@@ -1,0 +1,39 @@
+---
+
+import { render } from 'astro:content';
+import { safeCollection } from '../lib/collections';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+import PostCard from '../components/PostCard.astro';
+import { t, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+
+const { entry } = Astro.props;
+const entryLang = entry.data.lang !== locale ? entry.data.lang : undefined;
+const { Content } = await render(entry);
+const posts = (await safeCollection('blog'))
+  .filter((p) => !p.data.draft && p.data.authors.includes(entry.id))
+  .sort((a, b) => +b.data.date - +a.data.date);
+---
+
+<BaseLayout langRule={{ entryLang: entry.data.lang }} title={entry.data.title} description={entry.data.bio}>
+  <PageHero lang={entryLang} mock={entry.data.mock} eyebrow={t(locale, 'eyebrowAuthor')} title={entry.data.title} />
+  <section class="g-bg-white g-section">
+    <div class="g-container">
+      <div class="g-article" style="margin-bottom:var(--space-5)">
+        <AuthorBox entry={entry} />
+        <div class="g-prose" style="margin-top:var(--space-4)" lang={entryLang} data-entry-lang={entryLang}><Content /></div>
+      </div>
+      {posts.length > 0 && (
+        <>
+          <div class="g-section-head"><span class="g-eyebrow">{t(locale, 'posts')}</span><h2>{t(locale, 'writtenBy').replace('{name}', entry.data.title)}</h2></div>
+          <div class="g-grid-3" style="margin-top:var(--space-4)">
+            {posts.map((p) => <PostCard post={p} />)}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+</BaseLayout>

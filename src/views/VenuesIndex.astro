@@ -1,0 +1,35 @@
+---
+/** Venues list, mirroring Hugo's layouts/venues/list.html: a card grid of every
+ *  venue, sorted by name. Fixes the "All venues" backlink on venue detail pages,
+ *  which previously had no list page to point to. */
+import { safeCollection } from '../lib/collections';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { SECTIONS } from '../config';
+import { pageHref, getLocale, pick } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+const venues = (await safeCollection('venues')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const sec = SECTIONS.venues;
+---
+
+<BaseLayout title={pick(locale, sec.title)} description={pick(locale, sec.lead)}>
+  <PageHero eyebrow={pick(locale, sec.eyebrow)} title={pick(locale, sec.title)} lead={pick(locale, sec.lead)} />
+  <section class="g-bg-white g-section">
+    <div class="g-container">
+      <div class="g-grid-3">
+        {venues.map((v) => (
+          <article class="g-card">
+            {v.data.photo && (
+              <a href={pageHref(locale, `/venues/${v.id}/`)} class="g-card__media"><img src={pageHref(locale, v.data.photo)} alt={v.data.title} loading="lazy" decoding="async" /></a>
+            )}
+            <div class="g-card__body">
+              <h3 class="g-card__title"><a href={pageHref(locale, `/venues/${v.id}/`)}>{v.data.title}</a></h3>
+              {v.data.address && <div class="g-card__text"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {v.data.address}</div>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

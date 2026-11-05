@@ -1,0 +1,23 @@
+---
+/** GitHub Pages serves one 404.html for every missing path, so this page
+ *  shows both languages and has no language switcher. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t } from '../i18n/index.ts';
+---
+
+<BaseLayout title={t('hr', 'notfound.title')} noindex langRule="none">
+  <section class="g-bg-white g-section">
+    <div class="g-container g-stack" style="gap:var(--space-5);max-width:40rem">
+      <div>
+        <h1>{t('hr', 'notfound.title')}</h1>
+        <p class="g-lead">{t('hr', 'notfound.body')}</p>
+        <a class="g-btn g-btn--primary" href="/">{t('hr', 'notfound.home')}</a>
+      </div>
+      <div lang="en">
+        <h2>{t('en', 'notfound.title')}</h2>
+        <p class="g-lead">{t('en', 'notfound.body')}</p>
+        <a class="g-btn g-btn--outline" href="/en/" hreflang="en">{t('en', 'notfound.home')}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

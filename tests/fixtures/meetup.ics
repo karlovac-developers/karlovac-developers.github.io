@@ -1,0 +1,67 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Karlovac Developers
+X-WR-CALNAME:Karlovac Developers
+BEGIN:VTIMEZONE
+TZID:Europe/Zagreb
+TZURL:http://tzurl.org/zoneinfo-outlook/Europe/Zagreb
+X-LIC-LOCATION:Europe/Zagreb
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:event_317238274@meetup.com
+SEQUENCE:1
+DTSTAMP:20261105T112302Z
+DTSTART;TZID=Europe/Zagreb:20261113T180000
+DTEND;TZID=Europe/Zagreb:20261113T210000
+SUMMARY:AImo pričat o AI\; Novosti\, projekti i ideje
+DESCRIPTION:Karlovac Developers\nAI se mijenja iz dana u dan — novi mode
+ li\, harnessi i alati\, sve povoljnije opcije i novi načini rada. Što se
+  od svega toga pokazalo korisnim u praksi\, a što je samo hype?\n\nNa slj
+ edećem meetupu razgovarat ćemo o onome što nas trenutačno zanima u svi
+ jetu AI-ja. **Program ćemo složiti zajedno\, na početku događaja:** sv
+ atko može predložiti temu\, postaviti pitanje\, podijeliti svoje iskustv
+ o ili se uključiti u raspravu.\n\nNe moraš biti AI stručnjak niti imati
+  gotov projekt. Dobrodošli su i početnici s pitanjima i iskusniji korisn
+ ici s konkretnim problemima\, idejama i eksperimentima.\n\nImamo i **3 mje
+ sta za kratke prezentacije od 10–15 minuta**. Pokaži što si napravio/l
+ a uz AI\, kako si to napravio/la\, što je uspjelo\, gdje si zapeo/la i ok
+ o čega bi ti dobro došao savjet okupljenih. Nije nužno da projekt bude 
+ dovršen.\n\nAko želiš prezentirati\, dođi na početak događaja i upi
+ ši se na listu.\n\nZa inspiraciju\, evo nekoliko pitanja o kojima možemo
+  razgovarati:\n\n* Kako iz AI-ja izvući bolje rezultate i koji se alati z
+ a što isplate?\n* Što se stvarno može automatizirati uz AI?\n* Kako kom
+ binirati modele\, agente i harness-e za složenije zadatke?\n* Kako provje
+ riti da AI rješenje radi pouzdano\, a ne samo uvjerljivo?\n* Koji su nam 
+ eksperimenti uspjeli\, a što smo naučili iz neuspjeha?\n* Trebamo li sve
+  veće modele ili bolje algoritme?\n* Kako uopće mjerimo inteligenciju mo
+ dela?\n\nOvo su samo ideje — konačne teme biramo zajedno na licu mjesta
+ .\n\nImaš pitanje? Javi se u [WhatsApp grupu](https://chat.whatsapp.com/D
+ G2YF0K5hWlLDXwLK62cnj?mode=gi_t).\n\nVidimo se!
+URL;VALUE=URI:https://www.meetup.com/karlovac-developers-meetup/events/317
+ 238274/
+STATUS:CONFIRMED
+CREATED:20261101T140525Z
+LAST-MODIFIED:20261101T140525Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/karlovac-developers-meetup/events/ic
+ al/
+X-WR-CALNAME:Karlovac Developers
+END:VCALENDAR

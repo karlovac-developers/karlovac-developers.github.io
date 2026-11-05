@@ -1,0 +1,6 @@
+---
+import View from '../../../views/Tag.astro';
+import { paths } from '../../../views/Tag.paths.ts';
+export const getStaticPaths = () => paths('hr');
+---
+<View {...Astro.props} />

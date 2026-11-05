@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Karlovac Developers | Karlovački meetup za programere</title>
+  <meta name="description" content="Karlovac Developers je opušten meetup koji vodi zajednica programera i tech entuzijasta u Karlovcu." />
+
+  <meta property="og:title" content="Karlovac Developers" />
+  <meta property="og:description" content="Karlovac Developers je opušten meetup koji vodi zajednica programera i tech entuzijasta u Karlovcu." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://karlovac-developers.github.io/old/" />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://karlovac-developers.github.io/old/" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236c63ff'/%3E%3Ctext x='32' y='44' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='700' fill='white' text-anchor='middle'%3EKD%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="main">
+
+    <!-- HERO -->
+    <header class="hero">
+      <!-- Background carousel: populated by JS from HERO_IMAGES, only for files that exist -->
+      <div class="carousel" id="carousel"></div>
+
+      <!-- Brand-colour semi-transparent overlay -->
+      <div class="hero-overlay"></div>
+
+      <button class="lang-toggle" id="lang-toggle" aria-label="Promijeni jezik">EN</button>
+
+      <div class="hero-content">
+        <div>
+          <h1 class="hero-mark">KD<span class="dot">.</span></h1>
+          <p class="hero-tagline" data-i18n="hero.tagline">Karlovački meetup za programere</p>
+          <div class="hero-actions">
+            <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="btn-pill" data-i18n="hero.cta.join">🎉 Pridruži se Meetupu</a>
+            <a href="https://www.meetup.com/karlovac-developers-meetup/events/?type=upcoming" target="_blank" rel="noopener" class="btn-pill" data-i18n="hero.cta.next">📅 Sljedeći događaj</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="intro.title">Što je Karlovac Developers?</h2>
+      <p class="lead" data-i18n="intro.p1">
+        Karlovac Developers je opušten meetup koji vodi zajednica programera i tech entuzijasta u Karlovcu.
+      </p>
+      <p class="lead" data-i18n="intro.p2">
+        Bilo da si iskusan inženjer, radoznali početnik ili si tu samo zbog dobre atmosfere — dobrodošao si.
+        Družimo se, dijelimo ideje, radimo na projektima i učimo zajedno.
+      </p>
+    </section>
+
+    <!-- CARDS -->
+    <section class="section">
+      <div class="card-grid">
+
+        <div class="card">
+          <h3 class="card-title" data-i18n="join.title">Pridruži nam se</h3>
+          <p data-i18n="join.p1">
+            Redovito se okupljamo kako bismo popričali, podijelili znanje i uživali u društvu. Svrati na sljedeći Meetup i vidi o čemu se radi!
+          </p>
+          <p data-i18n="join.p2">
+            Ne moraš držati predavanje — samo dođi, uzmi kavu i upoznaj druge programere.
+          </p>
+          <p data-i18n-html="join.p3">
+            Imaš nešto za podijeliti? Odlično —
+            <a href="give-a-talk/" class="inline-link">prijavi se za predavanje</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title" data-i18n="host.title">Ugosti meetup</h3>
+          <p data-i18n="host.p1">
+            Želiš ugostiti Karlovac Developers meetup u svom prostoru?
+          </p>
+          <p data-i18n="host.p2">
+            Uvijek tražimo prostore s dobrom ekipom, a ugošćivanje je odličan način da podržiš lokalnu dev zajednicu.
+          </p>
+          <p data-i18n="host.p3">
+            Ako imaš prostor i želiš se uključiti, prijavi ga ovdje.
+          </p>
+          <a href="host-a-meetup/" class="btn-solid" data-i18n="host.cta">Prijavi prostor →</a>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title" data-i18n="next.title">Naš sljedeći Meetup</h3>
+          <div class="event">
+            <h4 class="event-title">Sajam znanja na Korani</h4>
+            <p class="event-date" data-i18n="next.date">16. svibnja 2026.</p>
+            <p class="event-excerpt" data-i18n="next.excerpt">
+              Cjelodnevno okupljanje na obali Korane — dijeljenje znanja, logorska vatra i kupanje. Otvoreno za sve lokalne tech stručnjake i entuzijaste...
+            </p>
+            <div class="event-more">
+              <a href="https://www.meetup.com/karlovac-developers-meetup/events/?type=upcoming" target="_blank" rel="noopener" class="inline-link" data-i18n="read.more">Pročitaj više →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title" data-i18n="past.title">Prošli Meetupovi</h3>
+          <div class="event">
+            <h4 class="event-title">CroMesh Meetup #2</h4>
+            <p class="event-date" data-i18n="past.date">28. veljače 2026.</p>
+            <div class="event-more">
+              <a href="https://www.meetup.com/karlovac-developers-meetup/events/past/" target="_blank" rel="noopener" class="inline-link" data-i18n="read.more">Pročitaj više →</a>
+            </div>
+          </div>
+          <div class="card-divider">
+            <a href="https://www.meetup.com/karlovac-developers-meetup/events/past/" target="_blank" rel="noopener" class="inline-link" data-i18n="past.all">Pogledaj sve prošle Meetupove →</a>
+          </div>
+        </div>
+
+        <div class="card card-jobs">
+          <h3 class="card-title" data-i18n="jobs.title">Poslovi</h3>
+          <p class="card-subtitle" data-i18n="jobs.subtitle">Tražim nekoga — Znam nekoga</p>
+
+          <div id="jobs-preview" class="jobs-preview"></div>
+
+          <div class="card-divider jobs-card-actions">
+            <a href="jobs/" class="inline-link" data-i18n="jobs.all">Pogledaj sve oglase →</a>
+            <a href="#" data-jobs-form target="_blank" rel="noopener" class="inline-link" data-i18n="jobs.post">Objavi oglas →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p data-i18n="footer.line1">Karlovac Developers ❤️ Karlovac</p>
+    <p data-i18n="footer.line2">Radili programeri, za programere.</p>
+    <p class="footer-links">
+      <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener">
+        <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.9 13.6c-.3.9-1.2 1.2-2 1.1-.6-.1-1-.5-1.2-1.1l-1-2.8-.8 2.2c-.3.8-.8 1.2-1.5 1.2-.7 0-1.2-.4-1.5-1.2l-1.4-4c-.2-.6.1-1.1.6-1.3.6-.2 1.1.1 1.3.7l.9 2.7.9-2.4c.2-.7.7-1 1.3-1s1.1.3 1.3 1l.9 2.5.9-2.8c.2-.6.7-.9 1.3-.7.5.2.8.7.6 1.3l-1.6 4.6z" />
+        </svg>
+        Meetup
+      </a>
+      •
+      <a href="https://github.com/karlovac-developers" target="_blank" rel="noopener">
+        <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
+        </svg>
+        GitHub
+      </a>
+    </p>
+  </footer>
+
+  <script>
+    // ── Hero carousel ────────────────────────────────────────────
+    // Drop meetup photos into assets/images/meetups/ named meetup_01.jpg,
+    // meetup_02.jpg, … and they fade in behind the hero automatically.
+    // Numbering must be contiguous: loading stops at the first missing
+    // file, so with no photos at all this costs a single request and the
+    // gradient background simply stays visible.
+    const IMAGE_DIR = 'assets/images/meetups/';
+    const IMAGE_EXT = '.jpg';
+    const MAX_IMAGES = 20;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const carousel = document.getElementById('carousel');
+      if (!carousel) return;
+
+      const slides = [];
+      let currentSlide = 0;
+      let timer = null;
+
+      function addSlide(img) {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        img.alt = 'Karlovac Developers meetup';
+        slide.appendChild(img);
+        carousel.appendChild(slide);
+        slides.push(slide);
+
+        if (slides.length === 1) slide.classList.add('is-active');
+        if (slides.length === 2 && !timer) timer = setInterval(nextSlide, 4000);
+      }
+
+      function nextSlide() {
+        slides[currentSlide].classList.remove('is-active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('is-active');
+      }
+
+      function load(n) {
+        if (n > MAX_IMAGES) return;
+        const img = new Image();
+        img.onload = function () { addSlide(img); load(n + 1); };
+        img.src = IMAGE_DIR + 'meetup_' + String(n).padStart(2, '0') + IMAGE_EXT;
+      }
+
+      load(1);
+    });
+  </script>
+
+  <script src="translations.js"></script>
+  <script src="jobs.js"></script>
+</body>
+</html>

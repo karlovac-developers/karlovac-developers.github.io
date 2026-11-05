@@ -1,0 +1,47 @@
+---
+import { SECTIONS_MAP, FEATURES } from '../config';
+import MockBadge from './MockBadge.astro';
+import { tagSlug } from '../lib/slugs';
+import type { CollectionEntry } from 'astro:content';
+import { safeCollection } from '../lib/collections';
+import { pageHref, formatDate, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+interface Props { post: CollectionEntry<'blog'> }
+const { post } = Astro.props;
+const d = post.data;
+const href = pageHref(locale, `/blog/${post.id}/`);
+// Mirror of the Hugo card's date guard: this component can render date-less
+// content, so omit the date (and, below, the whole eyebrow) when absent.
+const hasDate = d.date instanceof Date && !Number.isNaN(+d.date) && d.date.getFullYear() > 1;
+const month = hasDate ? formatDate(d.date, locale, { month: 'short', year: 'numeric' }) : '';
+const allAuthors = await safeCollection(SECTIONS_MAP.authors);
+const names = [
+  ...d.authors.map((slug) => allAuthors.find((a) => a.id === slug)?.data.title ?? slug),
+  ...d.guestAuthors.map((g) => g.name),
+];
+if (!names.length && d.author) names.push(d.author);
+const lang = d.lang !== locale ? d.lang : undefined;
+---
+
+<article class="g-card" data-tags={d.tags.join(',')}>
+  {d.image && (
+    <a href={href} class="g-card__media"><img src={pageHref(locale, d.image)} alt={d.title} loading="lazy" decoding="async" /></a>
+  )}
+  <div class="g-card__body">
+    {(month || names.length > 0) && (
+      <span class="g-card__eyebrow">{month}{month && names.length > 0 && ' · '}{names.length > 0 && names.join(', ')}</span>
+    )}
+    <h3 class="g-card__title"><a href={href} lang={lang}>{d.title}</a> {d.mock && <MockBadge />}</h3>
+    {d.description && <div class="g-card__text" lang={lang}>{d.description}</div>}
+    {d.tags.length > 0 && (
+      <div class="g-card__footer">
+        {d.tags.slice(0, 2).map((tag) => (
+          FEATURES.tags
+            ? <a class="g-tag" href={pageHref(locale, `/tags/${tagSlug(tag)}/`)}>{tag}</a>
+            : <span class="g-tag">{tag}</span>
+        ))}
+      </div>
+    )}
+  </div>
+</article>

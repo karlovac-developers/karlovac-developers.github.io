@@ -1,0 +1,58 @@
+# Build, check and publish the site to GitHub Pages.
+#
+# Based on the Popular theme's deploy-astro.yml.tmpl (see THEME.md).
+# Pull requests build and check only. Pushes to main, the daily schedule and
+# manual runs also deploy. The daily run keeps "next event" and job expiry
+# current; GitHub disables it after 60 days without repository activity
+# (re-enable it under Actions -> Deploy site -> Enable workflow).
+#
+# One-time setup: repository Settings -> Pages -> Source: GitHub Actions.
+name: Deploy site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run check
+      - run: npm run mocks
+      - uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: ./dist
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    # Never cancel a deploy mid-flight; let in-progress runs finish.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

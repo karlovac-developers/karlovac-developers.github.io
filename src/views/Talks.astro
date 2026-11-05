@@ -1,0 +1,54 @@
+---
+/** §3 talk archive index. Opt-in: builds only when SITE.talks is true (the
+ *  Astro counterpart of Hugo's "create content/talks/_index.md to enable"),
+ *  so sites without recordings do not grow an empty page. Aggregates every
+ *  talk across events, newest first, filterable by the parent event's tags
+ *  via the shared blog-filter.js (same [data-filterbar] / [data-tags] markup
+ *  as the blog list). */
+import { SITE } from '../config';
+import { safeCollection } from '../lib/collections';
+import { collectTalks } from '../lib/talks';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { t, pageHref, getLocale, formatDate } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+
+const { talks } = Astro.props;
+const tags = [...new Set(talks.flatMap((talk) => talk.tags))].sort();
+const fmt = (d: Date) => formatDate(d, locale, { month: 'short', day: 'numeric', year: 'numeric' });
+---
+
+<BaseLayout title={t(locale, 'talks')} description={t(locale, 'talksLead')}>
+  <PageHero eyebrow={t(locale, 'talks')} title={t(locale, 'talks')} lead={t(locale, 'talksLead')} />
+  <section class="g-bg-white g-section">
+    <div class="g-container">
+      <div class="g-row" data-filterbar style="margin-bottom:var(--space-5)">
+        {tags.length > 0 && (
+          <>
+            <span style="font-size:var(--text-sm);color:var(--text-muted)">{t(locale, 'filterLabel')}</span>
+            <button class="g-filter is-active" data-filter="*">{t(locale, 'filterAll')}</button>
+            {tags.map((tag) => <button class="g-filter" data-filter={tag}>#{tag}</button>)}
+          </>
+        )}
+      </div>
+      <div class="g-stack" style="gap:var(--space-3)">
+        {talks.map((talk) => (
+          <div class="g-talk" data-tags={talk.tags.join(',')}>
+            <div class="g-talk__title">{talk.title}</div>
+            {talk.speakerName && (
+              <div class="g-talk__by"><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i> {talk.speakerSlug ? <a href={pageHref(locale, `/speakers/${talk.speakerSlug}/`)}>{talk.speakerName}</a> : talk.speakerName}</div>
+            )}
+            <div class="g-talk__event"><i class="fa-solid fa-calendar-day" aria-hidden="true"></i> <a href={pageHref(locale, `/events/${talk.eventId}/`)}>{talk.eventTitle}</a> · {fmt(talk.date)}</div>
+            {(talk.recording || talk.slides) && (
+              <div class="g-row" style="gap:var(--space-2)">
+                {talk.recording && <a class="g-btn g-btn--sm g-btn--outline" href={pageHref(locale, talk.recording)} rel="noopener" target="_blank"><i class="fa-solid fa-circle-play" aria-hidden="true"></i> {t(locale, 'watchRecording')}</a>}
+                {talk.slides && <a class="g-btn g-btn--sm g-btn--ghost" href={pageHref(locale, talk.slides)} rel="noopener" target="_blank"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> {t(locale, 'viewSlides')}</a>}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

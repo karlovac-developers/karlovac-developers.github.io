@@ -1,0 +1,29 @@
+/* ── SITE ──
+   Styles for this site's own components, built from the theme's tokens.
+   Kept apart from the theme's stylesheets so THEME.md only lists theme
+   changes. */
+
+/* ── LANGUAGE SWITCH ── */
+.kd-lang { font-weight: var(--weight-semibold); letter-spacing: 0.04em; }
+
+/* ── MOCK LABEL ── */
+.kd-mock { border: var(--border-width) dashed currentColor; font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; vertical-align: middle; }
+.kd-mock-page { margin-top: var(--space-4); }
+.kd-btn-mock { cursor: not-allowed; opacity: 0.75; }
+
+/* ── JOB WALL ── */
+.kd-jobs { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
+.kd-jobs [hidden] { display: none; }
+.kd-jobs-filter { margin: var(--space-4) 0 var(--space-2); gap: 0.5rem; }
+.kd-jobs-count { color: var(--text-muted); font-size: var(--text-sm); }
+.kd-job__badges { gap: 0.4rem; margin-bottom: var(--space-2); }
+.kd-job__kind--available { background: var(--surface-wash); }
+.kd-job__vouched { color: var(--text-muted); font-size: var(--text-sm); }
+
+/* ── HERO CAROUSEL ── */
+.kd-carousel { position: relative; }
+.kd-carousel__slide { margin: 0; }
+.kd-carousel__slide[hidden] { display: none; }
+.kd-carousel__slide img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-xl); display: block; }
+.kd-carousel__slide figcaption { margin-top: 0.4rem; font-size: var(--text-xs); color: var(--text-muted); display: flex; gap: 0.4rem; align-items: center; }
+.kd-carousel__toggle { position: absolute; top: var(--space-2); right: var(--space-2); }

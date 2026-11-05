@@ -1,0 +1,15 @@
+---
+/** Link to the same page in the other language. The label and aria-label
+ *  are written in the target language, so the link carries its lang. */
+import { t, getLocale, otherLocale, peerHref } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+const other = otherLocale(locale);
+---
+
+<a
+  class="g-btn g-btn--ghost g-btn--sm kd-lang"
+  href={peerHref(Astro.url.pathname)}
+  hreflang={other}
+  lang={other}
+  aria-label={t(locale, 'lang.switch.aria')}
+>{t(locale, 'lang.switch.label')}</a>

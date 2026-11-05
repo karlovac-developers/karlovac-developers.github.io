@@ -1,0 +1,31 @@
+---
+import { pageHref, getLocale } from '../i18n/index.ts';
+import MockBadge from './MockBadge.astro';
+const locale = getLocale(Astro);
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  backHref?: string;
+  backLabel?: string;
+  /** Language of the title and lead, when it differs from the page's. */
+  lang?: string;
+  mock?: boolean;
+}
+const { eyebrow, title, lead, backHref, backLabel, lang, mock } = Astro.props;
+---
+
+<header class="g-pagehero">
+  <div class="g-container">
+    {backHref && (
+      <div style="margin-bottom:1rem"><a href={pageHref(locale, backHref)} style="display:inline-flex;gap:.4rem;align-items:center;font-size:var(--text-sm);font-weight:var(--weight-medium)"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> {backLabel}</a></div>
+    )}
+    {eyebrow && <span class="g-eyebrow">{eyebrow}</span>}
+    <h1 lang={lang}>{title} {mock && <MockBadge />}</h1>
+    {lead && <p class="g-pagehero__lead" lang={lang}>{lead}</p>}
+    {Astro.slots.has('default') && (
+      <div class="g-row" style="margin-top:var(--space-4)"><slot /></div>
+    )}
+  </div>
+</header>

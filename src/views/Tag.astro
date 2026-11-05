@@ -1,0 +1,30 @@
+---
+import { SITE, PAGINATION } from '../config';
+import { tagSlug } from '../lib/slugs';
+import { safeCollection } from '../lib/collections';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import PostCard from '../components/PostCard.astro';
+import Pagination from '../components/Pagination.astro';
+import { t, getLocale } from '../i18n/index.ts';
+const locale = getLocale(Astro);
+
+/* One route serves /tags/<tag>/ and /tags/<tag>/page/N/, matching the Hugo
+   theme's paginated term pages. URLs use the Hugo-compatible slug; the page
+   displays the tag's first-seen spelling. */
+
+const { tag } = Astro.params;
+const { label, current, total, count, posts } = Astro.props;
+---
+
+<BaseLayout title={`#${label}`} noindex={(SITE as Record<string, any>).seo?.noindexTaxonomies ?? false}>
+  <PageHero eyebrow={t(locale, 'eyebrowTag')} title={`#${label}`} lead={t(locale, 'taggedCount').replace('{n}', String(count)).replace('{tag}', label)} />
+  <section class="g-bg-white g-section">
+    <div class="g-container">
+      <div class="g-grid-3">
+        {posts.map((p) => <PostCard post={p} />)}
+      </div>
+      <Pagination current={current} total={total} base={`/tags/${tag}/`} />
+    </div>
+  </section>
+</BaseLayout>
