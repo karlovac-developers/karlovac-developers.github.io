@@ -47,6 +47,10 @@ Every mock carries `mock: true` and shows `<MockBadge />`; mock pages and docs s
 
 `src/config.ts`, `src/i18n/*.ts`, `src/lib/dates.ts` and `src/lib/jobs.ts` are loaded by Node for tests and `list-mocks`. They import only other `.ts` files, with explicit `.ts` extensions, use `as` (not `<T>`) for type assertions, and never import `astro:*`.
 
+### The previous site
+
+`public/old/` is a frozen copy of the old static site (`main` at `e27727f`), served at `/old/` with `noindex` and canonicals pointing at `/old/`. Do not edit it or apply this project's rules to it.
+
 ### Theme files
 
 Most of `src/components`, `src/lib`, `src/styles` and `public/` is the theme's code. Site-specific styles go in `src/styles/site.css`, not in the theme's stylesheets. Every change to a theme file gets a row in `THEME.md`.

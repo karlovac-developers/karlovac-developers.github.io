@@ -1513,6 +1513,11 @@ Both open questions resolved as hoped: entry files export
     `langRule: 'none'` and emits no canonical or hreflang.
 *   **`npm run mocks` scans only content, data and `src/config.ts`** for
     placeholders, skipping comments, so code fallbacks are not listed.
+*   **The previous site stays reachable at `/old/`** (owner's request after
+    implementation). `public/old/` holds the files of `main` at `e27727f`,
+    copied unchanged except for a `noindex` tag and canonical and `og:url`
+    links pointing at `/old/`. Astro copies it into the build as-is. The
+    rollback to `live-static` is unaffected.
 *   **The `lang.switch.aria` key holds text in the target language** in each
     dictionary ("Read in English" in `hr`), and the switcher link carries the
     matching `lang`.

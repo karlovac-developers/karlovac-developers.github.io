@@ -91,6 +91,18 @@ daily run keeps "next event" and job expiry current.
 disables them and emails the workflow's last actor. Re-enable the workflow under
 Actions → Deploy site → Enable workflow.
 
+## The previous site at /old/
+
+`public/old/` is a frozen copy of the static site that was live before this one
+(`main` at `e27727f`), served at <https://karlovac-developers.github.io/old/>.
+Its only changes are a `noindex` tag and canonical links pointing at `/old/`, so
+search engines do not treat it as a copy of the new pages. Do not edit it. To
+remove it, delete `public/old/`.
+
+The Astro dev server does not map `/old/` to `/old/index.html`; open
+`/old/index.html` there, or check the built site with
+`python3 -m http.server --directory dist`.
+
 ## Rollback
 
 The static site that was live before this one is on the `live-static` branch.

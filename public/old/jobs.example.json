@@ -1,0 +1,39 @@
+[
+  {
+    "_comment": "SCHEMA REFERENCE — this file is not loaded by the site. Copy an entry into jobs.json and edit it. Entries older than 60 days stop showing automatically, so 'posted' must be accurate.",
+
+    "posted": "2026-08-01",
+    "kind": "hiring",
+    "role": "Senior Flutter Developer",
+    "company": "Example Company d.o.o.",
+    "location": "Karlovac",
+    "type": "full-time",
+    "description": "One or two sentences. What the work actually is, and anything that makes it worth a look.",
+    "vouchedBy": "Ime P.",
+    "link": "https://example.com/careers/flutter"
+  },
+  {
+    "posted": "2026-07-28",
+    "kind": "available",
+    "role": "Backend developer, Go and Postgres",
+    "location": "Remote",
+    "type": "contract",
+    "description": "For someone offering themselves rather than a company hiring. 'company' is omitted for these.",
+    "vouchedBy": "Ime P.",
+    "link": "mailto:someone@example.com"
+  },
+
+  {
+    "_fields": {
+      "posted": "REQUIRED — YYYY-MM-DD. Drives the 60-day auto-hide.",
+      "kind": "REQUIRED — 'hiring' (a company looking for someone) or 'available' (a person open to work).",
+      "role": "REQUIRED — job title, or what the person does.",
+      "company": "Optional. Omit for kind: 'available'.",
+      "location": "REQUIRED — e.g. 'Karlovac', 'Zagreb', 'Remote', 'Hybrid — Karlovac'.",
+      "type": "REQUIRED — one of: full-time, part-time, contract, internship, student.",
+      "description": "REQUIRED — a sentence or two. Kept in whatever language it was submitted in.",
+      "vouchedBy": "REQUIRED — the community member referring this. The whole point of the wall; do not leave it blank.",
+      "link": "REQUIRED — apply URL or mailto: address."
+    }
+  }
+]
