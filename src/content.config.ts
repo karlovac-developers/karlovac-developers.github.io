@@ -202,7 +202,7 @@ const heroPhotos = defineCollection({
     id: z.string(),
     file: z.string(),
     alt: z.object({ hr: z.string().min(1), en: z.string().min(1) }),
-    source: z.string().url(),
+    source: z.url(),
     licence: z.string(),
     mock,
   }),

@@ -96,7 +96,7 @@ const eventLd = jsonld(buildEventLd({
         </div>
       )}
 
-      <div class="g-prose" lang={entryLang}><Content /></div>
+      <div class="g-prose" lang={entryLang} data-entry-lang={entryLang}><Content /></div>
 
       {speakerEntries.length > 0 && (
         <>

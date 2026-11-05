@@ -9,7 +9,7 @@ import { ui, type UiKey } from './ui.ts';
 
 export type Locale = 'hr' | 'en';
 export type Pair = { hr: string; en: string };
-export type PageLangRule = 'translated' | { entryLang: Locale };
+export type PageLangRule = 'translated' | 'none' | { entryLang: Locale };
 export type HeadLinks = {
   canonical: string;
   hreflang: { lang: string; href: string }[];
@@ -82,10 +82,11 @@ export function formatDate(date: Date, locale: Locale, options: Intl.DateTimeFor
 /** Canonical and hreflang links for a page (see "Content in two languages"
  *  in the design). Translated pages point at themselves and list both
  *  languages; a single-entry page points at the copy in the entry's
- *  language and lists none. */
+ *  language and lists none; 'none' (the 404 page) emits neither. */
 export function alternates(pathname: string, site: URL | string, rule: PageLangRule): HeadLinks {
   const neutral = stripLocale(pathname);
   const abs = (p: string) => new URL(p, site).href;
+  if (rule === 'none') return { canonical: '', hreflang: [] };
   if (rule === 'translated') {
     return {
       canonical: abs(pathname),

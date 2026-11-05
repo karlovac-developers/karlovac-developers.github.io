@@ -41,7 +41,7 @@ export const MEETUP_UPCOMING_URL = 'https://www.meetup.com/karlovac-developers-m
 export const JOBS_EXPIRY_DAYS = 60;
 export const JOBS_PREVIEW_COUNT = 2;
 /* Still a placeholder: the "post a job" button renders as a labelled mock
-   with no link while this contains REPLACE-ME. */
+   with no link until this points at a real form. */
 export const JOBS_FORM_URL = 'https://forms.gle/REPLACE-ME';
 
 /* ── Hero carousel ── */

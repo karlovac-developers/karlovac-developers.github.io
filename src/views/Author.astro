@@ -24,7 +24,7 @@ const posts = (await safeCollection('blog'))
     <div class="g-container">
       <div class="g-article" style="margin-bottom:var(--space-5)">
         <AuthorBox entry={entry} />
-        <div class="g-prose" style="margin-top:var(--space-4)" lang={entryLang}><Content /></div>
+        <div class="g-prose" style="margin-top:var(--space-4)" lang={entryLang} data-entry-lang={entryLang}><Content /></div>
       </div>
       {posts.length > 0 && (
         <>

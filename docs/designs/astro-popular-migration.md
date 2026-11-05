@@ -1,7 +1,7 @@
 # Karlovac Developers site on the Astro "Popular" theme, in Croatian and English
 
 *   **Author:** Marko Filipović
-*   **Status:** Approved; in implementation on branch `astro-migration` (phase 1 done)
+*   **Status:** Implemented on branch `astro-migration` (2026-11-05); see Implementation notes
 *   **Date:** 2026-11-05
 *   **Brief:** [astro-popular-migration-brief.md](./astro-popular-migration-brief.md)
     (decisions 1–37 are cited as "decision N")
@@ -1473,6 +1473,49 @@ run passes. Each fixture test shows its check failing on bad input.
 *   **Turn-off test (CUJ 11):** on a scratch branch, set `FEATURES.venues`
     to `false`, delete the venue entry files, and confirm `npm run build`
     and `npm run check` pass with no venue links.
+
+--------------------------------------------------------------------------------
+
+## Implementation notes (2026-11-05)
+
+Both open questions resolved as hoped: entry files export
+`getStaticPaths = () => paths('<locale>')` and Astro accepts it, and the
+`file()` loader reads `src/data/*.json`. Deviations from the plan:
+
+*   **Phases 2 and 3 landed together.** Changing the config text to
+    `{ hr, en }` pairs breaks every theme page that reads it, so the i18n core
+    and the views had to change in the same commit.
+*   **Components read the locale themselves** with `getLocale(Astro)` rather
+    than receiving it as a prop. `Astro.currentLocale` is available in
+    components, so the prop added nothing.
+*   **The unchanged theme had 19 type errors, not 1,** because npm installed
+    TypeScript 6, which enables `strict`. TypeScript is pinned to `^5`; the
+    remaining 5 errors were fixed in phase 1 (THEME.md).
+*   **`AuthorBox` stays visible when `authors` is off.** It also renders
+    speakers and organizers, so only the profile link is gated, by the flag of
+    that profile type.
+*   **Mock pages and docs are shorter adaptations** of the theme's starter text
+    in both languages, keeping its headings, callouts and checklists, not full
+    translations. Checklist ids carry a language suffix so the two versions do
+    not share saved progress.
+*   **Mock names avoid the maintainer's first name:** `vouchedBy` values are
+    Iva P., Luka P., Ana P., Petar P., Iva P., and the second organizer is
+    Petar Primjer.
+*   **Exo 2 is four files, not eight.** It is a variable font; Google serves
+    the same file for 400 and 700, so each style and subset has one file with
+    `font-weight: 400 700`, like the theme's Inter.
+*   **Hero photos:** Unsplash `m76kVfIRS5U`, `bIltCMXIwRE` and `UikYLDQj9_I`.
+    Two earlier candidates were dropped for showing Apple logos, one for
+    portrait orientation and one for a company sign.
+*   **The link check has one more exemption:** links inside an entry body shown
+    in the other language (`data-entry-lang`) may point at pages in the
+    entry's language, since the body is written once. The 404 page uses a new
+    `langRule: 'none'` and emits no canonical or hreflang.
+*   **`npm run mocks` scans only content, data and `src/config.ts`** for
+    placeholders, skipping comments, so code fallbacks are not listed.
+*   **The `lang.switch.aria` key holds text in the target language** in each
+    dictionary ("Read in English" in `hr`), and the switcher link carries the
+    matching `lang`.
 
 --------------------------------------------------------------------------------
 

@@ -21,7 +21,7 @@ const { Content } = await render(entry);
     <div class="g-container">
       <div class="g-article">
         <AuthorBox entry={entry} base="/organizers/" />
-        <div lang={entryLang}><Content /></div>
+        <div lang={entryLang} data-entry-lang={entryLang}><Content /></div>
       </div>
     </div>
   </section>
