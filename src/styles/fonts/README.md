@@ -52,3 +52,18 @@ Then download each `src:` URL, keep the file names below, and copy the
 `unicode-range` values into `fonts.css` unchanged. Google reslices its subsets
 from time to time, so the ranges must come from the same fetch as the files.
 Refresh all three copies together, or the package drift guard fails.
+## Exo 2 (this site)
+
+The theme's Quantico ships in the `latin` subset only, which has no č, ć, đ,
+š or ž, so this site replaces it with Exo 2 (SIL Open Font License 1.1, see
+`OFL-Exo2.txt`). Exo 2 is a variable font: Google serves one file per style
+and subset for every weight, so `fonts.css` declares `font-weight: 400 700`
+against a single file.
+
+Files and `unicode-range` values were fetched together on 2026-11-05 from:
+
+    https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,700;1,400;1,700&display=swap
+
+requested with a current desktop Chrome user agent. Only the `latin` and
+`latin-ext` subsets are kept. The display font is selected through
+`BRAND.fontDisplay` in `src/config.ts`.

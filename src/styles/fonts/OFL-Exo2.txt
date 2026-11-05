@@ -1,8 +1,8 @@
-Copyright (c) 2011, Matthew Desmond (http://www.madtype.com | mattdesmond@gmail.com),with Reserved Font Name Quantico.
+Copyright 2013 The Exo 2 Project Authors (https://github.com/googlefonts/Exo-2.0)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
-http://scripts.sil.org/OFL
+https://openfontlicense.org
 
 
 -----------------------------------------------------------

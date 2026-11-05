@@ -1,8 +1,8 @@
 /* ============================================================
    FONTS: Popular theme
    The live site uses Inter as its single workhorse typeface
-   (Hinode/Bootstrap theme). Quantico is an OPTIONAL geometric
-   display accent that echoes the squared "VANCOUVER" lettering
+   (Hinode/Bootstrap theme). Exo 2 (replacing the theme's Quantico, which
+   has no Croatian letters) is the geometric display accent that echoes the squared "VANCOUVER" lettering
    in the logo wordmark: use sparingly for hero/section accents.
    Swap or extend these via the brand config or your own fonts.css.
 
@@ -147,39 +147,39 @@
   src: url('../fonts/inter-normal-200-800-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* Quantico italic 400, latin */
+/* Exo 2 italic 400 700, latin-ext */
 @font-face {
-  font-family: 'Quantico';
+  font-family: 'Exo 2';
   font-style: italic;
-  font-weight: 400;
+  font-weight: 400 700;
   font-display: swap;
-  src: url('../fonts/quantico-italic-400-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../fonts/exo2-italic-400-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* Quantico italic 700, latin */
+/* Exo 2 italic 400 700, latin */
 @font-face {
-  font-family: 'Quantico';
+  font-family: 'Exo 2';
   font-style: italic;
-  font-weight: 700;
+  font-weight: 400 700;
   font-display: swap;
-  src: url('../fonts/quantico-italic-700-latin.woff2') format('woff2');
+  src: url('../fonts/exo2-italic-400-700-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* Quantico normal 400, latin */
+/* Exo 2 normal 400 700, latin-ext */
 @font-face {
-  font-family: 'Quantico';
+  font-family: 'Exo 2';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400 700;
   font-display: swap;
-  src: url('../fonts/quantico-normal-400-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../fonts/exo2-normal-400-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* Quantico normal 700, latin */
+/* Exo 2 normal 400 700, latin */
 @font-face {
-  font-family: 'Quantico';
+  font-family: 'Exo 2';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400 700;
   font-display: swap;
-  src: url('../fonts/quantico-normal-700-latin.woff2') format('woff2');
+  src: url('../fonts/exo2-normal-400-700-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
