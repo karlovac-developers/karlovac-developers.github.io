@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roštilj na Korani — Karlovac Developers</title>
+  <meta name="description" content="Developerski roštilj na Korani — 20. lipnja 2026. Hrana, piće, glazba, sport, zabava i druženje uz rijeku Koranu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap&subset=latin,latin-ext" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:   #f3e7c9;   /* warm cream */
+      --paper-2: #ecdcb3;
+      --ink:     #1f140d;   /* near-black brown */
+      --red:     #e0492f;   /* vermilion */
+      --orange:  #ef8a1f;
+      --yellow:  #f6c615;
+      --teal:    #1f8a78;
+      --blue:    #2b5fa6;
+      --disp:    'Anton', Impact, sans-serif;
+      --body:    'Space Grotesk', system-ui, sans-serif;
+      --mono:    'DM Mono', monospace;
+      --shadow:  4px 4px 0 var(--ink);
+      --shadow-lg: 7px 7px 0 var(--ink);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body);
+      color: var(--ink);
+      line-height: 1.5;
+      background-color: var(--paper);
+      /* halftone dot texture */
+      background-image:
+        radial-gradient(var(--ink) 0.6px, transparent 0.7px),
+        radial-gradient(var(--ink) 0.6px, transparent 0.7px);
+      background-size: 22px 22px;
+      background-position: 0 0, 11px 11px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    /* faint texture only */
+    body { background-blend-mode: normal; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background: var(--paper); opacity: 0.93;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+
+    a { color: inherit; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink); color: var(--paper);
+      border-bottom: 3px solid var(--ink);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .brand { font-family: var(--disp); font-size: 1.3rem; letter-spacing: 1px; color: var(--paper); text-decoration: none; }
+    .brand .dot { color: var(--red); }
+    .nav-links { display: flex; gap: 22px; list-style: none; align-items: center; }
+    .nav-links a {
+      text-decoration: none; font-weight: 600; font-size: 0.8rem;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--paper);
+      opacity: 0.75; transition: opacity 0.15s, color 0.15s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--yellow); }
+    .nav-cta {
+      background: var(--red); color: var(--paper) !important; opacity: 1 !important;
+      padding: 6px 14px; border-radius: 2px; border: 2px solid var(--paper);
+    }
+    .nav-cta:hover { background: var(--orange); }
+
+    /* ── MARQUEE ── */
+    .marquee {
+      background: var(--red); color: var(--paper);
+      border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink);
+      overflow: hidden; white-space: nowrap; padding: 9px 0;
+    }
+    .marquee-track {
+      display: inline-block; will-change: transform;
+      animation: scroll-left 28s linear infinite;
+      font-family: var(--disp); font-size: 1.05rem; letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .marquee-track span { padding: 0 6px; }
+    .marquee-track .star { color: var(--yellow); }
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee.alt { background: var(--ink); }
+    .marquee.alt .marquee-track { animation-duration: 34s; animation-direction: reverse; }
+    .marquee.teal { background: var(--teal); }
+
+    /* ── HERO / POSTER ── */
+    .poster {
+      position: relative; text-align: center;
+      padding: 54px 22px 64px;
+    }
+    .poster-tag {
+      display: inline-block; font-weight: 700; font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      background: var(--ink); color: var(--paper);
+      padding: 6px 16px; transform: rotate(-1.5deg); margin-bottom: 26px;
+    }
+    .poster h1 {
+      font-family: var(--disp);
+      font-size: clamp(3.4rem, 15vw, 9.5rem);
+      line-height: 0.86; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--ink);
+    }
+    .poster h1 .line2 {
+      color: var(--paper);
+      -webkit-text-stroke: 2px var(--ink);
+      text-shadow: var(--shadow);
+    }
+    .poster h1 em {
+      font-style: normal; color: var(--red);
+      display: inline-block; transform: rotate(-2deg);
+    }
+    .date-bar {
+      display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      justify-content: center; margin: 30px 0 8px;
+      font-family: var(--disp); font-size: clamp(1.1rem, 4vw, 1.9rem);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .date-bar .chunk { background: var(--yellow); border: 3px solid var(--ink); padding: 4px 16px; box-shadow: var(--shadow); }
+    .date-bar .chunk.teal { background: var(--teal); color: var(--paper); }
+    .date-bar .chunk.orange { background: var(--orange); }
+    .date-bar .sep { font-size: 1rem; }
+    .poster-sub {
+      max-width: 560px; margin: 22px auto 0; font-size: 1.05rem;
+      font-weight: 500; color: var(--ink);
+    }
+    .poster-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+
+    .btn {
+      display: inline-block; font-family: var(--disp); font-size: 1.05rem;
+      letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+      padding: 12px 26px; border: 3px solid var(--ink); box-shadow: var(--shadow);
+      transition: transform 0.12s, box-shadow 0.12s; cursor: pointer;
+    }
+    .btn:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-lg); }
+    .btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+    .btn-red { background: var(--red); color: var(--paper); }
+    .btn-paper { background: var(--paper); color: var(--ink); }
+
+    /* decorative stickers in hero */
+    .sticker {
+      position: absolute; font-family: var(--disp); text-transform: uppercase;
+      background: var(--ink); color: var(--paper); padding: 7px 12px;
+      border: 3px solid var(--ink); box-shadow: var(--shadow);
+      font-size: 0.95rem; letter-spacing: 1px; z-index: 2;
+    }
+    .sticker.s1 { top: 70px; left: 4%; background: var(--teal); color: var(--paper); transform: rotate(-9deg); }
+    .sticker.s2 { top: 130px; right: 5%; background: var(--orange); color: var(--ink); transform: rotate(8deg); }
+    .sticker.s3 { bottom: 60px; left: 7%; background: var(--yellow); color: var(--ink); transform: rotate(6deg); }
+    .sticker.s4 { bottom: 110px; right: 6%; background: var(--red); color: var(--paper); transform: rotate(-7deg); }
+    @media (max-width: 720px) { .sticker { display: none; } }
+
+    /* ── SECTION HEADERS ── */
+    .section { padding: 64px 0; }
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+    .sec-kicker {
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      background: var(--ink); color: var(--paper); padding: 3px 9px;
+    }
+    .sec-title {
+      font-family: var(--disp); font-size: clamp(2rem, 6vw, 3.4rem);
+      text-transform: uppercase; letter-spacing: 1px; line-height: 1;
+    }
+    .sec-title .hl { color: var(--red); }
+    .sec-lead { font-weight: 500; max-width: 600px; margin-top: 6px; color: var(--ink); opacity: 0.85; }
+
+    /* ── PLAN BLOCKS ── */
+    .plan-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 22px; margin-top: 40px;
+    }
+    .block {
+      background: var(--paper); border: 3px solid var(--ink);
+      box-shadow: var(--shadow); padding: 22px;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .block:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+    .block-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 3px solid var(--ink); }
+    .block-num {
+      font-family: var(--disp); font-size: 1.5rem; line-height: 1;
+      width: 46px; height: 46px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border: 3px solid var(--ink); color: var(--paper);
+    }
+    .block-num.c1 { background: var(--red); }
+    .block-num.c2 { background: var(--orange); color: var(--ink); }
+    .block-num.c3 { background: var(--teal); }
+    .block-num.c4 { background: var(--blue); }
+    .block-num.c5 { background: var(--yellow); color: var(--ink); }
+    .block-num.c6 { background: var(--ink); }
+    .block-num.c7 { background: var(--teal); }
+    .block-num.c8 { background: var(--red); }
+    .block-icon { font-size: 1.5rem; }
+    .block-title { font-family: var(--disp); font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* sticker chips */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 0.84rem; font-weight: 600;
+      background: var(--paper-2); border: 2px solid var(--ink);
+      padding: 4px 11px; border-radius: 40px;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform 0.1s;
+    }
+    .chip:nth-child(3n)   { transform: rotate(-1.5deg); }
+    .chip:nth-child(3n+1) { transform: rotate(1.5deg); }
+    .chip:hover { transform: rotate(0) scale(1.06); background: var(--yellow); }
+    .chip.q { background: var(--red); color: var(--paper); }
+    .chip.q:hover { background: var(--orange); color: var(--ink); }
+
+    /* ── LINEUP (schedule) ── */
+    .lineup { margin-top: 40px; border: 3px solid var(--ink); box-shadow: var(--shadow-lg); background: var(--paper); }
+    .lineup-row {
+      display: flex; align-items: center; gap: 22px; padding: 20px 24px;
+      border-bottom: 3px solid var(--ink);
+      transition: background 0.12s;
+    }
+    .lineup-row:last-child { border-bottom: none; }
+    .lineup-row:hover { background: var(--yellow); }
+    .lineup-time {
+      font-family: var(--disp); font-size: clamp(1.4rem, 5vw, 2.4rem);
+      line-height: 1; flex-shrink: 0; min-width: 130px; color: var(--red);
+    }
+    .lineup-row:hover .lineup-time { color: var(--ink); }
+    .lineup-act { font-family: var(--disp); font-size: clamp(1.05rem, 3.5vw, 1.6rem); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.05; }
+    .lineup-note { font-family: var(--mono); font-size: 0.78rem; opacity: 0.7; margin-top: 3px; }
+
+    /* ── PREP TICKET ── */
+    .prep-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 40px; }
+    .ticket {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--paper); border: 3px dashed var(--ink); padding: 18px 20px;
+      transition: transform 0.12s, background 0.12s;
+    }
+    .ticket:hover { transform: translateY(-3px); background: var(--paper-2); }
+    .ticket-box {
+      flex-shrink: 0; width: 30px; height: 30px; border: 3px solid var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--disp); color: var(--red); font-size: 1.2rem;
+    }
+    .ticket-text { font-weight: 600; }
+
+    /* ── INFO STRIP ── */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0; margin-top: 40px; border: 3px solid var(--ink); box-shadow: var(--shadow-lg); }
+    .info-cell {
+      padding: 24px 20px; text-align: center;
+      border-right: 3px solid var(--ink);
+    }
+    .info-cell:last-child { border-right: none; }
+    .info-cell:nth-child(1) { background: var(--red); color: var(--paper); }
+    .info-cell:nth-child(2) { background: var(--orange); }
+    .info-cell:nth-child(3) { background: var(--teal); color: var(--paper); }
+    .info-cell:nth-child(4) { background: var(--yellow); }
+    .info-emoji { font-size: 1.8rem; }
+    .info-label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; margin: 8px 0 4px; opacity: 0.85; }
+    .info-value { font-family: var(--disp); font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
+    @media (max-width: 620px) {
+      .info-cell { border-right: none; border-bottom: 3px solid var(--ink); }
+      .info-cell:last-child { border-bottom: none; }
+    }
+
+    /* ── CTA ── */
+    .cta {
+      background: var(--ink); color: var(--paper);
+      border: 3px solid var(--ink); box-shadow: var(--shadow-lg);
+      text-align: center; padding: 64px 30px; margin: 0 0 64px;
+    }
+    .cta h2 { font-family: var(--disp); font-size: clamp(2.2rem, 7vw, 4rem); text-transform: uppercase; line-height: 0.95; letter-spacing: 1px; }
+    .cta h2 .hl { color: var(--yellow); }
+    .cta p { max-width: 520px; margin: 18px auto 30px; font-weight: 500; opacity: 0.9; }
+    .cta .btn-paper { background: var(--paper); }
+    .cta .btn-paper:hover, .cta .btn-red:hover { box-shadow: 7px 7px 0 var(--red); }
+
+    /* ── FOOTER ── */
+    .footer { border-top: 3px solid var(--ink); padding: 28px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .footer-text { font-weight: 600; font-size: 0.9rem; }
+    .footer-link { font-family: var(--mono); font-size: 0.8rem; text-decoration: none; border-bottom: 2px solid var(--red); }
+    .footer-link:hover { background: var(--yellow); }
+
+    @media (max-width: 768px) {
+      .nav-links li.hide-sm { display: none; }
+      .lineup-time { min-width: 92px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner container">
+      <a href="../" class="brand">KD<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li class="hide-sm"><a href="#plan">Plan</a></li>
+        <li class="hide-sm"><a href="#raspored">Raspored</a></li>
+        <li class="hide-sm"><a href="#priprema">Priprema</a></li>
+        <li><a href="#prijava" class="nav-cta">Prijavi se</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>ĆEVAPI</span><span class="star">★</span><span>TOFU</span><span class="star">★</span><span>PIVO</span><span class="star">★</span><span>ZIPLINE</span><span class="star">★</span><span>GLJIVE</span><span class="star">★</span><span>KUPANJE</span><span class="star">★</span><span>GITARA</span><span class="star">★</span><span>KVIZ</span><span class="star">★</span><span>SALATA</span><span class="star">★</span><span>BADMINTON</span><span class="star">★</span>
+      <span>ĆEVAPI</span><span class="star">★</span><span>TOFU</span><span class="star">★</span><span>PIVO</span><span class="star">★</span><span>ZIPLINE</span><span class="star">★</span><span>GLJIVE</span><span class="star">★</span><span>KUPANJE</span><span class="star">★</span><span>GITARA</span><span class="star">★</span><span>KVIZ</span><span class="star">★</span><span>SALATA</span><span class="star">★</span><span>BADMINTON</span><span class="star">★</span>
+    </div>
+  </div>
+
+  <!-- POSTER / HERO -->
+  <header class="poster">
+    <span class="sticker s1">Vegan ✓</span>
+    <span class="sticker s2">Carnivore ✓</span>
+    <span class="sticker s3">Uz rijeku</span>
+    <span class="sticker s4">Cijeli dan</span>
+
+    <div class="container">
+      <span class="poster-tag">★ Karlovac Developers predstavlja ★</span>
+      <h1>
+        Developerski<br />
+        <em>Roštilj</em><br />
+        <span class="line2">na Korani</span>
+      </h1>
+      <div class="date-bar">
+        <span class="chunk">Subota</span>
+        <span class="sep">•</span>
+        <span class="chunk teal">20. lipnja</span>
+        <span class="sep">•</span>
+        <span class="chunk orange">2026.</span>
+      </div>
+      <p class="poster-sub">
+        Cjelodnevno druženje uz Koranu — hrana s roštilja, hladno piće, glazba,
+        sport, igre i dobra ekipa. Vegan, vegetarian ili carnivore: ima za svakoga.
+      </p>
+      <div class="poster-actions">
+        <a href="#prijava" class="btn btn-red">Prijavi se &amp; volontiraj</a>
+        <a href="#plan" class="btn btn-paper">Pogledaj plan ↓</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MARQUEE alt -->
+  <div class="marquee alt">
+    <div class="marquee-track">
+      <span class="star">●</span><span>HRANA</span><span class="star">●</span><span>PIĆE</span><span class="star">●</span><span>GLAZBA</span><span class="star">●</span><span>SPORT</span><span class="star">●</span><span>ZABAVA</span><span class="star">●</span><span>OPREMA</span><span class="star">●</span><span>PRIPREMA</span><span class="star">●</span><span>IZVEDBA</span><span class="star">●</span>
+      <span class="star">●</span><span>HRANA</span><span class="star">●</span><span>PIĆE</span><span class="star">●</span><span>GLAZBA</span><span class="star">●</span><span>SPORT</span><span class="star">●</span><span>ZABAVA</span><span class="star">●</span><span>OPREMA</span><span class="star">●</span><span>PRIPREMA</span><span class="star">●</span><span>IZVEDBA</span><span class="star">●</span>
+    </div>
+  </div>
+
+  <!-- PLAN -->
+  <section class="section" id="plan">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-kicker">01 — 08</span>
+        <h2 class="sec-title">Plan u <span class="hl">8 koraka</span></h2>
+      </div>
+      <p class="sec-lead">Od hrane do izvedbe — sve što čini dobar roštilj na jednom mjestu.</p>
+
+      <div class="plan-grid">
+
+        <article class="block">
+          <div class="block-head">
+            <div class="block-num c1">1</div>
+            <span class="block-icon">🍔</span>
+            <h3 class="block-title">Hrana</h3>
+          </div>
+          <div class="chips">
+            <span class="chip">vegan</span><span class="chip">vegetarian</span><span class="chip">carnivore</span>
+            <span class="chip">tofu</span><span class="chip">gljive</span><span class="chip">povrće</span><span class="chip">salata</span>
+            <span class="chip">luk</span><span class="chip">ćevapi</span><span class="chip">kotleti</span><span class="chip">lepinje</span>
+            <span class="chip">začini</span><span class="chip">umaci</span><span class="chip">krastavci</span>
+          </div>
+        </article>
+
+        <article class="block">
+          <div class="block-head">
+            <div class="block-num c2">2</div>
+            <span class="block-icon">🍺</span>
+            <h3 class="block-title">Piće</h3>
+          </div>
+          <div class="chips">
+            <span class="chip">voda</span><span class="chip">mineralna</span><span class="chip">sokovi</span>
+            <span class="chip">pivo</span><span class="chip">vino</span><span class="chip">žestica</span><span class="chip">led</span>
+            <span class="chip">Hollywood limenke</span>
+            <span class="chip q">homebrew</span>
+          </div>
+        </article>
+
+        <article class="block">
+          <div class="block-head">
+            <div class="block-num c3">3</div>
+            <span class="block-icon">🎸</span>
+            <h3 class="block-title">Glazba</h3>
+          </div>
+          <div class="chips">
+            <span class="chip">zvučnici</span><span class="chip">powerbank</span><span class="chip">gitara</span>
+            <span class="chip">čembalo</span><span class="chip">theremin flauta</span>
+          </div>
+        </article>
+
+        <article class="block">
+          <div class="block-head">
+            <div class="block-num c4">4</div>
+            <span class="block-icon">🏐</span>
+            <h3 class="block-title">Sport</h3>
+          </div>
+          <div class="chips">
+            <span class="chip">trčanje</span><span class="chip">kupanje</span><span class="chip">boćanje</span>
+            <span class="chip">badminton</span><span class="chip">zipline</span>
+            <span class="chip">hrvanje u sirupu od malina</span>
+            <span class="chip">skokovi u vodu</span>
+          </div>
+        </article>
+
+        <article class="block">
+          <div class="block-head">
+            <div class="block-num c5">5</div>
+            <span class="block-icon">🎲</span>
+            <h3 class="block-title">Zabava</h3>
+          </div>
+          <div class="chips">
+            <span class="chip">karte</span><span class="chip">kviz</span><span class="chip">board games</span>
+            <span class="chip">IT igrice</span><span class="chip">programiranje</span><span class="chip">predavanje</span>
+            <span class="chip">diskusije</span><span class="chip">debate</span>
+            <span class="chip">CroMesh / RKK / Stemka show&amp;tell</span>
+          </div>
+        </article>
+
+        <article class="block">
+          <div class="block-head">
+            <div class="block-num c6">6</div>
+            <span class="block-icon">🧰</span>
+            <h3 class="block-title">Oprema</h3>
+          </div>
+          <div class="chips">
+            <span class="chip">rešetke</span><span class="chip">ugljen</span><span class="chip">drva</span>
+            <span class="chip">pribor za roštilj</span>
+            <span class="chip q">papirnati tanjuri</span>
+            <span class="chip">pribor za jedenje</span>
+            <span class="chip">klupe / stolovi</span><span class="chip">kamp oprema</span>
+            <span class="chip">posuđe za ispečeno</span><span class="chip">posude za led</span>
+            <span class="chip">vreće za smeće</span><span class="chip">baklje, svijeće</span>
+            <span class="chip">krema za sunce</span><span class="chip">protiv komaraca</span>
+          </div>
+        </article>
+
+        <article class="block">
+          <div class="block-head">
+            <div class="block-num c7">7</div>
+            <span class="block-icon">📋</span>
+            <h3 class="block-title">Priprema</h3>
+          </div>
+          <div class="chips">
+            <span class="chip">poziv volonterima</span>
+            <span class="chip">kupovina hrane i pića</span>
+            <span class="chip">prikupljanje opreme</span>
+            <span class="chip">dogovori o ulogama</span>
+          </div>
+        </article>
+
+        <article class="block">
+          <div class="block-head">
+            <div class="block-num c8">8</div>
+            <span class="block-icon">🔥</span>
+            <h3 class="block-title">Izvedba</h3>
+          </div>
+          <div class="chips">
+            <span class="chip">kupovina na dan</span><span class="chip">okupljanje</span>
+            <span class="chip">paljenje vatre</span><span class="chip">roštiljanje</span>
+            <span class="chip">konferencijski dio</span><span class="chip">sport &amp; kupanje</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE teal -->
+  <div class="marquee teal">
+    <div class="marquee-track">
+      <span class="star">★</span><span>20. LIPNJA 2026.</span><span class="star">★</span><span>KORANA · KARLOVAC</span><span class="star">★</span><span>09:00 — 20:00</span><span class="star">★</span>
+      <span class="star">★</span><span>20. LIPNJA 2026.</span><span class="star">★</span><span>KORANA · KARLOVAC</span><span class="star">★</span><span>09:00 — 20:00</span><span class="star">★</span>
+      <span class="star">★</span><span>20. LIPNJA 2026.</span><span class="star">★</span><span>KORANA · KARLOVAC</span><span class="star">★</span><span>09:00 — 20:00</span><span class="star">★</span>
+    </div>
+  </div>
+
+  <!-- LINEUP / SCHEDULE -->
+  <section class="section" id="raspored">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-kicker">Izvedba · 20.06.</span>
+        <h2 class="sec-title">Raspored <span class="hl">dana</span></h2>
+      </div>
+      <p class="sec-lead">Okvirni program — od jutarnje nabave do večernjeg druženja.</p>
+
+      <div class="lineup">
+        <div class="lineup-row">
+          <div class="lineup-time">09:00</div>
+          <div>
+            <div class="lineup-act">Kupovina preostale robe</div>
+            <div class="lineup-note">09:00 — 10:00 · na dan roštilja</div>
+          </div>
+        </div>
+        <div class="lineup-row">
+          <div class="lineup-time">10:00</div>
+          <div>
+            <div class="lineup-act">Okupljanje, priprema, kupanje</div>
+            <div class="lineup-note">10:00 — 11:00 · početak</div>
+          </div>
+        </div>
+        <div class="lineup-row">
+          <div class="lineup-time">11:00</div>
+          <div>
+            <div class="lineup-act">Paljenje vatre · roštiljanje · jedanje</div>
+            <div class="lineup-note">11:00 — 13:00 · 🔥</div>
+          </div>
+        </div>
+        <div class="lineup-row">
+          <div class="lineup-time">13:00</div>
+          <div>
+            <div class="lineup-act">„Konferencijski dio“ · sport · igranje · kupanje</div>
+            <div class="lineup-note">13:00 — 20:00 · do mraka</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREP -->
+  <section class="section" id="priprema">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-kicker">07</span>
+        <h2 class="sec-title">Priprema &amp; <span class="hl">zaduženja</span></h2>
+      </div>
+      <p class="sec-lead">Da dan prođe glatko, ovo treba odraditi unaprijed. Javi se ako želiš preuzeti neku ulogu.</p>
+
+      <div class="prep-grid">
+        <div class="ticket"><div class="ticket-box">✓</div><div class="ticket-text">Poziv volonterima</div></div>
+        <div class="ticket"><div class="ticket-box">✓</div><div class="ticket-text">Kupovina hrane i pića</div></div>
+        <div class="ticket"><div class="ticket-box">✓</div><div class="ticket-text">Prikupljanje opreme (rešetka, ugljen, drva…)</div></div>
+        <div class="ticket"><div class="ticket-box">✓</div><div class="ticket-text">Dogovori o ulogama</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO STRIP -->
+  <section class="container">
+    <div class="info-grid">
+      <div class="info-cell">
+        <div class="info-emoji">📅</div>
+        <div class="info-label">Datum</div>
+        <div class="info-value">Sub 20.06.</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-emoji">⏰</div>
+        <div class="info-label">Vrijeme</div>
+        <div class="info-value">09 — 20h</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-emoji">📍</div>
+        <div class="info-label">Lokacija</div>
+        <div class="info-value">Korana</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-emoji">🍽️</div>
+        <div class="info-label">Meni</div>
+        <div class="info-value">Za sve</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="prijava">
+    <div class="container">
+      <div class="cta">
+        <h2>Vidimo se na <span class="hl">Korani?</span></h2>
+        <p>
+          Prijavi se, ponesi dobru volju i — ako možeš — pomozi s nabavom, opremom
+          ili roštiljanjem. Što nas je više, to je bolje.
+        </p>
+        <div class="poster-actions">
+          <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="btn btn-red">Prijava na Meetupu</a>
+          <a href="../" class="btn btn-paper">← Karlovac Developers</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="../" class="brand" style="color:var(--ink)">KD<span class="dot">.</span></a>
+      <p class="footer-text">Roštilj na Korani — 20.06.2026.</p>
+      <a href="https://www.meetup.com/karlovac-developers-meetup/" target="_blank" rel="noopener" class="footer-link">
+        meetup.com/karlovac-developers-meetup
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>

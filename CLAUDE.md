@@ -18,7 +18,7 @@ Serve it over http — do **not** open `index.html` as a `file://` page. The job
 
 ### Pages are standalone, not templated
 
-Every page is a complete HTML file: `index.html` plus one `index.html` per directory (`give-a-talk/`, `host-a-meetup/`, `jobs/`). The hero header, footer, font `<link>`s, and inline SVG favicon are **duplicated** in each. A change to the footer or nav means editing every page. `<link rel="canonical">` is per-page and must not be copied verbatim; the `og:` tags currently live on the homepage only.
+Every page is a complete HTML file: `index.html` plus one `index.html` per directory (`give-a-talk/`, `host-a-meetup/`, `unconference/`, `jobs/`). The hero header, footer, font `<link>`s, and inline SVG favicon are **duplicated** in each. A change to the footer or nav means editing every page. `<link rel="canonical">` is per-page and must not be copied verbatim; the `og:` tags currently live on the homepage only.
 
 Subpages must carry `<body data-root="../">`. Both `translations.js` and `jobs.js` read that attribute to resolve paths from the site root — without it, translated relative links and the `jobs.json` fetch break on subpages.
 

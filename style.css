@@ -484,7 +484,8 @@ a { color: inherit; }
   margin-bottom: 1rem;
 }
 
-.prose ul {
+.prose ul,
+.prose ol {
   margin: 0 0 1rem 1.25rem;
   font-size: 1.125rem;
   line-height: 1.625;

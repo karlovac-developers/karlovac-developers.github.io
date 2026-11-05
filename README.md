@@ -20,7 +20,7 @@ Then open http://localhost:8000. Serve it over http rather than opening `index.h
 | Path | What it is |
 | --- | --- |
 | `index.html` | Homepage — hero, intro cards, job preview |
-| `give-a-talk/`, `host-a-meetup/`, `jobs/` | Subpages, one `index.html` each |
+| `give-a-talk/`, `host-a-meetup/`, `unconference/`, `jobs/` | Subpages, one `index.html` each |
 | `style.css` | The single stylesheet for all of the above |
 | `translations.js` | Croatian/English dictionaries and the i18n engine |
 | `jobs.js`, `jobs.json` | The job wall and its data |
