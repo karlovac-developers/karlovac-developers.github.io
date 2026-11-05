@@ -13,7 +13,7 @@ for the design.
 
 ## Setup
 
-Node 22.18 or later (see `.nvmrc`) and Python 3 for two of the checks.
+Node 22.23.4 or later (Astro's minimum; `.nvmrc` selects the latest 22.x) and Python 3 for two of the checks.
 
 ```bash
 npm install

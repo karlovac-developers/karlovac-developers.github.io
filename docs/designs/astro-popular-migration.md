@@ -1491,6 +1491,9 @@ Both open questions resolved as hoped: entry files export
 *   **The unchanged theme had 19 type errors, not 1,** because npm installed
     TypeScript 6, which enables `strict`. TypeScript is pinned to `^5`; the
     remaining 5 errors were fixed in phase 1 (THEME.md).
+*   **Node 22.23.4, not 22.18.** Astro 7.4.5 refuses to run on older Node,
+    which the first CI build showed. `.nvmrc` is `22` (the latest 22.x) and
+    `engines.node` is `>=22.23.4`.
 *   **`AuthorBox` stays visible when `authors` is off.** It also renders
     speakers and organizers, so only the profile link is gated, by the flag of
     that profile type.

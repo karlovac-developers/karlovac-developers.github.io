@@ -15,7 +15,7 @@ npm run check     # astro check, node --test, alt-text, JSON-LD and link checks 
 npm run mocks     # list every mock and placeholder
 ```
 
-Node 22.18+ (type stripping runs the `.ts` tests without a flag). TypeScript is pinned to `^5`: TypeScript 6 turns `strict` on, which the theme's code does not pass.
+Node 22.23.4+, Astro's minimum (type stripping runs the `.ts` tests without a flag). TypeScript is pinned to `^5`: TypeScript 6 turns `strict` on, which the theme's code does not pass.
 
 ## Architecture
 
