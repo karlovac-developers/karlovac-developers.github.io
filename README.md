@@ -46,8 +46,9 @@ All paths are the same in both languages: Croatian at `/events/`, English at
 **Events from Meetup.** Events are announced on Meetup. Every build reads Meetup's
 public calendar feed (`MEETUP_ICAL_URL` in `src/config.ts`) and adds each upcoming
 event that has no file in `src/content/events/`, with its title, date, time and
-description, and an RSVP button to Meetup. The daily build picks up a new event by
-the next morning; run the deploy workflow by hand to publish it sooner.
+description, and an RSVP button to Meetup. There is no scheduled build: after
+announcing an event on Meetup, run the deploy workflow by hand (Actions → Deploy
+site → Run workflow, or `gh workflow run deploy.yml`) to publish it.
 
 The feed has no venue, so a synced event links to Meetup for the location. To add
 a venue, speakers or talks, write the event's file: name it
@@ -106,12 +107,13 @@ Then run `npm run build && npm run check`.
 ## Deploy
 
 `.github/workflows/deploy.yml` builds and checks every pull request. Pushes to
-`main`, a daily run at 03:00 UTC and manual runs also deploy to GitHub Pages. The
-daily run keeps "next event" and job expiry current.
+`main` and manual runs also deploy to GitHub Pages.
 
-**Scheduled builds stop after 60 days without repository activity.** GitHub
-disables them and emails the workflow's last actor. Re-enable the workflow under
-Actions → Deploy site → Enable workflow.
+**There is no scheduled build.** What depends on the date is worked out when the
+site is built, so between builds it goes stale: an event that is over stays
+"next", a new Meetup event does not appear, and expired job postings stay up. Run
+the workflow by hand after announcing an event and the day after it, or add a
+`schedule:` trigger back to the workflow.
 
 ## The previous site at /old/
 

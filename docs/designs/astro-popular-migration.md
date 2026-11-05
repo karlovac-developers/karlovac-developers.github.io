@@ -1549,6 +1549,12 @@ Both open questions resolved as hoped: entry files export
     *   *People:* no member data was imported. Speaker names appear only
         where the organizers wrote them in the event descriptions.
 
+*   **No daily build (owner's decision after go-live).** The `schedule`
+    trigger was removed, so the site is rebuilt only on pushes to `main` and
+    manual runs. "Next event", synced Meetup events and job expiry are
+    current only as of the last build; the maintainer runs the workflow by
+    hand after announcing an event and after it has taken place.
+
 --------------------------------------------------------------------------------
 
 *Drafted with EGM*
