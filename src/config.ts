@@ -123,6 +123,8 @@ export const NAV: (Link & { children?: Link[] })[] = [
     ],
   },
   { label: { hr: 'Priručnik', en: 'Handbook' }, href: '/handbook/', feature: 'docs' },
+  /* Temporary: tonight's intro deck (13 Nov 2026). Remove after the meetup. */
+  { label: { hr: 'AImo slajdovi', en: 'AImo slides' }, href: '/slides/aimo-pricat-o-ai.html' },
 ];
 
 export const CTA = {

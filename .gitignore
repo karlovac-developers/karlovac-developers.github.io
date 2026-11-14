@@ -3,3 +3,7 @@ dist/
 node_modules/
 .DS_Store
 __pycache__/
+
+# Third-party talk transcript and form exports with personal data: never commit.
+docs/gergely_transcript.txt
+docs/presentation/

@@ -55,6 +55,10 @@ Every mock carries `mock: true` and shows `<MockBadge />`; mock pages and docs s
 
 `public/old/` is a frozen copy of the old static site (`main` at `e27727f`), served at `/old/` with `noindex` and canonicals pointing at `/old/`. Do not edit it or apply this project's rules to it.
 
+### Talk decks
+
+`public/slides/` holds standalone talk decks: self-contained HTML files with `noindex`, served as they are and not in the sitemap. A deck carries its own language switch (text pairs marked `data-l="hr"`/`data-l="en"`), so the bilingual and no-literal-text rules do not apply to them; do not add twins or `ui.ts` keys for them.
+
 ### Theme files
 
 Most of `src/components`, `src/lib`, `src/styles` and `public/` is the theme's code. Site-specific styles go in `src/styles/site.css`, not in the theme's stylesheets. Every change to a theme file gets a row in `THEME.md`.

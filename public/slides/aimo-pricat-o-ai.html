@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>AImo pričat o AI · Karlovac Developers</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!--
+  One-off intro deck for the "AImo pričat o AI" meetup, 13 Nov 2026.
+  Self-contained on purpose: no external files (the heading font is inlined),
+  so it also works from disk (file://) when the venue has no Wi-Fi.
+  Opens in Croatian; HR/EN buttons on the first slide or the L key switch language.
+  Every text is a pair: <span data-l="hr">…</span><span data-l="en">…</span>.
+  S (or the button on the last slide) = scenery tour without slides; Esc or S to return.
+
+  Keys: → ↓ Space PageDown next · ← ↑ PageUp back · Home/End · f fullscreen · L language · S scenery.
+  Click the right/left half of the screen to go forward/back.
+
+  EDITING: each slide is one <section class="slide" data-scene="..."> below,
+  in screen order. data-scene picks the Karlovac scene behind it:
+  dubovac, rivers, zvijezda, bridge, sunrise, slapovi, korana
+  (two slides per scene).
+  Write & as &amp;. <span class="hot">…</span> = yellow and bold.
+  Result bars: style="--n:6" is the count (out of 11).
+
+  Heading font: Pixelify Sans 700 (latin + latin-ext), SIL Open Font License 1.1,
+  Copyright 2021 The Pixelify Sans Project Authors (github.com/eifetx/Pixelify-Sans).
+-->
+<style>
+  @font-face {
+    font-family: 'Pixelify Sans'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url(data:font/woff2;base64,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) format('woff2');
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+  @font-face {
+    font-family: 'Pixelify Sans'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url(data:font/woff2;base64,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) format('woff2');
+    unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  }
+  :root {
+    --sw: min(100vw, calc(100vh * 16 / 9));
+    --sh: min(100vh, calc(100vw * 9 / 16));
+    --panel: rgba(27, 32, 64, 0.92);
+    --ink: #fbf8ef;
+    --muted: #c3c9e0;
+    --accent: #ffd43b;
+    --accent-2: #8ce99a;
+    --bar: #4dabf7;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --pixel: 'Pixelify Sans', var(--font);
+    --ease: cubic-bezier(.65, 0, .35, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #10142a; color: var(--ink); font-family: var(--font); }
+  a { color: var(--accent); }
+
+  /* 16:9 stage, letterboxed so it also fits a 4:3 projector. */
+  .viewport { position: fixed; inset: 0; display: grid; place-items: center; overflow: hidden; }
+  .stage { position: relative; overflow: hidden; width: var(--sw); height: var(--sh); font-size: calc(var(--sh) * 0.045); }
+
+  /* Scenery: sky cross-fades; three layers slide at different speeds (parallax). */
+  .world { position: absolute; inset: 0; }
+  .sky { position: absolute; inset: 0; opacity: 0; transition: opacity 1s var(--ease); }
+  .sky.on { opacity: 1; }
+  .sky[data-sky="dubovac"]  { background: linear-gradient(#6ec1f2, #d9f2ff); }
+  .sky[data-sky="rivers"]   { background: linear-gradient(#55b0ea, #c8ecff); }
+  .sky[data-sky="zvijezda"] { background: linear-gradient(#69b6ea, #ffeccc); }
+  .sky[data-sky="bridge"]   { background: linear-gradient(#4fa6e3, #d3f0fc); }
+  .sky[data-sky="sunrise"]  { background: linear-gradient(#ff8f6b, #ffd08a 60%, #ffe9b0); }
+  .sky[data-sky="slapovi"]  { background: linear-gradient(#5cb8ec, #e3f6ff); }
+  .sky[data-sky="korana"]   { background: linear-gradient(#3b3f86, #b06a8f 55%, #f6a564); }
+  .layer { position: absolute; top: 0; left: 0; height: 100%; display: block; transition: transform 1s var(--ease), filter 1s var(--ease); }
+  .far  { width: 400%; transform: translateX(calc(var(--pos, 0) * var(--sw) * -0.4)); }
+  .mid  { width: 700%; transform: translateX(calc(var(--pos, 0) * var(--sw) * -1)); }
+  .near { width: 1100%; transform: translateX(calc(var(--pos, 0) * var(--sw) * -1.6)); }
+  .stage[data-scene="sunrise"] .far { filter: sepia(.35) brightness(.98); }
+  .stage[data-scene="korana"] .far, .stage[data-scene="korana"] .near { filter: brightness(.62) saturate(.8); }
+  .flame { animation: flick 0.5s steps(2) infinite; }
+  @keyframes flick { 50% { opacity: .55; } }
+
+  /* Slides. */
+  .slide { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 4% 6% 8%; }
+  .slide[hidden] { display: none; }
+  .panel {
+    background: var(--panel); padding: 0.85em 1.2em; max-width: 100%; max-height: 100%;
+    box-shadow: 0 0 0 0.12em var(--ink), 0 0 0 0.24em #1b2040, 0.32em 0.32em 0 0.24em rgba(0, 0, 0, .28);
+    animation: pop 0.25s steps(4);
+  }
+  /* While the scenery slides, the panel waits; it is visible by default so it never depends on an animation. */
+  .stage.moving .panel { visibility: hidden; animation: none; }
+  @keyframes pop { from { transform: translateY(0.4em); } }
+
+  h1, h2 { font-family: var(--pixel); font-weight: 700; }
+  h2 .small { font-family: var(--font); font-weight: 400; }
+  h1 { font-size: 2.6em; line-height: 1.05; margin: 0 0 0.2em; color: var(--accent); text-shadow: 0.06em 0.06em 0 #c2410c; }
+  h2 { font-size: 1.45em; line-height: 1.15; margin: 0 0 0.45em; color: var(--accent); }
+  h3 { font-size: 0.66em; margin: 0 0 0.3em; color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.06em; }
+  p { margin: 0.3em 0; }
+  ul { margin: 0; padding-left: 1.1em; }
+  li { margin: 0.35em 0; line-height: 1.25; }
+  li::marker { color: var(--accent); }
+  .lead { color: var(--muted); font-size: 0.85em; }
+  .small { font-size: 0.7em; }
+  .muted { color: var(--muted); }
+  .hot { color: var(--accent); font-weight: 700; }
+  .center { text-align: center; }
+
+  /* Progress marker for Gergely's four lenses. */
+  .lenses { display: flex; gap: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.55em; color: var(--muted); margin-bottom: 0.5em; }
+  .lenses .on { color: var(--accent-2); }
+  .credit, .counter { position: absolute; bottom: 2.2%; font-size: 0.42em; color: var(--ink); background: var(--panel); padding: 0.25em 0.6em; }
+  .credit { left: 4%; }
+  .counter { right: 2.5%; font-variant-numeric: tabular-nums; }
+
+  /* Setup slide. */
+  .rows { display: grid; grid-template-columns: auto 1fr; gap: 0.3em 0.8em; font-size: 0.66em; align-items: baseline; margin: 0; }
+  .rows dt { color: var(--accent-2); font-weight: 700; white-space: nowrap; }
+  .rows dd { margin: 0; }
+  .rows .what { color: var(--muted); }
+  .rows-roomy { font-size: 0.8em; gap: 0.45em 0.9em; margin-top: 0.5em; }
+
+  /* Form result bars, counts out of 11. */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; }
+  .bars { list-style: none; padding: 0; font-size: 0.62em; }
+  .bars li { display: grid; grid-template-columns: 9em 8em 1.6em; gap: 0.4em; align-items: center; margin: 0.25em 0; }
+  .bars .bar { height: 0.8em; width: calc(var(--n) / 11 * 100%); background: repeating-linear-gradient(90deg, var(--bar) 0 0.6em, #339af0 0.6em 0.7em); }
+  .bars .n { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .vote { display: grid; grid-template-columns: 1fr auto; gap: 1.2em; align-items: center; }
+  .qr { width: calc(var(--sh) * 0.42); height: calc(var(--sh) * 0.42); background: #fff; color: #111; display: grid; place-items: center; text-align: center; font-size: 0.5em; padding: 0.4em; }
+  .qr svg { width: 100%; height: 100%; }
+  .qr-small { width: calc(var(--sh) * 0.22); height: calc(var(--sh) * 0.22); margin: 0 auto; }
+  .qr-pair { display: flex; gap: 0.6em; align-items: flex-start; }
+  .qr-pair .small { font-size: 0.5em; margin-top: 0.4em; }
+  /* Video: a button until clicked, so nothing loads from YouTube before then. */
+  .video { width: calc(var(--sh) * 0.74); max-width: 100%; aspect-ratio: 16 / 9; margin: 0.4em auto; background: #000; }
+  .video-foot { display: flex; gap: 1em; justify-content: center; align-items: center; margin: 0; }
+  .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .video .play { width: 100%; height: 100%; font: inherit; font-weight: 700; color: var(--ink); background: #000; border: 0.12em solid var(--ink); cursor: pointer; }
+  .video .play .small { font-weight: 400; }
+
+  /* Language: only the active language's text is shown. */
+  html[lang="hr"] [data-l="en"], html[lang="en"] [data-l="hr"] { display: none !important; }
+  .langs { margin: 0.7em 0 0; display: flex; gap: 0.4em; justify-content: center; }
+  .langs button, .tour-btn { font: inherit; font-size: 0.55em; font-weight: 700; padding: 0.2em 0.7em; background: transparent; color: var(--muted); border: 0.12em solid var(--muted); cursor: pointer; }
+  .langs button[aria-pressed="true"] { background: var(--accent); color: #1b2040; border-color: var(--accent); }
+  .tour-btn { margin-top: 0.8em; font-size: 0.5em; }
+  .tour-big { font-size: 0.9em; margin-top: 0.5em; padding: 0.35em 1.4em; color: #10142a; background: var(--accent); border-color: var(--accent); }
+  /* Scenery tour: slides hidden, scene name shown. */
+  .stage.scenery .slide, .stage.scenery .counter { display: none !important; }
+  .caption { display: none; position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); font-family: var(--pixel); font-weight: 700; font-size: 1.1em; color: var(--accent); background: var(--panel); padding: 0.3em 0.9em; box-shadow: 0 0 0 0.12em var(--ink); white-space: nowrap; }
+  .caption small { display: block; font-family: var(--font); font-weight: 400; font-size: 0.4em; color: var(--muted); text-align: center; }
+  .stage.scenery .caption { display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .layer, .sky { transition: none; }
+    .panel, .flame { animation: none; }
+  }
+
+  /* Without JS, or printed: every slide stacked, no scenery. */
+  .no-js .viewport { position: static; display: block; }
+  .no-js .stage { height: auto; margin: 0 auto; }
+  .no-js .world, .no-js .counter, .no-js .langs, .no-js .tour-btn, .no-js .caption { display: none; }
+  .no-js .slide, .no-js .slide[hidden] { position: relative; display: flex; height: var(--sh); }
+  @media print {
+    @page { size: 1600px 900px; margin: 0; }
+    :root { --sw: 1600px; --sh: 900px; }
+    .viewport { position: static; display: block; }
+    .stage { height: auto; overflow: visible; }
+    .world, .counter, .langs, .tour-btn, .caption { display: none; }
+    .slide, .slide[hidden] { position: relative; display: flex; height: 900px; break-after: page; }
+    .panel { animation: none; }
+  }
+</style>
+</head>
+<body class="no-js">
+<main class="viewport">
+<div class="stage" id="stage" data-scene="dubovac">
+
+<div class="world" aria-hidden="true">
+  <div class="sky" data-sky="dubovac"></div>
+  <div class="sky" data-sky="rivers"></div>
+  <div class="sky" data-sky="zvijezda"></div>
+  <div class="sky" data-sky="bridge"></div>
+  <div class="sky" data-sky="sunrise"></div>
+  <div class="sky" data-sky="slapovi"></div>
+  <div class="sky" data-sky="korana"></div>
+
+  <!-- Far: rolling hills, repeating. 1280 units = 4 stage widths. -->
+  <svg class="layer far" viewBox="0 0 1280 180" preserveAspectRatio="none" shape-rendering="crispEdges">
+    <defs>
+      <pattern id="hills" width="160" height="180" patternUnits="userSpaceOnUse">
+        <rect x="0" y="104" width="160" height="76" fill="#a9d8b8"/>
+        <rect x="10" y="96" width="60" height="8" fill="#a9d8b8"/>
+        <rect x="20" y="90" width="40" height="6" fill="#a9d8b8"/>
+        <rect x="30" y="86" width="18" height="4" fill="#a9d8b8"/>
+        <rect x="90" y="100" width="56" height="4" fill="#a9d8b8"/>
+        <rect x="100" y="95" width="34" height="5" fill="#a9d8b8"/>
+        <rect x="0" y="116" width="160" height="64" fill="#8cc9a0"/>
+        <rect x="50" y="110" width="70" height="6" fill="#8cc9a0"/>
+        <rect x="64" y="105" width="38" height="5" fill="#8cc9a0"/>
+      </pattern>
+    </defs>
+    <rect width="1280" height="180" fill="url(#hills)"/>
+  </svg>
+
+  <!-- Mid: the seven Karlovac scenes, 320 units each. -->
+  <svg class="layer mid" viewBox="0 0 2240 180" preserveAspectRatio="none" shape-rendering="crispEdges">
+
+    <!-- 0 · Dubovac castle on its hill, morning -->
+    <g>
+      <rect x="28" y="18" width="20" height="20" fill="#ffe066"/>
+      <rect x="24" y="22" width="28" height="12" fill="#ffe066"/>
+      <rect x="32" y="14" width="12" height="28" fill="#ffe066"/>
+      <rect x="80" y="26" width="34" height="6" fill="#fff"/><rect x="86" y="21" width="18" height="5" fill="#fff"/>
+      <rect x="150" y="16" width="26" height="5" fill="#fff"/><rect x="155" y="12" width="12" height="4" fill="#fff"/>
+      <rect x="0" y="132" width="320" height="48" fill="#6cbf55"/>
+      <rect x="150" y="110" width="170" height="22" fill="#5aae46"/>
+      <rect x="170" y="96" width="140" height="14" fill="#5aae46"/>
+      <rect x="188" y="84" width="110" height="12" fill="#5aae46"/>
+      <rect x="204" y="76" width="80" height="8" fill="#5aae46"/>
+      <!-- walls, keep, round tower -->
+      <rect x="206" y="60" width="76" height="16" fill="#e3d6b6"/>
+      <rect x="206" y="56" width="4" height="4" fill="#e3d6b6"/><rect x="214" y="56" width="4" height="4" fill="#e3d6b6"/><rect x="270" y="56" width="4" height="4" fill="#e3d6b6"/><rect x="278" y="56" width="4" height="4" fill="#e3d6b6"/>
+      <rect x="226" y="34" width="26" height="42" fill="#efe4c8"/>
+      <rect x="226" y="30" width="4" height="4" fill="#efe4c8"/><rect x="233" y="30" width="4" height="4" fill="#efe4c8"/><rect x="241" y="30" width="4" height="4" fill="#efe4c8"/><rect x="248" y="30" width="4" height="4" fill="#efe4c8"/>
+      <rect x="236" y="44" width="5" height="7" fill="#4a3b2a"/><rect x="236" y="58" width="5" height="7" fill="#4a3b2a"/>
+      <rect x="256" y="42" width="20" height="34" fill="#d9caa6"/>
+      <rect x="254" y="38" width="24" height="4" fill="#d9caa6"/>
+      <rect x="263" y="50" width="5" height="6" fill="#4a3b2a"/>
+      <rect x="238" y="18" width="1" height="12" fill="#5c4630"/>
+      <rect x="239" y="18" width="3" height="3" fill="#e03131"/><rect x="242" y="18" width="3" height="3" fill="#fff"/><rect x="245" y="18" width="3" height="3" fill="#e03131"/>
+      <rect x="239" y="21" width="3" height="3" fill="#fff"/><rect x="242" y="21" width="3" height="3" fill="#e03131"/><rect x="245" y="21" width="3" height="3" fill="#fff"/>
+      <!-- trees -->
+      <rect x="40" y="112" width="4" height="20" fill="#7a5230"/><rect x="32" y="96" width="20" height="18" fill="#3f8f35"/><rect x="36" y="90" width="12" height="6" fill="#3f8f35"/>
+      <rect x="100" y="116" width="4" height="16" fill="#7a5230"/><rect x="93" y="102" width="18" height="15" fill="#2f7d2b"/>
+      <!-- town sign -->
+      <rect x="128" y="112" width="2" height="20" fill="#555"/><rect x="146" y="112" width="2" height="20" fill="#555"/>
+      <rect x="120" y="100" width="36" height="13" fill="#fff"/><rect x="121" y="101" width="34" height="11" fill="#1c7ed6"/>
+      <text x="138" y="109" font-size="6" font-family="monospace" font-weight="700" fill="#fff" text-anchor="middle">KARLOVAC</text>
+    </g>
+
+    <!-- 1 · Four rivers: Kupa, Korana, Mrežnica, Dobra -->
+    <g transform="translate(320 0)">
+      <rect x="236" y="22" width="40" height="6" fill="#fff"/><rect x="244" y="17" width="22" height="5" fill="#fff"/>
+      <rect x="40" y="30" width="28" height="5" fill="#fff"/>
+      <rect x="0" y="118" width="320" height="62" fill="#6cbf55"/>
+      <rect x="0" y="124" width="320" height="4" fill="#7cc7f2"/>
+      <rect x="0" y="133" width="320" height="5" fill="#5fb6ee"/>
+      <rect x="0" y="144" width="320" height="7" fill="#3d9be0"/>
+      <rect x="0" y="157" width="320" height="11" fill="#2b86d1"/>
+      <rect x="20" y="160" width="10" height="1" fill="#a5d8ff"/><rect x="90" y="162" width="14" height="1" fill="#a5d8ff"/><rect x="200" y="160" width="12" height="1" fill="#a5d8ff"/><rect x="270" y="163" width="10" height="1" fill="#a5d8ff"/>
+      <rect x="60" y="146" width="8" height="1" fill="#a5d8ff"/><rect x="160" y="147" width="10" height="1" fill="#a5d8ff"/>
+      <!-- kayak -->
+      <rect x="120" y="157" width="24" height="3" fill="#f03e3e"/><rect x="122" y="160" width="20" height="1" fill="#c92a2a"/>
+      <rect x="130" y="150" width="5" height="7" fill="#ffd43b"/><rect x="131" y="146" width="3" height="4" fill="#f1c9a5"/>
+      <rect x="124" y="151" width="18" height="1" fill="#5c4630"/>
+      <!-- jumping fish -->
+      <rect x="226" y="140" width="6" height="3" fill="#ff922b"/><rect x="232" y="141" width="2" height="2" fill="#ff922b"/>
+      <!-- sign -->
+      <rect x="44" y="104" width="2" height="16" fill="#7a5230"/>
+      <rect x="28" y="94" width="34" height="11" fill="#8b5a2b"/>
+      <text x="45" y="102" font-size="6" font-family="monospace" font-weight="700" fill="#fff" text-anchor="middle">4 RIJEKE</text>
+      <rect x="270" y="100" width="4" height="18" fill="#7a5230"/><rect x="262" y="84" width="20" height="18" fill="#3f8f35"/>
+      <rect x="0" y="168" width="320" height="12" fill="#5aae46"/>
+    </g>
+
+    <!-- 2 · Zvijezda, the star-shaped old town -->
+    <g transform="translate(640 0)">
+      <rect x="30" y="24" width="30" height="5" fill="#fff"/><rect x="36" y="19" width="16" height="5" fill="#fff"/>
+      <!-- church -->
+      <rect x="150" y="44" width="16" height="66" fill="#f6ead0"/>
+      <rect x="148" y="38" width="20" height="6" fill="#2f7d5f"/><rect x="151" y="32" width="14" height="6" fill="#2f7d5f"/>
+      <rect x="154" y="27" width="8" height="5" fill="#2f7d5f"/><rect x="157" y="20" width="2" height="7" fill="#ffd43b"/><rect x="155" y="22" width="6" height="2" fill="#ffd43b"/>
+      <rect x="155" y="54" width="6" height="8" fill="#4a3b2a"/>
+      <rect x="166" y="76" width="36" height="34" fill="#f6ead0"/><rect x="164" y="70" width="40" height="6" fill="#c0392b"/>
+      <!-- houses -->
+      <rect x="60" y="80" width="40" height="30" fill="#ffd56b"/><rect x="56" y="72" width="48" height="8" fill="#c0392b"/>
+      <rect x="66" y="88" width="5" height="6" fill="#5c4630"/><rect x="78" y="88" width="5" height="6" fill="#5c4630"/><rect x="90" y="88" width="5" height="6" fill="#5c4630"/>
+      <rect x="104" y="86" width="40" height="24" fill="#f9e2ae"/><rect x="101" y="79" width="46" height="7" fill="#d9480f"/>
+      <rect x="111" y="92" width="5" height="6" fill="#5c4630"/><rect x="124" y="92" width="5" height="6" fill="#5c4630"/>
+      <rect x="208" y="84" width="44" height="26" fill="#ffc9c9"/><rect x="204" y="77" width="52" height="7" fill="#c0392b"/>
+      <rect x="214" y="90" width="5" height="6" fill="#5c4630"/><rect x="228" y="90" width="5" height="6" fill="#5c4630"/><rect x="242" y="90" width="5" height="6" fill="#5c4630"/>
+      <rect x="256" y="88" width="34" height="22" fill="#d0ebff"/><rect x="253" y="81" width="40" height="7" fill="#d9480f"/>
+      <!-- ramparts with a star bastion -->
+      <rect x="0" y="110" width="320" height="18" fill="#4f9a3f"/>
+      <rect x="110" y="104" width="100" height="6" fill="#4f9a3f"/>
+      <rect x="130" y="99" width="60" height="5" fill="#4f9a3f"/>
+      <rect x="0" y="110" width="320" height="2" fill="#69b85a"/>
+      <!-- moat -->
+      <rect x="0" y="128" width="320" height="16" fill="#3d9be0"/>
+      <rect x="40" y="134" width="12" height="1" fill="#a5d8ff"/><rect x="180" y="137" width="14" height="1" fill="#a5d8ff"/>
+      <rect x="0" y="144" width="320" height="36" fill="#6cbf55"/>
+      <rect x="276" y="128" width="3" height="16" fill="#7a5230"/><rect x="268" y="112" width="20" height="18" fill="#3f8f35"/>
+    </g>
+
+    <!-- 3 · A bridge under repair (radovi) -->
+    <g transform="translate(960 0)">
+      <rect x="40" y="26" width="30" height="5" fill="#fff"/><rect x="200" y="14" width="24" height="5" fill="#fff"/>
+      <rect x="0" y="120" width="320" height="60" fill="#3d9be0"/>
+      <rect x="10" y="134" width="14" height="1" fill="#a5d8ff"/><rect x="140" y="150" width="16" height="1" fill="#a5d8ff"/><rect x="250" y="140" width="12" height="1" fill="#a5d8ff"/>
+      <!-- bridge with a gap and scaffolding -->
+      <rect x="0" y="106" width="128" height="8" fill="#a39a8a"/><rect x="172" y="106" width="148" height="8" fill="#a39a8a"/>
+      <rect x="0" y="102" width="128" height="2" fill="#7d7464"/><rect x="172" y="102" width="148" height="2" fill="#7d7464"/>
+      <rect x="40" y="114" width="10" height="30" fill="#8f8676"/><rect x="250" y="114" width="10" height="30" fill="#8f8676"/>
+      <rect x="132" y="108" width="2" height="40" fill="#f08c00"/><rect x="149" y="108" width="2" height="40" fill="#f08c00"/><rect x="166" y="108" width="2" height="40" fill="#f08c00"/>
+      <rect x="130" y="108" width="40" height="2" fill="#f08c00"/><rect x="130" y="124" width="40" height="2" fill="#f08c00"/>
+      <rect x="128" y="104" width="44" height="3" fill="#c49a6c"/>
+      <!-- crane -->
+      <rect x="214" y="28" width="6" height="74" fill="#fab005"/>
+      <rect x="215" y="36" width="4" height="1" fill="#e67700"/><rect x="215" y="50" width="4" height="1" fill="#e67700"/><rect x="215" y="64" width="4" height="1" fill="#e67700"/><rect x="215" y="78" width="4" height="1" fill="#e67700"/><rect x="215" y="92" width="4" height="1" fill="#e67700"/>
+      <rect x="150" y="26" width="110" height="4" fill="#fab005"/>
+      <rect x="250" y="30" width="10" height="8" fill="#868e96"/>
+      <rect x="162" y="30" width="1" height="44" fill="#495057"/><rect x="159" y="74" width="7" height="3" fill="#495057"/>
+      <rect x="154" y="77" width="18" height="6" fill="#c49a6c"/>
+      <!-- sign, cones, worker -->
+      <rect x="74" y="92" width="2" height="10" fill="#555"/>
+      <rect x="58" y="80" width="34" height="12" fill="#fab005"/>
+      <text x="75" y="88.5" font-size="6" font-family="monospace" font-weight="700" fill="#111" text-anchor="middle">RADOVI</text>
+      <rect x="104" y="96" width="2" height="2" fill="#ff6b6b"/><rect x="103" y="98" width="4" height="2" fill="#fff"/><rect x="102" y="100" width="6" height="2" fill="#ff6b6b"/>
+      <rect x="116" y="96" width="2" height="2" fill="#ff6b6b"/><rect x="115" y="98" width="4" height="2" fill="#fff"/><rect x="114" y="100" width="6" height="2" fill="#ff6b6b"/>
+      <rect x="186" y="88" width="6" height="3" fill="#ffd43b"/><rect x="187" y="91" width="4" height="3" fill="#f1c9a5"/>
+      <rect x="186" y="94" width="6" height="5" fill="#ff922b"/><rect x="186" y="99" width="2" height="3" fill="#364fc7"/><rect x="190" y="99" width="2" height="3" fill="#364fc7"/>
+      <rect x="192" y="95" width="5" height="1" fill="#495057"/>
+    </g>
+
+    <!-- 4 · Sunrise over the Korana, something new -->
+    <g transform="translate(1280 0)">
+      <rect x="190" y="66" width="44" height="50" fill="#ffe066"/>
+      <rect x="182" y="74" width="60" height="42" fill="#ffe066"/>
+      <rect x="178" y="84" width="68" height="32" fill="#ffe066"/>
+      <rect x="198" y="60" width="28" height="6" fill="#ffe066"/>
+      <!-- balloon -->
+      <rect x="112" y="18" width="18" height="4" fill="#f03e3e"/><rect x="108" y="22" width="26" height="14" fill="#f03e3e"/>
+      <rect x="117" y="22" width="8" height="14" fill="#ffd43b"/><rect x="112" y="36" width="18" height="4" fill="#f03e3e"/><rect x="116" y="40" width="10" height="3" fill="#f03e3e"/>
+      <rect x="117" y="43" width="1" height="5" fill="#5c4630"/><rect x="124" y="43" width="1" height="5" fill="#5c4630"/><rect x="117" y="48" width="8" height="5" fill="#8b5a2b"/>
+      <rect x="60" y="30" width="3" height="1" fill="#5c4630"/><rect x="63" y="29" width="2" height="1" fill="#5c4630"/><rect x="65" y="30" width="3" height="1" fill="#5c4630"/>
+      <rect x="80" y="40" width="3" height="1" fill="#5c4630"/><rect x="83" y="39" width="2" height="1" fill="#5c4630"/><rect x="85" y="40" width="3" height="1" fill="#5c4630"/>
+      <!-- new buildings -->
+      <rect x="20" y="58" width="30" height="58" fill="#5c7cfa"/><rect x="54" y="78" width="24" height="38" fill="#74c0fc"/>
+      <rect x="82" y="66" width="22" height="50" fill="#4dabf7"/><rect x="262" y="72" width="38" height="44" fill="#91a7ff"/>
+      <rect x="25" y="64" width="4" height="4" fill="#fff3bf"/><rect x="33" y="64" width="4" height="4" fill="#fff3bf"/><rect x="41" y="64" width="4" height="4" fill="#d0ebff"/>
+      <rect x="25" y="74" width="4" height="4" fill="#d0ebff"/><rect x="33" y="74" width="4" height="4" fill="#fff3bf"/><rect x="41" y="74" width="4" height="4" fill="#fff3bf"/>
+      <rect x="25" y="84" width="4" height="4" fill="#fff3bf"/><rect x="33" y="84" width="4" height="4" fill="#d0ebff"/><rect x="41" y="84" width="4" height="4" fill="#fff3bf"/>
+      <rect x="87" y="72" width="4" height="4" fill="#fff3bf"/><rect x="95" y="72" width="4" height="4" fill="#fff3bf"/><rect x="87" y="82" width="4" height="4" fill="#d0ebff"/><rect x="95" y="82" width="4" height="4" fill="#fff3bf"/>
+      <rect x="268" y="78" width="6" height="4" fill="#fff3bf"/><rect x="280" y="78" width="6" height="4" fill="#fff3bf"/><rect x="268" y="88" width="6" height="4" fill="#fff3bf"/><rect x="280" y="88" width="6" height="4" fill="#d0ebff"/>
+      <rect x="128" y="102" width="40" height="14" fill="#69db7c"/><rect x="132" y="96" width="32" height="6" fill="#69db7c"/>
+      <!-- river with the sun's reflection -->
+      <rect x="0" y="116" width="320" height="38" fill="#4c8fd6"/>
+      <rect x="196" y="120" width="32" height="2" fill="#ffe066"/><rect x="200" y="126" width="24" height="2" fill="#ffe066"/><rect x="204" y="132" width="16" height="2" fill="#ffe066"/><rect x="208" y="138" width="8" height="2" fill="#ffe066"/>
+      <rect x="0" y="154" width="320" height="26" fill="#6cbf55"/>
+    </g>
+
+    <!-- 5 · Mrežnica waterfalls: travertine steps, cascades, an old mill -->
+    <g transform="translate(1600 0)">
+      <rect x="60" y="22" width="32" height="5" fill="#fff"/><rect x="67" y="17" width="16" height="5" fill="#fff"/>
+      <rect x="230" y="30" width="26" height="5" fill="#fff"/>
+      <!-- forested hills behind -->
+      <rect x="0" y="74" width="320" height="30" fill="#2f7d2b"/>
+      <rect x="10" y="66" width="40" height="8" fill="#2f7d2b"/><rect x="90" y="62" width="50" height="12" fill="#2f7d2b"/><rect x="200" y="64" width="44" height="10" fill="#2f7d2b"/><rect x="270" y="68" width="40" height="6" fill="#2f7d2b"/>
+      <rect x="20" y="60" width="20" height="6" fill="#3f8f35"/><rect x="104" y="56" width="22" height="6" fill="#3f8f35"/><rect x="212" y="58" width="20" height="6" fill="#3f8f35"/>
+      <!-- upper pool and first travertine step -->
+      <rect x="40" y="88" width="250" height="6" fill="#5fb6ee"/>
+      <rect x="40" y="94" width="250" height="16" fill="#cbbd93"/>
+      <rect x="40" y="94" width="250" height="2" fill="#5aae46"/>
+      <rect x="70" y="94" width="12" height="18" fill="#e7f5ff"/><rect x="74" y="94" width="2" height="18" fill="#a5d8ff"/>
+      <rect x="112" y="94" width="18" height="18" fill="#e7f5ff"/><rect x="118" y="94" width="2" height="18" fill="#a5d8ff"/><rect x="125" y="94" width="2" height="18" fill="#a5d8ff"/>
+      <rect x="160" y="94" width="10" height="18" fill="#e7f5ff"/>
+      <rect x="200" y="94" width="22" height="18" fill="#e7f5ff"/><rect x="206" y="94" width="2" height="18" fill="#a5d8ff"/><rect x="214" y="94" width="2" height="18" fill="#a5d8ff"/>
+      <rect x="252" y="94" width="12" height="18" fill="#e7f5ff"/>
+      <!-- middle pool and second step -->
+      <rect x="20" y="112" width="290" height="6" fill="#4dabf7"/>
+      <rect x="20" y="118" width="290" height="14" fill="#b8a77a"/>
+      <rect x="20" y="118" width="290" height="2" fill="#5aae46"/>
+      <rect x="54" y="118" width="16" height="16" fill="#e7f5ff"/><rect x="60" y="118" width="2" height="16" fill="#a5d8ff"/>
+      <rect x="98" y="118" width="26" height="16" fill="#e7f5ff"/><rect x="106" y="118" width="2" height="16" fill="#a5d8ff"/><rect x="115" y="118" width="2" height="16" fill="#a5d8ff"/>
+      <rect x="150" y="118" width="14" height="16" fill="#e7f5ff"/>
+      <rect x="190" y="118" width="30" height="16" fill="#e7f5ff"/><rect x="198" y="118" width="2" height="16" fill="#a5d8ff"/><rect x="209" y="118" width="2" height="16" fill="#a5d8ff"/>
+      <rect x="244" y="118" width="18" height="16" fill="#e7f5ff"/><rect x="250" y="118" width="2" height="16" fill="#a5d8ff"/>
+      <!-- lower pool with foam -->
+      <rect x="0" y="134" width="320" height="30" fill="#2f9be0"/>
+      <rect x="50" y="134" width="24" height="2" fill="#fff"/><rect x="94" y="134" width="34" height="2" fill="#fff"/><rect x="146" y="134" width="22" height="2" fill="#fff"/><rect x="186" y="134" width="38" height="2" fill="#fff"/><rect x="240" y="134" width="26" height="2" fill="#fff"/>
+      <rect x="30" y="146" width="12" height="1" fill="#a5d8ff"/><rect x="130" y="152" width="16" height="1" fill="#a5d8ff"/><rect x="230" y="148" width="12" height="1" fill="#a5d8ff"/>
+      <!-- swimmer -->
+      <rect x="170" y="150" width="10" height="3" fill="#1971c2"/><rect x="180" y="148" width="4" height="4" fill="#f1c9a5"/><rect x="180" y="147" width="4" height="2" fill="#f03e3e"/>
+      <!-- old mill on the left bank -->
+      <rect x="0" y="104" width="22" height="30" fill="#8b5a2b"/><rect x="0" y="98" width="26" height="6" fill="#5c3d20"/>
+      <rect x="6" y="112" width="5" height="6" fill="#3b2a18"/>
+      <rect x="22" y="116" width="2" height="18" fill="#5c3d20"/><rect x="24" y="124" width="10" height="2" fill="#5c3d20"/><rect x="28" y="118" width="2" height="14" fill="#5c3d20"/>
+      <!-- sign and trees -->
+      <rect x="296" y="96" width="2" height="16" fill="#7a5230"/>
+      <rect x="276" y="86" width="42" height="11" fill="#8b5a2b"/>
+      <text x="297" y="94" font-size="6" font-family="monospace" font-weight="700" fill="#fff" text-anchor="middle">MREŽNICA</text>
+      <rect x="0" y="164" width="320" height="16" fill="#6cbf55"/>
+    </g>
+
+    <!-- 6 · Korana beach at dusk, campfire -->
+    <g transform="translate(1920 0)">
+      <rect x="30" y="16" width="2" height="2" fill="#fff"/><rect x="90" y="10" width="2" height="2" fill="#fff"/><rect x="150" y="22" width="2" height="2" fill="#fff"/><rect x="210" y="12" width="2" height="2" fill="#fff"/><rect x="300" y="28" width="2" height="2" fill="#fff"/><rect x="60" y="34" width="1" height="1" fill="#fff"/><rect x="180" y="36" width="1" height="1" fill="#fff"/>
+      <rect x="252" y="18" width="14" height="14" fill="#fff3bf"/><rect x="258" y="16" width="10" height="12" fill="#3b3f86"/>
+      <rect x="0" y="96" width="320" height="18" fill="#2b5a3a"/>
+      <rect x="20" y="84" width="16" height="12" fill="#2b5a3a"/><rect x="90" y="80" width="20" height="16" fill="#2b5a3a"/><rect x="200" y="86" width="18" height="10" fill="#2b5a3a"/><rect x="280" y="82" width="22" height="14" fill="#2b5a3a"/>
+      <rect x="0" y="114" width="320" height="30" fill="#3d6fae"/>
+      <rect x="40" y="122" width="16" height="1" fill="#ffc078"/><rect x="150" y="128" width="22" height="1" fill="#ffc078"/><rect x="250" y="120" width="14" height="1" fill="#ffc078"/>
+      <rect x="0" y="144" width="320" height="36" fill="#e2bd80"/>
+      <!-- tent -->
+      <rect x="66" y="126" width="8" height="4" fill="#ff922b"/><rect x="62" y="130" width="16" height="6" fill="#ff922b"/><rect x="58" y="136" width="24" height="6" fill="#ff922b"/><rect x="54" y="142" width="32" height="6" fill="#ff922b"/>
+      <rect x="68" y="136" width="4" height="12" fill="#7a3e00"/>
+      <!-- campfire -->
+      <rect x="150" y="156" width="22" height="3" fill="#7a5230"/><rect x="154" y="153" width="14" height="3" fill="#5c3d20"/>
+      <rect class="flame" x="156" y="142" width="10" height="11" fill="#ff6b00"/>
+      <rect class="flame" x="158" y="136" width="6" height="8" fill="#ffd43b" style="animation-delay:.25s"/>
+      <rect x="160" y="132" width="2" height="4" fill="#ffd43b"/>
+      <!-- people -->
+      <rect x="132" y="146" width="6" height="8" fill="#5f3dc4"/><rect x="133" y="141" width="4" height="5" fill="#f1c9a5"/><rect x="130" y="154" width="10" height="3" fill="#343a40"/>
+      <rect x="186" y="146" width="6" height="8" fill="#0ca678"/><rect x="187" y="141" width="4" height="5" fill="#c9a07a"/><rect x="184" y="154" width="10" height="3" fill="#343a40"/>
+      <rect x="230" y="150" width="20" height="4" fill="#ff8787"/><rect x="232" y="146" width="16" height="4" fill="#ffa8a8"/>
+    </g>
+  </svg>
+
+  <!-- Near: grass tufts and flowers, fastest layer. 3520 units = 11 stage widths. -->
+  <svg class="layer near" viewBox="0 0 3520 180" preserveAspectRatio="none" shape-rendering="crispEdges">
+    <defs>
+      <pattern id="tufts" width="96" height="180" patternUnits="userSpaceOnUse">
+        <rect x="6" y="170" width="2" height="10" fill="#2f7d2b"/><rect x="9" y="166" width="2" height="14" fill="#3f8f35"/><rect x="12" y="171" width="2" height="9" fill="#2f7d2b"/>
+        <rect x="40" y="172" width="2" height="8" fill="#3f8f35"/><rect x="43" y="169" width="2" height="11" fill="#2f7d2b"/>
+        <rect x="44" y="166" width="3" height="3" fill="#fff"/><rect x="45" y="167" width="1" height="1" fill="#ffd43b"/>
+        <rect x="70" y="168" width="2" height="12" fill="#3f8f35"/><rect x="73" y="172" width="2" height="8" fill="#2f7d2b"/><rect x="76" y="170" width="2" height="10" fill="#3f8f35"/>
+        <rect x="74" y="164" width="3" height="3" fill="#f783ac"/>
+      </pattern>
+    </defs>
+    <rect width="3520" height="180" fill="url(#tufts)"/>
+  </svg>
+</div>
+
+<section class="slide" data-scene="dubovac">
+  <div class="panel center">
+    <p class="lead"><span data-l="hr">Karlovac Developers · 13. studenoga 2026.</span><span data-l="en">Karlovac Developers · 13 November 2026</span></p>
+    <h1>AImo pričat o AI</h1>
+    <p class="muted"><span data-l="hr">Novosti, projekti i ideje</span><span data-l="en">News, projects and ideas</span></p>
+    <p class="langs" role="group" aria-label="Jezik / Language">
+      <button type="button" data-set-lang="hr" lang="hr">HR</button><button type="button" data-set-lang="en" lang="en">EN</button>
+    </p>
+  </div>
+</section>
+
+<section class="slide" data-scene="dubovac">
+  <div class="panel">
+    <h2><span data-l="hr">Rekli ste nam <span class="muted small">11 odgovora na „Upoznajmo se“</span></span><span data-l="en">You told us <span class="muted small">11 answers to “Upoznajmo se”</span></span></h2>
+    <div class="cols">
+      <div>
+        <h3><span data-l="hr">Iskustvo</span><span data-l="en">Experience</span></h3>
+        <ul class="bars">
+          <li><span>Senior</span><span class="bar" style="--n:6"></span><span class="n">6</span></li>
+          <li><span>Lead / manager</span><span class="bar" style="--n:3"></span><span class="n">3</span></li>
+          <li><span><span data-l="hr">Hobist</span><span data-l="en">Hobbyist</span></span><span class="bar" style="--n:2"></span><span class="n">2</span></li>
+        </ul>
+        <h3 style="margin-top:0.6em"><span data-l="hr">Iz Karlovca</span><span data-l="en">From Karlovac</span></h3>
+        <p class="small"><span data-l="hr">10 od 11, plus 1 iz okolice</span><span data-l="en">10 of 11, plus 1 from nearby</span></p>
+      </div>
+      <div>
+        <h3><span data-l="hr">Kako radite</span><span data-l="en">How you work</span></h3>
+        <ul class="bars">
+          <li><span>Remote</span><span class="bar" style="--n:8"></span><span class="n">8</span></li>
+          <li><span><span data-l="hr">U firmi lokalno</span><span data-l="en">Local company</span></span><span class="bar" style="--n:5"></span><span class="n">5</span></li>
+          <li><span><span data-l="hr">Freelance / svoja firma</span><span data-l="en">Freelance / own firm</span></span><span class="bar" style="--n:3"></span><span class="n">3</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-scene="rivers">
+  <div class="panel">
+    <h2><span data-l="hr">Što želite</span><span data-l="en">What you want</span></h2>
+    <div class="cols">
+      <div>
+        <h3><span data-l="hr">Teme</span><span data-l="en">Topics</span></h3>
+        <ul class="bars">
+          <li><span>AI / LLM</span><span class="bar" style="--n:9"></span><span class="n">9</span></li>
+          <li><span><span data-l="hr">Startupi</span><span data-l="en">Startups</span></span><span class="bar" style="--n:8"></span><span class="n">8</span></li>
+          <li><span><span data-l="hr">Sigurnost</span><span data-l="en">Security</span></span><span class="bar" style="--n:7"></span><span class="n">7</span></li>
+          <li><span><span data-l="hr">Hardver / IoT</span><span data-l="en">Hardware / IoT</span></span><span class="bar" style="--n:7"></span><span class="n">7</span></li>
+          <li><span>Web</span><span class="bar" style="--n:6"></span><span class="n">6</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3><span data-l="hr">Formati</span><span data-l="en">Formats</span></h3>
+        <ul class="bars">
+          <li><span><span data-l="hr">Druženje</span><span data-l="en">Hanging out</span></span><span class="bar" style="--n:10"></span><span class="n">10</span></li>
+          <li><span><span data-l="hr">Lightning talkovi</span><span data-l="en">Lightning talks</span></span><span class="bar" style="--n:9"></span><span class="n">9</span></li>
+          <li><span><span data-l="hr">Radionice</span><span data-l="en">Workshops</span></span><span class="bar" style="--n:8"></span><span class="n">8</span></li>
+          <li><span><span data-l="hr">Predavanja</span><span data-l="en">Talks</span></span><span class="bar" style="--n:7"></span><span class="n">7</span></li>
+          <li><span><span data-l="hr">IT konferencija u Karlovcu</span><span data-l="en">IT conference in Karlovac</span></span><span class="bar" style="--n:6"></span><span class="n">6</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="small" style="margin-top:0.5em"><span data-l="hr">Kada: <span class="hot">radnim danom navečer</span> (9 od 11), vikendom (5 od 11)</span><span data-l="en">When: <span class="hot">weekday evenings</span> (9 of 11), weekends (5 of 11)</span></p>
+  </div>
+</section>
+
+<section class="slide" data-scene="rivers">
+  <div class="panel vote">
+    <div>
+      <h2><span data-l="hr">Izaberite novo ime</span><span data-l="en">Pick our new name</span></h2>
+      <p class="small"><span data-l="hr">Vaši prijedlozi. <span class="hot">Jedan glas po osobi.</span></span><span data-l="en">Your suggestions. <span class="hot">One vote each.</span></span></p>
+      <ul class="small">
+        <li>Karlovac Tech &amp; Dev Community</li>
+        <li>Karlovački 1337 kompjuteraši</li>
+        <li>Karlovac IT</li>
+        <li>Web Runners</li>
+        <li>Karlovac IT Crowd</li>
+      </ul>
+      <p class="small muted"><span data-l="hr">Glasanje se zatvara 20. studenoga u 23:59. Pobjeđuje ime s najviše glasova.</span><span data-l="en">Closes 20 November at 23:59. The name with the most votes wins.</span><br>strawpoll.com/poy9kO67pgJ</p>
+    </div>
+    <a class="qr" href="https://strawpoll.com/poy9kO67pgJ" aria-label="QR: StrawPoll, strawpoll.com/poy9kO67pgJ">
+      <!-- QR for https://strawpoll.com/poy9kO67pgJ (qrcode 1.5.4, level M). -->
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#000000" d="M2 2.5h7m1 0h3m1 0h1m2 0h2m2 0h2m1 0h7M2 3.5h1m5 0h1m1 0h3m3 0h2m1 0h1m4 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m2 0h1m2 0h4m4 0h1m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m1 0h1m1 0h1m5 0h2m1 0h1m2 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m4 0h1m1 0h1m5 0h2m1 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m7 0h1m2 0h4m1 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M10 9.5h1m1 0h5m2 0h2M2 10.5h1m1 0h2m1 0h3m5 0h2m1 0h3m3 0h1m2 0h1m1 0h2M5 11.5h1m1 0h1m3 0h1m5 0h3m1 0h2m1 0h3m3 0h1M2 12.5h1m3 0h1m1 0h1m1 0h2m1 0h1m2 0h2m1 0h1m3 0h1m4 0h2M2 13.5h2m2 0h2m4 0h6m2 0h1m1 0h2m6 0h1M2 14.5h1m1 0h1m1 0h1m1 0h1m1 0h1m8 0h3m5 0h2M3 15.5h2m1 0h2m1 0h1m4 0h2m4 0h2m1 0h2m3 0h3M4 16.5h1m1 0h1m1 0h1m3 0h1m3 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h3M2 17.5h1m4 0h1m2 0h2m1 0h1m1 0h1m5 0h1m1 0h1m2 0h1m2 0h1M2 18.5h4m2 0h2m2 0h3m2 0h1m2 0h1m1 0h2m2 0h2m1 0h1M4 19.5h2m1 0h1m1 0h1m1 0h2m2 0h1m3 0h1m2 0h1m2 0h1m1 0h3M2 20.5h1m2 0h2m1 0h1m4 0h2m2 0h4m3 0h1m1 0h1m1 0h1M4 21.5h1m5 0h1m1 0h1m1 0h1m2 0h5m1 0h2m3 0h1M3 22.5h1m1 0h1m2 0h1m2 0h5m2 0h1m1 0h1m1 0h7M10 23.5h2m3 0h2m1 0h3m1 0h1m3 0h5M2 24.5h7m1 0h1m2 0h1m1 0h1m4 0h3m1 0h1m1 0h2m1 0h1M2 25.5h1m5 0h1m1 0h5m3 0h1m1 0h3m3 0h2m1 0h2M2 26.5h1m1 0h3m1 0h1m3 0h1m3 0h5m1 0h5m1 0h2M2 27.5h1m1 0h3m1 0h1m1 0h5m1 0h5m1 0h2m2 0h2m2 0h1M2 28.5h1m1 0h3m1 0h1m1 0h1m1 0h1m6 0h2m1 0h1m2 0h1m2 0h1m1 0h1M2 29.5h1m5 0h1m2 0h1m2 0h3m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m1 0h1M2 30.5h7m1 0h1m1 0h1m5 0h1m2 0h2m2 0h1m1 0h1m1 0h1"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="slide" data-scene="zvijezda">
+  <div class="panel">
+    <h2><span data-l="hr">Dignite ruku ako ste…</span><span data-l="en">Hands up if you…</span></h2>
+    <ul>
+      <li><span data-l="hr">ovaj tjedan koristili AI za nešto što nije kod</span><span data-l="en">used AI this week for something other than code</span></li>
+      <li><span data-l="hr">…koristili ga za kod</span><span data-l="en">…used it for code</span></li>
+      <li><span data-l="hr">…pokrenuli više AI agenata istovremeno</span><span data-l="en">…ran more than one AI agent at the same time</span></li>
+      <li><span class="hot"><span data-l="hr">…i dalje čitate svaki redak koji napiše</span><span data-l="en">…still read every line it writes</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide" data-scene="zvijezda">
+  <div class="panel">
+    <div class="lenses"><span class="on"><span data-l="hr">Promijenilo se</span><span data-l="en">Changed</span></span><span><span data-l="hr">Ostalo je</span><span data-l="en">Stayed</span></span><span><span data-l="hr">Puklo je</span><span data-l="en">Broke</span></span><span><span data-l="hr">Slijedi</span><span data-l="en">Next</span></span></div>
+    <h2><span data-l="hr">Što se promijenilo</span><span data-l="en">What changed</span></h2>
+    <p class="lead"><span data-l="hr">Pogled iz New Yorka. Vrijedi li i za Karlovac?</span><span data-l="en">One view from New York. Does it match Karlovac?</span></p>
+    <ul>
+      <li><span class="hot"><span data-l="hr">Većina koda danas nastaje promptom, ne tipkanjem.</span><span data-l="en">Most code is now prompted, not typed.</span></span></li>
+      <li><span data-l="hr">Rad s više agenata paralelno postaje normalan.</span><span data-l="en">Running several agents in parallel is becoming normal.</span></li>
+    </ul>
+  </div>
+  <a class="credit" href="https://www.youtube.com/watch?v=uErdlVHb8ow">via Gergely Orosz · “The state of the software engineering industry” · LDX3 New York 2026</a>
+</section>
+
+<section class="slide" data-scene="bridge">
+  <div class="panel">
+    <div class="lenses"><span><span data-l="hr">Promijenilo se</span><span data-l="en">Changed</span></span><span class="on"><span data-l="hr">Ostalo je</span><span data-l="en">Stayed</span></span><span><span data-l="hr">Puklo je</span><span data-l="en">Broke</span></span><span><span data-l="hr">Slijedi</span><span data-l="en">Next</span></span></div>
+    <h2><span data-l="hr">Što se nije promijenilo</span><span data-l="en">What didn’t change</span></h2>
+    <ul>
+      <li><span class="hot"><span data-l="hr">Testiranje i dalje traži jednako truda kao i pisanje koda.</span><span data-l="en">Testing still takes as much effort as writing the code.</span></span></li>
+      <li><span data-l="hr">Tim je i dalje osnovna jedinica rada, a ne-inženjeri i dalje ne puštaju kod u produkciju.</span><span data-l="en">The team is still the unit of work, and non-engineers still don’t ship to production.</span></li>
+    </ul>
+  </div>
+  <a class="credit" href="https://www.youtube.com/watch?v=uErdlVHb8ow">via Gergely Orosz · LDX3 New York 2026</a>
+</section>
+
+<section class="slide" data-scene="bridge">
+  <div class="panel">
+    <div class="lenses"><span><span data-l="hr">Promijenilo se</span><span data-l="en">Changed</span></span><span><span data-l="hr">Ostalo je</span><span data-l="en">Stayed</span></span><span class="on"><span data-l="hr">Puklo je</span><span data-l="en">Broke</span></span><span><span data-l="hr">Slijedi</span><span data-l="en">Next</span></span></div>
+    <h2><span data-l="hr">Što je puklo</span><span data-l="en">What broke</span></h2>
+    <ul>
+      <li><span class="hot"><span data-l="hr">Code review postaje predstava: „zombi reviewi“, LGTM na sve.</span><span data-l="en">Code review is turning into theatre: “zombie reviews”, LGTM on everything.</span></span></li>
+      <li><span data-l="hr">Fokus: uvijek vas čeka još neki agent, a jučerašnje ubrzanje današnji je standard.</span><span data-l="en">Focus: there is always another agent waiting for you, and yesterday’s speed-up is today’s baseline.</span></li>
+    </ul>
+  </div>
+  <a class="credit" href="https://www.youtube.com/watch?v=uErdlVHb8ow">via Gergely Orosz · LDX3 New York 2026</a>
+</section>
+
+<section class="slide" data-scene="sunrise">
+  <div class="panel">
+    <div class="lenses"><span><span data-l="hr">Promijenilo se</span><span data-l="en">Changed</span></span><span><span data-l="hr">Ostalo je</span><span data-l="en">Stayed</span></span><span><span data-l="hr">Puklo je</span><span data-l="en">Broke</span></span><span class="on"><span data-l="hr">Slijedi</span><span data-l="en">Next</span></span></div>
+    <h2><span data-l="hr">Što slijedi</span><span data-l="en">What comes next</span></h2>
+    <ul>
+      <li><span data-l="hr">Manje poslova za juniore, a snalaženje s AI-jem postaje uvjet za zapošljavanje.</span><span data-l="en">Fewer junior jobs, and AI fluency becomes a hiring baseline.</span></li>
+      <li><span class="hot"><span data-l="hr">Prestat ćemo čitati kod. Pitanje nije hoćemo li, nego kada.</span><span data-l="en">We will stop reading the code. Not if, but when.</span></span></li>
+    </ul>
+  </div>
+  <a class="credit" href="https://www.youtube.com/watch?v=uErdlVHb8ow">via Gergely Orosz · LDX3 New York 2026</a>
+</section>
+
+<section class="slide" data-scene="sunrise">
+  <div class="panel">
+    <h2><span data-l="hr">Moj setup</span><span data-l="en">My setup</span></h2>
+    <p class="small"><span data-l="hr">Ovaj tjedan: <span class="hot">5 sesija paralelno</span>, svaka na svom projektu.</span><span data-l="en">This week: <span class="hot">5 sessions in parallel</span>, one per project.</span></p>
+    <dl class="rows rows-roomy">
+      <dt><span data-l="hr">Prije</span><span data-l="en">Before</span></dt><dd class="muted">iTerm2, VS Code, TaskManagerAI</dd>
+      <dt><span data-l="hr">Sad</span><span data-l="en">Now</span></dt><dd><span data-l="hr">Claude Code u <span class="hot">Okeni</span>: svi projekti u jednom prozoru, orkestrator dijeli posao subagentima</span><span data-l="en">Claude Code in <span class="hot">Okena</span>: every project in one window, an orchestrator hands work to subagents</span></dd>
+      <dt>CLAUDE.md</dt><dd><span data-l="hr">pravila projekta koja agent uvijek pročita</span><span data-l="en">project rules the agent always reads</span></dd>
+      <dt><span data-l="hr">Hookovi</span><span data-l="en">Hooks</span></dt><dd><span data-l="hr">zvuk kad me Claude čeka</span><span data-l="en">a sound when Claude waits for me</span></dd>
+      <dt><span data-l="hr">Pluginovi</span><span data-l="en">Plugins</span></dt><dd>superpowers <span class="muted">(plan → <span data-l="hr">izrada</span><span data-l="en">build</span> → review)</span>, egm, figma</dd>
+      <dt><span data-l="hr">Moji skillovi</span><span data-l="en">My skills</span></dt><dd>release-portal, design-audit</dd>
+      <dt>MCP</dt><dd>Trello, Railway<span class="muted"><span data-l="hr">; po projektu Firebase, Dart, Serverpod</span><span data-l="en">; per project Firebase, Dart, Serverpod</span></span></dd>
+    </dl>
+  </div>
+</section>
+
+<section class="slide" data-scene="slapovi">
+  <div class="panel">
+    <h2><span data-l="hr">Kako je nastala ova prezentacija</span><span data-l="en">How this deck was made</span></h2>
+    <p class="small"><span data-l="hr">Ja sam odlučivao <span class="hot">što i zašto</span>, Claude je predlagao <span class="hot">kako</span> i kritizirao.</span><span data-l="en">I decided <span class="hot">what and why</span>; Claude proposed <span class="hot">how</span> and pushed back.</span></p>
+    <dl class="rows">
+      <dt>1 · <span data-l="hr">Ideja</span><span data-l="en">Idea</span></dt><dd><span data-l="hr">egm brainstorm: 6 recenzenata bez konteksta napadne ideju, ja biram što ostaje</span><span data-l="en">egm brainstorm: 6 reviewers with no context attack the idea, I pick what stays</span></dd>
+      <dt>2 · <span data-l="hr">Sadržaj</span><span data-l="en">Content</span></dt><dd><span data-l="hr">transkript Gergelyjeva predavanja → 4 pitanja: promijenilo, ostalo, puklo, slijedi</span><span data-l="en">Gergely’s talk transcript → 4 questions: changed, stayed, broke, next</span></dd>
+      <dt>3 · <span data-l="hr">Podaci</span><span data-l="en">Data</span></dt><dd><span data-l="hr">vaših 11 odgovora iz forme → samo zbrojevi, emailovi ne idu u git</span><span data-l="en">your 11 form answers → counts only, emails stay out of git</span></dd>
+      <dt>4 · <span data-l="hr">Izgled</span><span data-l="en">Look</span></dt><dd><span data-l="hr">tražio sam stil poznate igre, Claude je odbio kopiju → originalni pixel Karlovac, nacrtan kodom</span><span data-l="en">I asked for a famous game’s style, Claude declined to copy it → original pixel Karlovac, drawn in code</span></dd>
+      <dt>5 · <span data-l="hr">Izrada</span><span data-l="en">Build</span></dt><dd><span data-l="hr">jedan HTML file, bez frameworka, HR/EN prekidač</span><span data-l="en">one HTML file, no framework, HR/EN switch</span></dd>
+      <dt>6 · <span data-l="hr">Provjera</span><span data-l="en">Check</span></dt><dd><span data-l="hr">screenshotovi u headless Chromeu, QR kodovi dekodirani, build i testovi stranice</span><span data-l="en">headless Chrome screenshots, QR codes decoded, site build and tests</span></dd>
+      <dt>7 · <span data-l="hr">Krugovi</span><span data-l="en">Rounds</span></dt><dd><span data-l="hr">više krugova mojih ispravaka: redoslijed, pitanja, glasanje → StrawPoll</span><span data-l="en">several rounds of my corrections: order, questions, vote → StrawPoll</span></dd>
+    </dl>
+  </div>
+</section>
+
+<section class="slide" data-scene="slapovi">
+  <div class="panel">
+    <h2><span data-l="hr">Što je nekonferencija?</span><span data-l="en">What is an unconference?</span></h2>
+    <p class="lead"><span data-l="hr">Dnevni red ne slažu organizatori, nego sudionici, na početku večeri.</span><span data-l="en">The participants, not the organizers, set the agenda, at the start of the evening.</span></p>
+    <ul>
+      <li><span data-l="hr">Svatko može predložiti temu, a tko je predloži, pokreće razgovor.</span><span data-l="en">Anyone can propose a topic; whoever proposes it gets the conversation going.</span></li>
+      <li><span data-l="hr">Sesije su uglavnom razgovori, a ne predavanja.</span><span data-l="en">Sessions are mostly discussions, not talks.</span></li>
+      <li><span data-l="hr">Tko god je došao, pravi su ljudi.</span><span data-l="en">Whoever comes are the right people.</span></li>
+      <li><span data-l="hr">Zakon dviju nogu: ako ne učite i ne doprinosite, prijeđite tamo gdje možete.</span><span data-l="en">The law of two feet: if you’re neither learning nor contributing, move to where you can.</span></li>
+    </ul>
+  </div>
+  <a class="credit" href="https://citycamp.com/how-to-run-unconference-guide"><span data-l="hr">Više: </span><span data-l="en">More: </span>citycamp.com/how-to-run-unconference-guide</a>
+</section>
+
+<section class="slide" data-scene="korana">
+  <div class="panel vote">
+    <div>
+      <h2><span data-l="hr">Vaš red</span><span data-l="en">Your turn</span></h2>
+      <p class="small"><span data-l="hr">Pokažite nam svoj setup: <span class="hot">Gdje ga pokrećete? Što ste dodali? Što ste sami napravili?</span></span><span data-l="en">Show us your setup: <span class="hot">Where do you run it? What did you add? What did you build?</span></span></p>
+      <ul>
+        <li><span data-l="hr">Biste li mergeali kod koji niste pročitali?</span><span data-l="en">Would you merge code you haven’t read?</span></li>
+        <li><span data-l="hr">Kako junior postaje dobar ako agenti rade juniorski posao?</span><span data-l="en">How does a junior get good if agents do the junior work?</span></li>
+        <li><span data-l="hr">Što je u vašem setupu preživjelo dulje od mjesec dana?</span><span data-l="en">What in your setup survived more than a month?</span></li>
+      </ul>
+    </div>
+    <div class="qr-pair">
+      <div class="center">
+        <a class="qr qr-small" href="https://strawpoll.com/poy9kO67pgJ" aria-label="QR: StrawPoll, strawpoll.com/poy9kO67pgJ">
+          <!-- QR for https://strawpoll.com/poy9kO67pgJ (qrcode 1.5.4, level M). -->
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#000000" d="M2 2.5h7m1 0h3m1 0h1m2 0h2m2 0h2m1 0h7M2 3.5h1m5 0h1m1 0h3m3 0h2m1 0h1m4 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m2 0h1m2 0h4m4 0h1m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m1 0h1m1 0h1m5 0h2m1 0h1m2 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m4 0h1m1 0h1m5 0h2m1 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m7 0h1m2 0h4m1 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M10 9.5h1m1 0h5m2 0h2M2 10.5h1m1 0h2m1 0h3m5 0h2m1 0h3m3 0h1m2 0h1m1 0h2M5 11.5h1m1 0h1m3 0h1m5 0h3m1 0h2m1 0h3m3 0h1M2 12.5h1m3 0h1m1 0h1m1 0h2m1 0h1m2 0h2m1 0h1m3 0h1m4 0h2M2 13.5h2m2 0h2m4 0h6m2 0h1m1 0h2m6 0h1M2 14.5h1m1 0h1m1 0h1m1 0h1m1 0h1m8 0h3m5 0h2M3 15.5h2m1 0h2m1 0h1m4 0h2m4 0h2m1 0h2m3 0h3M4 16.5h1m1 0h1m1 0h1m3 0h1m3 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h3M2 17.5h1m4 0h1m2 0h2m1 0h1m1 0h1m5 0h1m1 0h1m2 0h1m2 0h1M2 18.5h4m2 0h2m2 0h3m2 0h1m2 0h1m1 0h2m2 0h2m1 0h1M4 19.5h2m1 0h1m1 0h1m1 0h2m2 0h1m3 0h1m2 0h1m2 0h1m1 0h3M2 20.5h1m2 0h2m1 0h1m4 0h2m2 0h4m3 0h1m1 0h1m1 0h1M4 21.5h1m5 0h1m1 0h1m1 0h1m2 0h5m1 0h2m3 0h1M3 22.5h1m1 0h1m2 0h1m2 0h5m2 0h1m1 0h1m1 0h7M10 23.5h2m3 0h2m1 0h3m1 0h1m3 0h5M2 24.5h7m1 0h1m2 0h1m1 0h1m4 0h3m1 0h1m1 0h2m1 0h1M2 25.5h1m5 0h1m1 0h5m3 0h1m1 0h3m3 0h2m1 0h2M2 26.5h1m1 0h3m1 0h1m3 0h1m3 0h5m1 0h5m1 0h2M2 27.5h1m1 0h3m1 0h1m1 0h5m1 0h5m1 0h2m2 0h2m2 0h1M2 28.5h1m1 0h3m1 0h1m1 0h1m1 0h1m6 0h2m1 0h1m2 0h1m2 0h1m1 0h1M2 29.5h1m5 0h1m2 0h1m2 0h3m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m1 0h1M2 30.5h7m1 0h1m1 0h1m5 0h1m2 0h2m2 0h1m1 0h1m1 0h1"/></svg>
+        </a>
+        <p class="small muted"><span data-l="hr">Glasajte za ime</span><span data-l="en">Vote for the name</span></p>
+      </div>
+    <div class="center">
+      <a class="qr qr-small" href="https://youtu.be/uErdlVHb8ow" aria-label="QR: YouTube, youtu.be/uErdlVHb8ow">
+        <!-- QR for https://youtu.be/uErdlVHb8ow (qrcode 1.5.4, level M). -->
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#000000" d="M2 2.5h7m2 0h3m1 0h1m2 0h1m5 0h7M2 3.5h1m5 0h1m1 0h1m1 0h1m3 0h3m1 0h2m2 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m5 0h3m1 0h1m1 0h1m3 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h3m1 0h3m1 0h2m3 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m2 0h3m2 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m4 0h1m1 0h1m3 0h1m1 0h1m2 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m2 0h3m1 0h2m1 0h2M2 10.5h1m1 0h1m1 0h1m1 0h1m2 0h1m4 0h2m1 0h1m2 0h1m3 0h1m2 0h1M3 11.5h2m1 0h2m4 0h1m3 0h2m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1M4 12.5h1m2 0h2m1 0h2m3 0h1m3 0h2m1 0h3m1 0h1m1 0h3M2 13.5h1m2 0h1m3 0h1m1 0h4m2 0h1m1 0h1m9 0h1M4 14.5h3m1 0h2m2 0h2m4 0h3m3 0h2m1 0h1m1 0h2M2 15.5h2m1 0h1m1 0h1m1 0h1m3 0h1m1 0h1m1 0h2m1 0h1m1 0h3m2 0h1m2 0h1M2 16.5h1m2 0h2m1 0h2m3 0h1m2 0h3m1 0h1m2 0h1m1 0h3m1 0h2M4 17.5h1m4 0h4m2 0h2m1 0h2m1 0h4m2 0h1m1 0h1M2 18.5h1m1 0h1m3 0h1m1 0h2m1 0h2m1 0h2m1 0h1m2 0h4m1 0h1m1 0h2M3 19.5h3m1 0h1m2 0h1m3 0h1m1 0h2m3 0h4m2 0h2m1 0h1M2 20.5h1m4 0h2m3 0h1m2 0h1m3 0h1m4 0h2m3 0h2M3 21.5h1m2 0h1m7 0h1m2 0h1m1 0h6m1 0h2m1 0h1M2 22.5h1m1 0h3m1 0h1m2 0h1m1 0h2m3 0h2m2 0h5M10 23.5h2m1 0h3m1 0h4m1 0h1m3 0h1m1 0h3M2 24.5h7m3 0h1m3 0h4m1 0h2m1 0h1m1 0h2m1 0h2M2 25.5h1m5 0h1m2 0h1m3 0h2m1 0h3m1 0h1m3 0h2m1 0h1M2 26.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h2m2 0h1m1 0h5m2 0h1M2 27.5h1m1 0h3m1 0h1m4 0h1m1 0h3m4 0h1m2 0h2m1 0h1M2 28.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m2 0h1m1 0h1m3 0h3m2 0h1M2 29.5h1m5 0h1m2 0h5m1 0h1m3 0h2m6 0h1M2 30.5h7m1 0h1m3 0h3m1 0h1m3 0h3m2 0h1m1 0h2"/></svg>
+      </a>
+      <p class="small muted"><span data-l="hr">Cijelo predavanje</span><span data-l="en">Watch the full talk</span><br>youtu.be/uErdlVHb8ow</p>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-scene="korana">
+  <div class="panel center">
+    <h2><span data-l="hr">Cijelo predavanje</span><span data-l="en">The full talk</span></h2>
+    <div class="video">
+      <button type="button" class="play" data-play="uErdlVHb8ow"><span data-l="hr">▶ Pokreni video</span><span data-l="en">▶ Play video</span><br><span class="small muted">Gergely Orosz · LDX3 New York 2026</span></button>
+    </div>
+    <p class="small muted video-foot"><a href="https://www.youtube.com/watch?v=uErdlVHb8ow">youtube.com/watch?v=uErdlVHb8ow</a></p>
+    <button type="button" class="tour-btn tour-big" data-tour><span data-l="hr">Prošetaj po Karlovcu ▶</span><span data-l="en">Walk through Karlovac ▶</span></button>
+  </div>
+</section>
+
+<div class="caption" aria-live="polite"></div>
+<div class="counter" aria-live="polite"></div>
+</div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  document.body.classList.remove('no-js');
+  var SCENES = ['dubovac', 'rivers', 'zvijezda', 'bridge', 'sunrise', 'slapovi', 'korana'];
+  var NAMES = {
+    dubovac:  ['Stari grad Dubovac', 'Dubovac castle'],
+    rivers:   ['Grad na četiri rijeke', 'The city on four rivers'],
+    zvijezda: ['Zvijezda', 'The star-shaped old town'],
+    bridge:   ['Radovi na mostu', 'Bridge works'],
+    sunrise:  ['Novi dan na Korani', 'A new day on the Korana'],
+    slapovi:  ['Slapovi Mrežnice', 'The Mrežnica waterfalls'],
+    korana:   ['Korana u sumrak', 'The Korana at dusk']
+  };
+  var stage = document.getElementById('stage');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var skies = Array.prototype.slice.call(document.querySelectorAll('.sky'));
+  var langButtons = Array.prototype.slice.call(document.querySelectorAll('[data-set-lang]'));
+  var counter = document.querySelector('.counter');
+  var caption = document.querySelector('.caption');
+  var current = -1, timer, tour = null, tourIdx = 0, tourTimer;
+
+  function setScene(scene) {
+    var moved = scene !== stage.getAttribute('data-scene');
+    stage.setAttribute('data-scene', scene);
+    stage.style.setProperty('--pos', Math.max(0, SCENES.indexOf(scene)));
+    skies.forEach(function (s) { s.classList.toggle('on', s.getAttribute('data-sky') === scene); });
+    return moved;
+  }
+
+  var playButtons = new Map();
+
+  function show(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    var first = current === -1;
+    current = i;
+    var moved = setScene(slides[i].getAttribute('data-scene') || SCENES[0]) && !first;
+    stage.classList.toggle('moving', moved);
+    clearTimeout(timer);
+    if (moved) timer = setTimeout(function () { stage.classList.remove('moving'); }, 700);
+    // Leaving the video slide stops the video: the iframe goes back to its play button.
+    playButtons.forEach(function (btn, f) { if (f.parentNode) f.parentNode.replaceChild(btn, f); });
+    playButtons.clear();
+    slides.forEach(function (s, n) { s.hidden = n !== current; });
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+    try { history.replaceState(null, '', '#' + (current + 1)); } catch (e) { /* some browsers refuse on file:// */ }
+  }
+
+  function setLang(l) {
+    document.documentElement.lang = l;
+    langButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === l)); });
+    try { localStorage.setItem('aimo-lang', l); } catch (e) { /* storage blocked */ }
+    if (tour) tourScene(tourIdx);
+  }
+
+  // Scenery tour: hide the slides and walk through the scenes, one every 5 s.
+  function tourScene(i) {
+    tourIdx = (i + SCENES.length) % SCENES.length;
+    var scene = SCENES[tourIdx], n = NAMES[scene], en = document.documentElement.lang === 'en';
+    setScene(scene);
+    caption.innerHTML = (en ? n[1] : n[0]) + '<small>' + (en ? 'Esc: back to the slides' : 'Esc: natrag na slajdove') + '</small>';
+  }
+  function restartTourTimer() {
+    clearInterval(tourTimer);
+    tourTimer = setInterval(function () { tourScene(tourIdx + 1); }, 5000);
+  }
+  function startTour() {
+    tour = true;
+    stage.classList.add('scenery');
+    tourScene(SCENES.indexOf(stage.getAttribute('data-scene')) + 1);
+    restartTourTimer();
+  }
+  function stopTour() {
+    tour = null;
+    clearInterval(tourTimer);
+    stage.classList.remove('scenery');
+    var keep = current; current = -1; show(keep);
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    var k = e.key;
+    if (k === 'l' || k === 'L') { setLang(document.documentElement.lang === 'hr' ? 'en' : 'hr'); }
+    else if (k === 's' || k === 'S') { tour ? stopTour() : startTour(); }
+    else if (tour) {
+      if (k === 'Escape') stopTour();
+      else if (k === 'ArrowRight' || k === 'ArrowDown' || k === ' ' || k === 'PageDown') { tourScene(tourIdx + 1); restartTourTimer(); }
+      else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp') { tourScene(tourIdx - 1); restartTourTimer(); }
+      else return;
+    }
+    else switch (k) {
+      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown': show(current + 1); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': show(current - 1); break;
+      case 'Home': show(0); break;
+      case 'End': show(slides.length - 1); break;
+      case 'f':
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+        break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
+  // Click or tap: right half forward, left half back. Links and buttons do their own thing.
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (b) {
+      if (b.hasAttribute('data-set-lang')) setLang(b.getAttribute('data-set-lang'));
+      if (b.hasAttribute('data-tour')) startTour();
+      if (b.hasAttribute('data-play')) {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-play') + '?autoplay=1';
+        f.title = 'Gergely Orosz · LDX3 New York 2026';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        f.referrerPolicy = 'strict-origin-when-cross-origin';
+        b.parentNode.replaceChild(f, b);
+        playButtons.set(f, b);
+      }
+      return;
+    }
+    if (e.target.closest('a')) return;
+    var dir = e.clientX > window.innerWidth / 2 ? 1 : -1;
+    if (tour) { tourScene(tourIdx + dir); restartTourTimer(); } else show(current + dir);
+  });
+
+  var lang = 'hr';
+  try { lang = localStorage.getItem('aimo-lang') === 'en' ? 'en' : 'hr'; } catch (e) { /* storage blocked */ }
+  setLang(lang);
+  var start = parseInt(location.hash.slice(1), 10);
+  show(isNaN(start) ? 0 : start - 1);
+})();
+</script>
+</body>
+</html>
